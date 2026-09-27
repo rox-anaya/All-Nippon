@@ -9,8 +9,8 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#00266b">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Google Fonts (Added Dancing Script for "Anaya") -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <!-- FontAwesome (Vector Emojis/Icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -24,6 +24,7 @@
                     fontFamily: {
                         sans: ['Poppins', 'sans-serif'],
                         heading: ['Montserrat', 'sans-serif'],
+                        signature: ['"Dancing Script"', 'cursive'], // Custom font for the developer name
                     },
                     colors: {
                         ana: { dark: '#00266b', light: '#007fc1' }
@@ -62,13 +63,89 @@
 
     <!-- HEADER -->
     <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl glass-panel rounded-full flex justify-between items-center px-6 py-3 z-50 transition-all">
-        <a href="#" class="flex items-center">
+        <a href="index.html" class="flex items-center">
             <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790497605/Picsart_26-09-27_13-51-21-265_j4qz5z.png" alt="ANVG Logo" class="h-10 w-auto">
         </a>
-        <button class="text-white text-2xl hover:text-ana-light transition">
+        <button onclick="openMenu()" class="text-white text-2xl hover:text-ana-light transition">
             <i class="fa-solid fa-bars"></i>
         </button>
     </header>
+
+    <!-- ================= HAMBURGER MENU ================= -->
+    <!-- Dark blurred overlay (blocks background interaction) -->
+    <div id="menuOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] hidden opacity-0 transition-opacity duration-300" onclick="closeMenu()"></div>
+    
+    <!-- Menu Panel (Premium Glass UI) -->
+    <div id="sideMenu" class="fixed top-0 right-0 h-full w-[85vw] max-w-sm border-l border-white/20 bg-gradient-to-b from-[#00266b]/95 to-[#0a192f]/95 backdrop-blur-xl z-[110] translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
+        
+        <!-- Top: Logo & Close Button -->
+        <div class="flex items-center justify-between p-6 border-b border-white/10">
+            <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790497605/Picsart_26-09-27_13-51-21-265_j4qz5z.png" alt="ANVG Logo" class="h-8 w-auto">
+            <button onclick="closeMenu()" class="text-white text-3xl hover:text-red-400 transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        
+        <!-- Navigation Links (Scrollable area) -->
+        <div class="flex-1 overflow-y-auto px-6 py-6 space-y-2">
+            
+            <a href="index.html" class="block py-3 text-lg font-medium hover:text-ana-light transition border-b border-white/5"><i class="fa-solid fa-house w-6 text-ana-light"></i> Home</a>
+            
+            <!-- About Us (Collapsible) -->
+            <div class="border-b border-white/5">
+                <button onclick="toggleSubmenu('aboutSub')" class="w-full flex justify-between items-center py-3 text-lg font-medium hover:text-ana-light transition">
+                    <span><i class="fa-solid fa-circle-info w-6 text-ana-light"></i> About Us</span>
+                    <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" id="aboutSub-arrow"></i>
+                </button>
+                <div id="aboutSub" class="hidden flex-col pl-8 border-l-2 border-ana-light/30 ml-3 mb-3 space-y-3 text-gray-300">
+                    <a href="about.html" class="block hover:text-white transition mt-2">About Us</a>
+                    <a href="staff.html" class="block hover:text-white transition">Staff</a>
+                </div>
+            </div>
+
+            <!-- Operations (Collapsible) -->
+            <div class="border-b border-white/5">
+                <button onclick="toggleSubmenu('opsSub')" class="w-full flex justify-between items-center py-3 text-lg font-medium hover:text-ana-light transition">
+                    <span><i class="fa-solid fa-plane-departure w-6 text-ana-light"></i> Operations</span>
+                    <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" id="opsSub-arrow"></i>
+                </button>
+                <div id="opsSub" class="hidden flex-col pl-8 border-l-2 border-ana-light/30 ml-3 mb-3 space-y-3 text-gray-300">
+                    <a href="fleet.html" class="block hover:text-white transition mt-2">Fleet</a>
+                    <a href="events.html" class="block hover:text-white transition">Events</a>
+                    <a href="routes.html" class="block hover:text-white transition">Routes</a>
+                    <a href="ranks.html" class="block hover:text-white transition">Ranks</a>
+                </div>
+            </div>
+
+            <a href="training.html" class="block py-3 text-lg font-medium hover:text-ana-light transition border-b border-white/5"><i class="fa-solid fa-book-open-reader w-6 text-ana-light"></i> Training</a>
+            
+            <!-- Change log (Collapsible) -->
+            <div class="border-b border-white/5">
+                <button onclick="toggleSubmenu('changeSub')" class="w-full flex justify-between items-center py-3 text-lg font-medium hover:text-ana-light transition">
+                    <span><i class="fa-solid fa-clock-rotate-left w-6 text-ana-light"></i> Change log</span>
+                    <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" id="changeSub-arrow"></i>
+                </button>
+                <div id="changeSub" class="hidden flex-col pl-8 border-l-2 border-ana-light/30 ml-3 mb-3 space-y-3 text-gray-300">
+                    <a href="changelog.html" class="block hover:text-white transition mt-2">Change log</a>
+                    <a href="settings.html" class="block hover:text-white transition">Settings</a>
+                </div>
+            </div>
+
+            <a href="apply.html" class="block py-3 text-lg font-medium text-ana-light hover:text-white transition"><i class="fa-solid fa-paper-plane w-6"></i> Apply</a>
+        </div>
+
+        <!-- Footer Card in Menu -->
+        <div class="p-5 mx-6 mb-6 rounded-2xl glass-panel bg-white/5 text-center border border-white/10">
+            <p class="text-[9px] tracking-[0.2em] text-gray-400 font-bold mb-1">POWERED BY METUPOLO™</p>
+            <p class="text-sm text-gray-300 mb-4 flex items-center justify-center gap-2">
+                Developed By <span class="font-signature text-2xl text-ana-light translate-y-1">Anaya</span>
+            </p>
+            <a href="ifc-profile.html" class="inline-block w-full bg-ana-light hover:bg-blue-400 text-white text-sm px-6 py-2.5 rounded-full font-medium transition shadow-lg shadow-blue-500/30">
+                IFC Profile
+            </a>
+        </div>
+    </div>
+    <!-- ============================================== -->
 
     <!-- HERO SECTION -->
     <section class="hero-bg min-h-screen flex flex-col items-center justify-center text-center px-4 pt-24 pb-12">
@@ -118,13 +195,10 @@
             <p class="text-xs text-gray-400">Statistics are updated monthly by our operations team | Last updated: Sep 2026</p>
         </section>
 
-        <!-- Live Flights Section (Redesigned) -->
+        <!-- Live Flights Section -->
         <section class="glass-panel rounded-3xl p-6 md:p-8">
             <div class="flex items-center justify-between mb-4 border-b border-white/10 pb-4">
-                <!-- Softened Font -->
                 <h2 class="font-sans text-lg md:text-xl font-light tracking-wide text-gray-200 uppercase">Live Map</h2>
-                
-                <!-- Minimalist Pulse Indicator -->
                 <div class="flex items-center gap-2 bg-white/5 px-4 py-1.5 rounded-full border border-white/10">
                     <span class="relative flex h-2.5 w-2.5">
                       <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-300 opacity-75"></span>
@@ -152,7 +226,6 @@
         <section class="w-full max-w-5xl mx-auto">
             <h2 class="font-heading text-2xl font-bold mb-6 text-center">Fleet Showcase</h2>
             <div class="relative w-full aspect-video rounded-3xl overflow-hidden glass-panel group shadow-2xl shadow-black/50">
-                <!-- Updated Images -->
                 <div id="carousel" class="w-full h-full relative">
                     <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790448259/file_0000000056d882109519b69d5cd130e4_fesapl.png" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="ANVG Aircraft 1">
                     <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790448852/file_00000000cb24820abeab70c2e31114bf_h61zpt.png" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="ANVG Aircraft 2">
@@ -229,8 +302,54 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT -->
+    <!-- JAVASCRIPT FOR GALLERY AND MENU -->
     <script>
+        // --- Hamburger Menu Logic ---
+        const menuOverlay = document.getElementById('menuOverlay');
+        const sideMenu = document.getElementById('sideMenu');
+
+        function openMenu() {
+            menuOverlay.classList.remove('hidden');
+            // Timeout ensures the display:block applies before fading in
+            setTimeout(() => {
+                menuOverlay.classList.remove('opacity-0');
+                sideMenu.classList.remove('translate-x-full');
+            }, 10);
+            
+            // Stop background from scrolling!
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeMenu() {
+            menuOverlay.classList.add('opacity-0');
+            sideMenu.classList.add('translate-x-full');
+            
+            // Wait for animation to finish before hiding completely
+            setTimeout(() => {
+                menuOverlay.classList.add('hidden');
+            }, 300);
+            
+            // Allow background scrolling again
+            document.body.style.overflow = ''; 
+        }
+
+        // Submenu accordion logic
+        function toggleSubmenu(id) {
+            const submenu = document.getElementById(id);
+            const arrow = document.getElementById(id + '-arrow');
+            
+            if (submenu.classList.contains('hidden')) {
+                submenu.classList.remove('hidden');
+                submenu.classList.add('flex');
+                arrow.classList.add('rotate-180');
+            } else {
+                submenu.classList.add('hidden');
+                submenu.classList.remove('flex');
+                arrow.classList.remove('rotate-180');
+            }
+        }
+
+        // --- Photo Gallery Carousel Logic ---
         const slides = document.querySelectorAll('.carousel-slide');
         let currentSlide = 0;
 
@@ -257,6 +376,7 @@
 
         setInterval(nextSlide, 5000);
 
+        // --- PWA Registration ---
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js').then(registration => {
