@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>All Nippon Virtual Airways | Infinite Flight</title>
+    
+    <!-- Vector Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HIGH-CONTRAST TUBE HEADER -->
+    <header class="anva-header glass-element">
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790448177/Picsart_26-09-27_00-09-58-886_p4reym.png" alt="ANVA Logo" class="header-logo">
+            </div>
+            <button class="hamburg-pill" aria-label="Open Menu" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- PREMIUM GLASS HERO SECTION WITH FOREGROUND IMAGE -->
+    <section class="hero-wrapper" id="home">
+        <div class="hero-overlay"></div>
+        
+        <!-- Floating Glass Panel for the Title -->
+        <div class="hero-glass-card glass-element">
+            <h3 class="sub-heading">ANVA — INFINITE FLIGHT VA</h3>
+            
+            <!-- NEW: Premium Staggered VA Name -->
+            <h1 class="main-heading">
+                <span class="brand-primary">ALL NIPPON</span><br>
+                <span class="brand-secondary">VIRTUAL AIRWAYS</span>
+            </h1>
+            
+            <p class="tagline">Fly Beyond Borders</p>
+            
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="window.location.href='#fleet'">Join fleet <i class="fa-solid fa-plane-departure"></i></button>
+                <button class="btn-secondary" onclick="window.location.href='#about'">Learn more <i class="fa-solid fa-arrow-right"></i></button>
+                <button class="btn-secondary" onclick="window.location.href='#events'">Events <i class="fa-solid fa-calendar-days"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <!-- OPERATIONS OVERVIEW (Glass Grid) -->
+        <section class="operations-list reveal-on-scroll">
+            <div class="op-card glass-element">
+                <span class="op-number">5</span>
+                <i class="fa-solid fa-location-dot op-icon"></i>
+                <span class="op-text">Hubs</span>
+            </div>
+            <div class="op-card glass-element">
+                <span class="op-number">2</span>
+                <i class="fa-solid fa-plane op-icon"></i>
+                <span class="op-text">Aircraft Family</span>
+            </div>
+            <div class="op-card glass-element">
+                <span class="op-number">6</span>
+                <i class="fa-solid fa-earth-americas op-icon"></i>
+                <span class="op-text">Continent served</span>
+            </div>
+            <div class="op-card glass-element">
+                <span class="op-number">2</span>
+                <i class="fa-solid fa-box op-icon"></i>
+                <span class="op-text">Cargo x Pax</span>
+            </div>
+        </section>
+
+        <!-- VA STATISTICS -->
+        <section class="statistics-section reveal-on-scroll">
+            <div class="stats-header">
+                <h2 class="section-title">VA Statistics</h2>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-box glass-element" onclick="window.location.href='roster.html'">
+                    <div class="stat-left">
+                        <i class="fa-solid fa-users stat-icon"></i>
+                        <h4>Pilots</h4>
+                    </div>
+                    <i class="fa-solid fa-chevron-right stat-arrow"></i>
+                </div>
+                <div class="stat-box glass-element" onclick="window.location.href='routes.html'">
+                    <div class="stat-left">
+                        <i class="fa-solid fa-route stat-icon"></i>
+                        <h4>Routes</h4>
+                    </div>
+                    <i class="fa-solid fa-chevron-right stat-arrow"></i>
+                </div>
+                <div class="stat-box glass-element" onclick="window.location.href='codeshare.html'">
+                    <div class="stat-left">
+                        <i class="fa-solid fa-handshake stat-icon"></i>
+                        <h4>Codeshares</h4>
+                    </div>
+                    <i class="fa-solid fa-chevron-right stat-arrow"></i>
+                </div>
+            </div>
+            <p class="stats-disclaimer">Statistics are updated monthly by our operations team | Last updated: Sep 2026</p>
+        </section>
+
+        <!-- OUR MISSION -->
+        <section class="mission-box content-card glass-element reveal-on-scroll" id="about">
+            <h2>Our Mission</h2>
+            <p>“To turn every flight into a journey worth remembering. ANVA brings together pilots from around the world to explore, connect, and experience aviation through the spirit of Japan. We fly with purpose, grow as a community, and leave a mark on every route we take.”</p>
+        </section>
+
+        <!-- 16:9 IMAGE SLIDER -->
+        <section class="image-slider-container glass-element reveal-on-scroll" id="fleet">
+            <div class="slide active">
+                <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790448259/file_0000000056d882109519b69d5cd130e4_fesapl.png" alt="ANVA Fleet 1">
+            </div>
+            <div class="slide">
+                <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790448853/file_0000000066a08210a8037d2e309ed4b9_nbznyz.png" alt="ANVA Fleet 2">
+            </div>
+            <div class="slide">
+                <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790448853/file_00000000e0d882109c175de8f160790f_l3ojqt.png" alt="ANVA Fleet 3">
+            </div>
+            <div class="slide">
+                <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790448852/file_00000000cb24820abeab70c2e31114bf_h61zpt.png" alt="ANVA Fleet 4">
+            </div>
+            <button class="slider-btn prev-btn" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="slider-btn next-btn" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        </section>
+
+        <!-- CEO MESSAGE -->
+        <section class="ceo-message-box content-card glass-element reveal-on-scroll">
+            <i class="fa-solid fa-quote-left quote-icon"></i>
+            <p class="quote-text">“Welcome to ANVA. We’re here to make every flight meaningful, every destination memorable, and every pilot part of something greater. Let’s fly together and build something we can be proud of.”</p>
+            <div class="ceo-signature">
+                <h4 class="ceo-name">Luciano</h4>
+                <span class="ceo-title">CEO, All Nippon Virtual Airways</span>
+            </div>
+        </section>
+
+        <!-- APPLY CALL TO ACTION -->
+        <section class="apply-box content-card glass-element reveal-on-scroll" id="apply">
+            <h2>Ready to Join ANVA?</h2>
+            <p>Check requirements and apply to become part of our elite pilot family.</p>
+            <button class="btn-primary" onclick="window.location.href='apply.html'">Apply <i class="fa-solid fa-paper-plane"></i></button>
+        </section>
+    </main>
+
+    <!-- FOOTER WITH AUTHENTIC BRAND EMOJIS/ICONS -->
+    <footer class="anva-footer glass-element reveal-on-scroll">
+        <div class="footer-logo-wrapper">
+            <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790448177/Picsart_26-09-27_00-09-58-886_p4reym.png" alt="ANVA Logo" class="footer-logo">
+        </div>
+        
+        <div class="footer-grid">
+            <div class="footer-nav">
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="staff.html">Staff</a></li>
+                    <li><a href="fleet.html">Fleet</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="routes.html">Routes</a></li>
+                    <li><a href="ranks.html">Ranks</a></li>
+                    <li><a href="training.html">Training</a></li>
+                    <li><a href="apply.html">Apply</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-community">
+                <h4>Community</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fa-brands fa-discourse brand-ifc"></i> IFC Forum</a></li>
+                    <li><a href="#"><i class="fa-solid fa-comments brand-thread"></i> IFC Thread</a></li>
+                    <li><a href="#"><i class="fa-solid fa-w brand-waypoints"></i> Waypoints</a></li>
+                    <li><a href="#"><i class="fa-brands fa-instagram brand-insta"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fa-brands fa-youtube brand-yt"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p class="copyright-text">© 2026 All Nippon Virtual Airways — Built for the Infinite Flight Community</p>
+            <p class="disclaimer">All Nippon Virtual Airways is in no way related to the real-world All Nippon Airways. All trademarks and logos remain the property of their respective owners.</p>
+        </div>
+    </footer>
+
+    <!-- App Logic (Menu, Animations, Slider) -->
+    <script src="app.js"></script>
+</body>
+</html>
