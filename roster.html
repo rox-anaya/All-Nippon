@@ -102,7 +102,7 @@
                 </div>
             </div>
 
-            <a href="apply.html" class="block py-3 text-base font-medium hover:text-ana-light transition border-b border-white/5"><i class="fa-solid fa-paper-plane w-6"></i> Apply</a>
+            <a href="apply.html" class="block py-3 text-base font-medium hover:text-ana-light transition"><i class="fa-solid fa-paper-plane w-6"></i> Apply</a>
         </div>
     </div>
     <!-- ============================================== -->
@@ -113,61 +113,95 @@
             Pilot Roster
         </h1>
         <p class="text-gray-200 text-lg md:text-xl font-light leading-relaxed">
-            Explore our active roster of virtual aviators flying across the global network.
+            Explore our active leaderboard and roster of virtual aviators flying across the global network.
         </p>
     </section>
 
     <!-- MAIN CONTENT AREA -->
     <main class="max-w-4xl mx-auto px-4 pb-20 mt-4 space-y-12">
-        <!-- LEADERBOARD & ROSTER SECTION -->
+        
+        <!-- 1. LEADERBOARD & SEARCH SECTION (Now First!) -->
         <div>
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 ml-2 md:ml-4">
                 <h2 class="font-heading text-xl md:text-2xl font-bold text-gray-200 tracking-wide border-l-4 border-yellow-500 pl-4">
                     Active Leaderboard & Roster
                 </h2>
                 
-                <!-- Search Bar Placeholder -->
+                <!-- Search Bar with dynamic filtering script -->
                 <div class="relative w-full md:w-72">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-gray-400">
                         <i class="fa-solid fa-magnifying-glass text-xs"></i>
                     </span>
-                    <input type="text" placeholder="Search pilot or callsign..." class="w-full bg-white/5 border border-white/10 rounded-full pl-11 pr-4 py-2.5 text-xs text-white placeholder-gray-400 focus:outline-none focus:border-ana-light transition">
+                    <input type="text" id="pilotSearch" onkeyup="filterPilots()" placeholder="Search pilot name or ID..." class="w-full bg-white/5 border border-white/10 rounded-full pl-11 pr-4 py-2 text-xs text-white placeholder-gray-400 focus:outline-none focus:border-ana-light transition">
                 </div>
             </div>
             
-            <!-- Pilot Cards Stack (Wide & Low Height) -->
-            <div class="space-y-4">
+            <!-- Pilot Cards Stack -->
+            <div class="space-y-3" id="pilotList">
 
-                <!-- 
-                  SPECIAL PILOT CARD TWIST: 
-                  Adding the 'special-pilot' class (along with border-yellow-500/50 and custom background) 
-                  automatically triggers the special highlighted effect for this card!
-                -->
-                <article class="special-pilot rounded-2xl p-4 md:p-5 flex items-center justify-between gap-4 border border-yellow-500/50 bg-gradient-to-r from-yellow-950/30 via-[#00266b]/30 to-[#0a192f]/80 backdrop-blur-xl shadow-[0_0_20px_rgba(234,179,8,0.15)] hover:border-yellow-400 transition-all duration-300">
-                    <div class="flex items-center gap-4 md:gap-5">
-                        <div class="w-12 h-12 rounded-full bg-yellow-500/20 border border-yellow-500/40 flex items-center justify-center text-yellow-400 text-base font-bold shrink-0 shadow-md">
+                <!-- Pilot Card 1 (Luciano) -->
+                <article class="pilot-card rounded-2xl p-4 flex items-center justify-between gap-4 border border-white/10 bg-gradient-to-r from-[#00266b]/30 to-[#0a192f]/60 backdrop-blur-xl shadow-lg hover:border-ana-light/50 transition-all duration-300">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 border border-yellow-500/40 flex items-center justify-center text-yellow-400 text-sm font-bold shrink-0 shadow-md">
                             <i class="fa-solid fa-crown"></i>
                         </div>
                         <div>
-                            <div class="flex items-center gap-2">
-                                <h3 class="font-heading text-lg font-bold text-white">Luciano</h3>
-                                <span class="bg-yellow-500/20 text-yellow-300 border border-yellow-500/30 text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm">Special Roster</span>
-                            </div>
-                            <p class="text-gray-400 text-xs font-mono mt-0.5">001AN</p>
+                            <h3 class="font-heading text-base md:text-lg font-bold text-white pilot-name">Luciano</h3>
+                            <p class="text-gray-400 text-xs font-mono pilot-id">001AN</p>
                         </div>
                     </div>
                     <div class="flex items-center gap-3">
                         <div class="hidden sm:block text-right">
                             <p class="text-xs text-gray-300 font-medium">Sora no Takumi</p>
-                            <p class="text-[10px] text-yellow-400 font-bold">2,150 Hrs</p>
+                            <p class="text-[10px] text-ana-light">2,150 Hrs</p>
                         </div>
-                        <a href="#" target="_blank" class="bg-ana-light hover:bg-blue-400 text-white text-xs px-4 py-2 rounded-full font-medium transition flex items-center gap-2 shadow-md shrink-0 border border-white/10">
-                            <i class="fa-solid fa-plane"></i> IFC Profile
+                        <a href="#" target="_blank" class="bg-ana-light hover:bg-blue-400 text-white text-[11px] px-3.5 py-1.5 rounded-full font-medium transition flex items-center gap-1.5 shadow-md shrink-0 border border-white/10">
+                            <i class="fa-solid fa-plane text-[10px]"></i> IFC
                         </a>
                     </div>
                 </article>
 
-                <!-- Future standard or special pilot cards will stack right here! -->
+                <!-- More pilot cards can be added here following the exact same structure -->
+
+            </div>
+        </div>
+        <!-- 2. EXECUTIVE LEADERSHIP CARDS -->
+        <div class="pt-6 border-t border-white/10">
+            <h2 class="font-heading text-xl md:text-2xl font-bold text-gray-200 mb-6 ml-2 md:ml-4 tracking-wide border-l-4 border-ana-light pl-4">
+                Executive Leadership
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- CEO Card -->
+                <article class="glass-panel rounded-3xl p-5 flex items-center gap-4 border border-white/10 hover:border-white/30 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-xl text-ana-light shrink-0">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <span class="text-cyan-400 text-[10px] font-bold uppercase tracking-widest block mb-0.5">Chief Executive Officer</span>
+                        <h3 class="font-heading text-lg font-bold text-white truncate">Luciano</h3>
+                        <p class="text-gray-400 text-xs font-mono">001AN</p>
+                    </div>
+                    <a href="#" class="bg-white/10 hover:bg-ana-light text-white text-[11px] px-3.5 py-1.5 rounded-full font-medium transition shrink-0 border border-white/10 flex items-center gap-1.5">
+                        <i class="fa-solid fa-plane text-[10px]"></i> IFC
+                    </a>
+                </article>
+
+                <!-- COO Card (Placeholder) -->
+                <article class="glass-panel rounded-3xl p-5 flex items-center gap-4 border border-white/10 hover:border-white/30 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-xl text-ana-light shrink-0">
+                        <i class="fa-solid fa-user-gear"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <span class="text-blue-400 text-[10px] font-bold uppercase tracking-widest block mb-0.5">Chief Operating Officer</span>
+                        <h3 class="font-heading text-lg font-bold text-white truncate">[Insert Name]</h3>
+                        <p class="text-gray-400 text-xs font-mono">002AN</p>
+                    </div>
+                    <a href="#" class="bg-white/10 hover:bg-ana-light text-white text-[11px] px-3.5 py-1.5 rounded-full font-medium transition shrink-0 border border-white/10 flex items-center gap-1.5">
+                        <i class="fa-solid fa-plane text-[10px]"></i> IFC
+                    </a>
+                </article>
 
             </div>
         </div>
@@ -214,5 +248,25 @@
 
     <!-- Link to external Menu Javascript -->
     <script src="script.js"></script>
+
+    <!-- Instant Search & Filter Script (Case-Insensitive) -->
+    <script>
+        function filterPilots() {
+            let input = document.getElementById('pilotSearch').value.toLowerCase();
+            let cards = document.getElementsByClassName('pilot-card');
+
+            for (let i = 0; i < cards.length; i++) {
+                let name = cards[i].querySelector('.pilot-name').innerText.toLowerCase();
+                let id = cards[i].querySelector('.pilot-id').innerText.toLowerCase();
+
+                // If input matches name or ID, show the card, otherwise hide it
+                if (name.includes(input) || id.includes(input)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 </body>
 </html>
