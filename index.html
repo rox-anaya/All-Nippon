@@ -9,13 +9,13 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#00266b">
     
-    <!-- Google Fonts (Different fonts for headings and body) -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <!-- FontAwesome (Vector Emojis/Icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Tailwind CSS for styling -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -36,7 +36,6 @@
     <!-- Custom CSS for Glassmorphism -->
     <style>
         body {
-            /* ANA Inspired Gradient Background */
             background: linear-gradient(135deg, #0a192f 0%, #00266b 50%, #007fc1 100%);
             background-attachment: fixed;
             color: white;
@@ -54,7 +53,6 @@
             background-position: center;
             background-attachment: fixed;
         }
-        /* Hide scrollbar for cleaner look */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0a192f; }
         ::-webkit-scrollbar-thumb { background: #007fc1; border-radius: 4px; }
@@ -62,7 +60,7 @@
 </head>
 <body class="font-sans antialiased overflow-x-hidden">
 
-    <!-- HEADER: Pill Shape, Sticky at top -->
+    <!-- HEADER -->
     <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl glass-panel rounded-full flex justify-between items-center px-6 py-3 z-50 transition-all">
         <a href="#" class="flex items-center">
             <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790497605/Picsart_26-09-27_13-51-21-265_j4qz5z.png" alt="ANVG Logo" class="h-10 w-auto">
@@ -84,7 +82,6 @@
         
         <p class="text-xl md:text-2xl font-light mb-10 text-gray-200">Fly Beyond Borders</p>
         
-        <!-- Hero Pill Buttons -->
         <div class="flex flex-wrap justify-center gap-4">
             <a href="apply.html" class="bg-ana-light hover:bg-blue-400 text-white px-8 py-3 rounded-full font-medium transition shadow-lg shadow-blue-500/30">Join Fleet</a>
             <a href="about.html" class="glass-panel hover:bg-white/10 text-white px-8 py-3 rounded-full font-medium transition">Learn More</a>
@@ -95,7 +92,7 @@
     <!-- MAIN CONTENT AREA -->
     <main class="max-w-6xl mx-auto px-4 py-16 space-y-24">
 
-        <!-- Info Box (Non-Clickable) -->
+        <!-- Info Box -->
         <section class="glass-panel rounded-3xl p-8 max-w-4xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/20">
                 <div class="pt-4 md:pt-0"><h3 class="font-heading text-4xl font-bold text-ana-light mb-2">4</h3><p class="uppercase tracking-widest text-sm text-gray-300">Hubs</p></div>
@@ -121,21 +118,23 @@
             <p class="text-xs text-gray-400">Statistics are updated monthly by our operations team | Last updated: Sep 2026</p>
         </section>
 
-        <!-- Live Flights Section -->
+        <!-- Live Flights Section (Redesigned) -->
         <section class="glass-panel rounded-3xl p-6 md:p-8">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="font-heading text-2xl font-bold">Network Activity</h2>
-                <!-- Pulsing Live Button -->
-                <div class="glass-panel px-5 py-2 rounded-full flex items-center gap-3 border border-red-500/30">
-                    <span class="relative flex h-3 w-3">
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                      <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+            <div class="flex items-center justify-between mb-4 border-b border-white/10 pb-4">
+                <!-- Softened Font -->
+                <h2 class="font-sans text-lg md:text-xl font-light tracking-wide text-gray-200 uppercase">Live Map</h2>
+                
+                <!-- Minimalist Pulse Indicator -->
+                <div class="flex items-center gap-2 bg-white/5 px-4 py-1.5 rounded-full border border-white/10">
+                    <span class="relative flex h-2.5 w-2.5">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-300 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-400"></span>
                     </span>
-                    <span class="text-red-400 font-bold uppercase tracking-wider text-sm">Live</span>
+                    <span class="text-blue-200 text-xs font-medium tracking-widest uppercase">Online</span>
                 </div>
             </div>
-            <!-- Iframe Container -->
-            <div class="w-full rounded-2xl overflow-hidden border-2 border-white/10 bg-[#0f172a]">
+            
+            <div class="w-full rounded-2xl overflow-hidden bg-[#0a192f]/50">
                 <iframe src="https://waypoint-live.app/embed/va/all-nippon-virtual-airways" width="100%" height="420" style="border:0;" title="Live flights"></iframe>
             </div>
         </section>
@@ -149,23 +148,22 @@
             </p>
         </section>
 
-        <!-- Auto-Sliding Photo Gallery (16:9) -->
+        <!-- Auto-Sliding Photo Gallery -->
         <section class="w-full max-w-5xl mx-auto">
             <h2 class="font-heading text-2xl font-bold mb-6 text-center">Fleet Showcase</h2>
             <div class="relative w-full aspect-video rounded-3xl overflow-hidden glass-panel group shadow-2xl shadow-black/50">
-                <!-- Image Container -->
+                <!-- Updated Images -->
                 <div id="carousel" class="w-full h-full relative">
-                    <!-- Put your own images here in the future -->
-                    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="Plane">
-                    <img src="https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=1920&q=80" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Plane">
-                    <img src="https://images.unsplash.com/photo-1569154941061-e231b4732605?auto=format&fit=crop&w=1920&q=80" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Plane">
+                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790448259/file_0000000056d882109519b69d5cd130e4_fesapl.png" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="ANVG Aircraft 1">
+                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790448852/file_00000000cb24820abeab70c2e31114bf_h61zpt.png" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="ANVG Aircraft 2">
+                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790448853/file_00000000e0d882109c175de8f160790f_l3ojqt.png" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="ANVG Aircraft 3">
+                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790448853/file_0000000066a08210a8037d2e309ed4b9_nbznyz.png" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="ANVG Aircraft 4">
                 </div>
                 
-                <!-- Navigation Arrows -->
-                <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 glass-panel w-12 h-12 rounded-full flex items-center justify-center hover:bg-white/20 transition opacity-0 group-hover:opacity-100">
+                <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 glass-panel w-12 h-12 rounded-full flex items-center justify-center hover:bg-white/20 transition opacity-0 group-hover:opacity-100 z-10">
                     <i class="fa-solid fa-chevron-left"></i>
                 </button>
-                <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 glass-panel w-12 h-12 rounded-full flex items-center justify-center hover:bg-white/20 transition opacity-0 group-hover:opacity-100">
+                <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 glass-panel w-12 h-12 rounded-full flex items-center justify-center hover:bg-white/20 transition opacity-0 group-hover:opacity-100 z-10">
                     <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
@@ -176,7 +174,7 @@
             <p class="text-lg md:text-xl leading-relaxed italic font-light mb-6">
                 “Welcome to ANVG. We’re here to make every flight meaningful, every destination memorable, and every pilot part of something greater. Let’s fly together and build something we can be proud of.”
             </p>
-            <p class="font-heading font-bold text-ana-light">— CEO, All Nippon Virtual Group</p>
+            <p class="font-heading font-bold text-ana-light">— Luciano, CEO, All Nippon Virtual Group</p>
         </section>
 
         <!-- Apply CTA Card -->
@@ -194,7 +192,6 @@
     <footer class="bg-[#020914] text-gray-400 pt-16 pb-8 px-6 mt-12 border-t border-white/10">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
             
-            <!-- Navigation Links -->
             <div>
                 <h4 class="font-heading text-white text-lg font-bold mb-6 flex items-center gap-2">
                     <i class="fa-solid fa-compass text-ana-light"></i> Navigation
@@ -209,7 +206,6 @@
                 </ul>
             </div>
 
-            <!-- Community Links -->
             <div>
                 <h4 class="font-heading text-white text-lg font-bold mb-6 flex items-center gap-2">
                     <i class="fa-solid fa-users text-ana-light"></i> Community
@@ -233,9 +229,8 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT FOR GALLERY AND PWA -->
+    <!-- JAVASCRIPT -->
     <script>
-        // 1. Photo Gallery Carousel Logic
         const slides = document.querySelectorAll('.carousel-slide');
         let currentSlide = 0;
 
@@ -260,10 +255,8 @@
             showSlide(currentSlide);
         }
 
-        // Auto-change every 5 seconds
         setInterval(nextSlide, 5000);
 
-        // 2. Register PWA Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js').then(registration => {
