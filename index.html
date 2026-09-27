@@ -2,192 +2,277 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>All Nippon Virtual Airways | Infinite Flight</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Nippon Virtual Group - Fly Beyond Borders</title>
     
-    <!-- Vector Icons -->
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00266b">
+    
+    <!-- Google Fonts (Different fonts for headings and body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome (Vector Emojis/Icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
 
-    <!-- HIGH-CONTRAST TUBE HEADER -->
-    <header class="anva-header glass-element">
-        <div class="nav-container">
-            <div class="logo-container">
-                <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790448177/Picsart_26-09-27_00-09-58-886_p4reym.png" alt="ANVA Logo" class="header-logo">
-            </div>
-            <button class="hamburg-pill" aria-label="Open Menu" onclick="toggleMenu()">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-        </div>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        ana: { dark: '#00266b', light: '#007fc1' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for Glassmorphism -->
+    <style>
+        body {
+            /* ANA Inspired Gradient Background */
+            background: linear-gradient(135deg, #0a192f 0%, #00266b 50%, #007fc1 100%);
+            background-attachment: fixed;
+            color: white;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 38, 107, 0.7), rgba(10, 25, 47, 0.9)), url('https://res.cloudinary.com/dsfwafyc2/image/upload/v1779014897/Screenshot_20260509_221234_com.fds.infiniteflight_ewqhzv.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        /* Hide scrollbar for cleaner look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a192f; }
+        ::-webkit-scrollbar-thumb { background: #007fc1; border-radius: 4px; }
+    </style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden">
+
+    <!-- HEADER: Pill Shape, Sticky at top -->
+    <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl glass-panel rounded-full flex justify-between items-center px-6 py-3 z-50 transition-all">
+        <a href="#" class="flex items-center">
+            <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790497605/Picsart_26-09-27_13-51-21-265_j4qz5z.png" alt="ANVG Logo" class="h-10 w-auto">
+        </a>
+        <button class="text-white text-2xl hover:text-ana-light transition">
+            <i class="fa-solid fa-bars"></i>
+        </button>
     </header>
 
-    <!-- PREMIUM GLASS HERO SECTION WITH FOREGROUND IMAGE -->
-    <section class="hero-wrapper" id="home">
-        <div class="hero-overlay"></div>
+    <!-- HERO SECTION -->
+    <section class="hero-bg min-h-screen flex flex-col items-center justify-center text-center px-4 pt-24 pb-12">
+        <div class="glass-panel px-6 py-2 rounded-full mb-6 border-white/30 text-sm font-medium tracking-widest uppercase">
+            ANVG - Infinite Flight VA
+        </div>
         
-        <!-- Floating Glass Panel for the Title -->
-        <div class="hero-glass-card glass-element">
-            <h3 class="sub-heading">ANVA — INFINITE FLIGHT VA</h3>
-            
-            <!-- NEW: Premium Staggered VA Name -->
-            <h1 class="main-heading">
-                <span class="brand-primary">ALL NIPPON</span><br>
-                <span class="brand-secondary">VIRTUAL AIRWAYS</span>
-            </h1>
-            
-            <p class="tagline">Fly Beyond Borders</p>
-            
-            <div class="hero-buttons">
-                <button class="btn-primary" onclick="window.location.href='#fleet'">Join fleet <i class="fa-solid fa-plane-departure"></i></button>
-                <button class="btn-secondary" onclick="window.location.href='#about'">Learn more <i class="fa-solid fa-arrow-right"></i></button>
-                <button class="btn-secondary" onclick="window.location.href='#events'">Events <i class="fa-solid fa-calendar-days"></i></button>
-            </div>
+        <h1 class="font-heading text-5xl md:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-200">
+            All Nippon Virtual Group
+        </h1>
+        
+        <p class="text-xl md:text-2xl font-light mb-10 text-gray-200">Fly Beyond Borders</p>
+        
+        <!-- Hero Pill Buttons -->
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="apply.html" class="bg-ana-light hover:bg-blue-400 text-white px-8 py-3 rounded-full font-medium transition shadow-lg shadow-blue-500/30">Join Fleet</a>
+            <a href="about.html" class="glass-panel hover:bg-white/10 text-white px-8 py-3 rounded-full font-medium transition">Learn More</a>
+            <a href="events.html" class="glass-panel hover:bg-white/10 text-white px-8 py-3 rounded-full font-medium transition">Events</a>
         </div>
     </section>
 
-    <!-- MAIN CONTENT -->
-    <main>
-        <!-- OPERATIONS OVERVIEW (Glass Grid) -->
-        <section class="operations-list reveal-on-scroll">
-            <div class="op-card glass-element">
-                <span class="op-number">5</span>
-                <i class="fa-solid fa-location-dot op-icon"></i>
-                <span class="op-text">Hubs</span>
-            </div>
-            <div class="op-card glass-element">
-                <span class="op-number">2</span>
-                <i class="fa-solid fa-plane op-icon"></i>
-                <span class="op-text">Aircraft Family</span>
-            </div>
-            <div class="op-card glass-element">
-                <span class="op-number">6</span>
-                <i class="fa-solid fa-earth-americas op-icon"></i>
-                <span class="op-text">Continent served</span>
-            </div>
-            <div class="op-card glass-element">
-                <span class="op-number">2</span>
-                <i class="fa-solid fa-box op-icon"></i>
-                <span class="op-text">Cargo x Pax</span>
+    <!-- MAIN CONTENT AREA -->
+    <main class="max-w-6xl mx-auto px-4 py-16 space-y-24">
+
+        <!-- Info Box (Non-Clickable) -->
+        <section class="glass-panel rounded-3xl p-8 max-w-4xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/20">
+                <div class="pt-4 md:pt-0"><h3 class="font-heading text-4xl font-bold text-ana-light mb-2">4</h3><p class="uppercase tracking-widest text-sm text-gray-300">Hubs</p></div>
+                <div class="pt-4 md:pt-0"><h3 class="font-heading text-4xl font-bold text-ana-light mb-2">7</h3><p class="uppercase tracking-widest text-sm text-gray-300">Aircraft Family</p></div>
+                <div class="pt-4 md:pt-0"><h3 class="font-heading text-4xl font-bold text-ana-light mb-2">4</h3><p class="uppercase tracking-widest text-sm text-gray-300">Continents Served</p></div>
             </div>
         </section>
 
-        <!-- VA STATISTICS -->
-        <section class="statistics-section reveal-on-scroll">
-            <div class="stats-header">
-                <h2 class="section-title">VA Statistics</h2>
+        <!-- VA Statistics Buttons -->
+        <section class="text-center">
+            <h2 class="font-heading text-3xl font-bold mb-8">Operations <span class="text-ana-light">Center</span></h2>
+            <div class="flex flex-wrap justify-center gap-4 mb-6">
+                <a href="roster.html" class="glass-panel hover:bg-white/10 text-white px-8 py-4 rounded-full font-medium flex items-center gap-3 transition">
+                    <i class="fa-solid fa-users text-ana-light"></i> Pilots
+                </a>
+                <a href="routes.html" class="glass-panel hover:bg-white/10 text-white px-8 py-4 rounded-full font-medium flex items-center gap-3 transition">
+                    <i class="fa-solid fa-route text-ana-light"></i> Routes
+                </a>
+                <a href="codeshare.html" class="glass-panel hover:bg-white/10 text-white px-8 py-4 rounded-full font-medium flex items-center gap-3 transition">
+                    <i class="fa-solid fa-handshake text-ana-light"></i> Codeshare
+                </a>
             </div>
-            <div class="stats-grid">
-                <div class="stat-box glass-element" onclick="window.location.href='roster.html'">
-                    <div class="stat-left">
-                        <i class="fa-solid fa-users stat-icon"></i>
-                        <h4>Pilots</h4>
-                    </div>
-                    <i class="fa-solid fa-chevron-right stat-arrow"></i>
-                </div>
-                <div class="stat-box glass-element" onclick="window.location.href='routes.html'">
-                    <div class="stat-left">
-                        <i class="fa-solid fa-route stat-icon"></i>
-                        <h4>Routes</h4>
-                    </div>
-                    <i class="fa-solid fa-chevron-right stat-arrow"></i>
-                </div>
-                <div class="stat-box glass-element" onclick="window.location.href='codeshare.html'">
-                    <div class="stat-left">
-                        <i class="fa-solid fa-handshake stat-icon"></i>
-                        <h4>Codeshares</h4>
-                    </div>
-                    <i class="fa-solid fa-chevron-right stat-arrow"></i>
+            <p class="text-xs text-gray-400">Statistics are updated monthly by our operations team | Last updated: Sep 2026</p>
+        </section>
+
+        <!-- Live Flights Section -->
+        <section class="glass-panel rounded-3xl p-6 md:p-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="font-heading text-2xl font-bold">Network Activity</h2>
+                <!-- Pulsing Live Button -->
+                <div class="glass-panel px-5 py-2 rounded-full flex items-center gap-3 border border-red-500/30">
+                    <span class="relative flex h-3 w-3">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                    </span>
+                    <span class="text-red-400 font-bold uppercase tracking-wider text-sm">Live</span>
                 </div>
             </div>
-            <p class="stats-disclaimer">Statistics are updated monthly by our operations team | Last updated: Sep 2026</p>
-        </section>
-
-        <!-- OUR MISSION -->
-        <section class="mission-box content-card glass-element reveal-on-scroll" id="about">
-            <h2>Our Mission</h2>
-            <p>“To turn every flight into a journey worth remembering. ANVA brings together pilots from around the world to explore, connect, and experience aviation through the spirit of Japan. We fly with purpose, grow as a community, and leave a mark on every route we take.”</p>
-        </section>
-
-        <!-- 16:9 IMAGE SLIDER -->
-        <section class="image-slider-container glass-element reveal-on-scroll" id="fleet">
-            <div class="slide active">
-                <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790448259/file_0000000056d882109519b69d5cd130e4_fesapl.png" alt="ANVA Fleet 1">
-            </div>
-            <div class="slide">
-                <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790448853/file_0000000066a08210a8037d2e309ed4b9_nbznyz.png" alt="ANVA Fleet 2">
-            </div>
-            <div class="slide">
-                <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790448853/file_00000000e0d882109c175de8f160790f_l3ojqt.png" alt="ANVA Fleet 3">
-            </div>
-            <div class="slide">
-                <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790448852/file_00000000cb24820abeab70c2e31114bf_h61zpt.png" alt="ANVA Fleet 4">
-            </div>
-            <button class="slider-btn prev-btn" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="slider-btn next-btn" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
-        </section>
-
-        <!-- CEO MESSAGE -->
-        <section class="ceo-message-box content-card glass-element reveal-on-scroll">
-            <i class="fa-solid fa-quote-left quote-icon"></i>
-            <p class="quote-text">“Welcome to ANVA. We’re here to make every flight meaningful, every destination memorable, and every pilot part of something greater. Let’s fly together and build something we can be proud of.”</p>
-            <div class="ceo-signature">
-                <h4 class="ceo-name">Luciano</h4>
-                <span class="ceo-title">CEO, All Nippon Virtual Airways</span>
+            <!-- Iframe Container -->
+            <div class="w-full rounded-2xl overflow-hidden border-2 border-white/10 bg-[#0f172a]">
+                <iframe src="https://waypoint-live.app/embed/va/all-nippon-virtual-airways" width="100%" height="420" style="border:0;" title="Live flights"></iframe>
             </div>
         </section>
 
-        <!-- APPLY CALL TO ACTION -->
-        <section class="apply-box content-card glass-element reveal-on-scroll" id="apply">
-            <h2>Ready to Join ANVA?</h2>
-            <p>Check requirements and apply to become part of our elite pilot family.</p>
-            <button class="btn-primary" onclick="window.location.href='apply.html'">Apply <i class="fa-solid fa-paper-plane"></i></button>
+        <!-- Our Mission Card -->
+        <section class="glass-panel rounded-3xl p-8 md:p-12 text-center max-w-4xl mx-auto relative overflow-hidden">
+            <i class="fa-solid fa-quote-left absolute top-4 left-6 text-6xl text-white/5"></i>
+            <h2 class="font-heading text-3xl font-bold mb-6 text-ana-light">Our Mission</h2>
+            <p class="text-lg md:text-xl leading-relaxed font-light text-gray-200">
+                "To turn every flight into a journey worth remembering. ANVG brings together pilots from around the world to explore, connect, and experience aviation through the spirit of Japan. We fly with purpose, grow as a community, and leave a mark on every route we take."
+            </p>
         </section>
+
+        <!-- Auto-Sliding Photo Gallery (16:9) -->
+        <section class="w-full max-w-5xl mx-auto">
+            <h2 class="font-heading text-2xl font-bold mb-6 text-center">Fleet Showcase</h2>
+            <div class="relative w-full aspect-video rounded-3xl overflow-hidden glass-panel group shadow-2xl shadow-black/50">
+                <!-- Image Container -->
+                <div id="carousel" class="w-full h-full relative">
+                    <!-- Put your own images here in the future -->
+                    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="Plane">
+                    <img src="https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=1920&q=80" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Plane">
+                    <img src="https://images.unsplash.com/photo-1569154941061-e231b4732605?auto=format&fit=crop&w=1920&q=80" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Plane">
+                </div>
+                
+                <!-- Navigation Arrows -->
+                <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 glass-panel w-12 h-12 rounded-full flex items-center justify-center hover:bg-white/20 transition opacity-0 group-hover:opacity-100">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 glass-panel w-12 h-12 rounded-full flex items-center justify-center hover:bg-white/20 transition opacity-0 group-hover:opacity-100">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- CEO Message -->
+        <section class="glass-panel rounded-3xl p-8 md:p-12 max-w-4xl mx-auto border-l-4 border-l-ana-light">
+            <p class="text-lg md:text-xl leading-relaxed italic font-light mb-6">
+                “Welcome to ANVG. We’re here to make every flight meaningful, every destination memorable, and every pilot part of something greater. Let’s fly together and build something we can be proud of.”
+            </p>
+            <p class="font-heading font-bold text-ana-light">— CEO, All Nippon Virtual Group</p>
+        </section>
+
+        <!-- Apply CTA Card -->
+        <section class="glass-panel rounded-3xl p-12 text-center bg-gradient-to-t from-ana-dark/50 to-transparent">
+            <h2 class="font-heading text-4xl font-bold mb-6">Ready to join?</h2>
+            <p class="text-gray-300 mb-8 max-w-2xl mx-auto">Take your Infinite Flight experience to the next level. Become a part of our growing virtual family today.</p>
+            <a href="apply.html" class="inline-block bg-white text-ana-dark px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-200 transition shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                Submit Application <i class="fa-solid fa-paper-plane ml-2"></i>
+            </a>
+        </section>
+
     </main>
 
-    <!-- FOOTER WITH AUTHENTIC BRAND EMOJIS/ICONS -->
-    <footer class="anva-footer glass-element reveal-on-scroll">
-        <div class="footer-logo-wrapper">
-            <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790448177/Picsart_26-09-27_00-09-58-886_p4reym.png" alt="ANVA Logo" class="footer-logo">
-        </div>
-        
-        <div class="footer-grid">
-            <div class="footer-nav">
-                <h4>Navigation</h4>
-                <ul class="footer-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="staff.html">Staff</a></li>
-                    <li><a href="fleet.html">Fleet</a></li>
-                    <li><a href="events.html">Events</a></li>
-                    <li><a href="routes.html">Routes</a></li>
-                    <li><a href="ranks.html">Ranks</a></li>
-                    <li><a href="training.html">Training</a></li>
-                    <li><a href="apply.html">Apply</a></li>
+    <!-- FOOTER -->
+    <footer class="bg-[#020914] text-gray-400 pt-16 pb-8 px-6 mt-12 border-t border-white/10">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+            
+            <!-- Navigation Links -->
+            <div>
+                <h4 class="font-heading text-white text-lg font-bold mb-6 flex items-center gap-2">
+                    <i class="fa-solid fa-compass text-ana-light"></i> Navigation
+                </h4>
+                <ul class="space-y-3">
+                    <li><a href="apply.html" class="hover:text-white transition">Apply</a></li>
+                    <li><a href="about.html" class="hover:text-white transition">Learn More</a></li>
+                    <li><a href="events.html" class="hover:text-white transition">Events</a></li>
+                    <li><a href="roster.html" class="hover:text-white transition">Roster</a></li>
+                    <li><a href="routes.html" class="hover:text-white transition">Routes</a></li>
+                    <li><a href="codeshare.html" class="hover:text-white transition">Codeshares</a></li>
                 </ul>
             </div>
 
-            <div class="footer-community">
-                <h4>Community</h4>
-                <ul class="footer-links">
-                    <li><a href="#"><i class="fa-brands fa-discourse brand-ifc"></i> IFC Forum</a></li>
-                    <li><a href="#"><i class="fa-solid fa-comments brand-thread"></i> IFC Thread</a></li>
-                    <li><a href="#"><i class="fa-solid fa-w brand-waypoints"></i> Waypoints</a></li>
-                    <li><a href="#"><i class="fa-brands fa-instagram brand-insta"></i> Instagram</a></li>
-                    <li><a href="#"><i class="fa-brands fa-youtube brand-yt"></i> YouTube</a></li>
+            <!-- Community Links -->
+            <div>
+                <h4 class="font-heading text-white text-lg font-bold mb-6 flex items-center gap-2">
+                    <i class="fa-solid fa-users text-ana-light"></i> Community
+                </h4>
+                <ul class="space-y-4">
+                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-regular fa-comments w-5"></i> IFC Forum</a></li>
+                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-thread w-5"></i> IFC Thread</a></li>
+                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-w w-5"></i> Waypoints CC</a></li>
+                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-instagram w-5"></i> Instagram</a></li>
+                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-youtube w-5"></i> YouTube</a></li>
                 </ul>
             </div>
         </div>
 
-        <div class="footer-bottom">
-            <p class="copyright-text">© 2026 All Nippon Virtual Airways — Built for the Infinite Flight Community</p>
-            <p class="disclaimer">All Nippon Virtual Airways is in no way related to the real-world All Nippon Airways. All trademarks and logos remain the property of their respective owners.</p>
+        <div class="max-w-6xl mx-auto">
+            <hr class="border-white/10 mb-8">
+            <div class="text-center text-xs space-y-2">
+                <p class="text-white/60">© 2026 All Nippon Virtual Group — Built for the Infinite Flight Community</p>
+                <p class="text-white/40">All Nippon Virtual Group is no way related to the real-world All Nippon Airways. All trademarks and logos remain the property of their respective owners.</p>
+            </div>
         </div>
     </footer>
 
-    <!-- App Logic (Menu, Animations, Slider) -->
-    <script src="app.js"></script>
+    <!-- JAVASCRIPT FOR GALLERY AND PWA -->
+    <script>
+        // 1. Photo Gallery Carousel Logic
+        const slides = document.querySelectorAll('.carousel-slide');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('opacity-100');
+                slide.classList.add('opacity-0');
+                if (i === index) {
+                    slide.classList.remove('opacity-0');
+                    slide.classList.add('opacity-100');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        // Auto-change every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // 2. Register PWA Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then(registration => {
+                    console.log('PWA ServiceWorker registered successfully!');
+                }).catch(err => {
+                    console.log('PWA ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
 </body>
 </html>
