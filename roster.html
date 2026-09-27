@@ -10,7 +10,7 @@
     <meta name="theme-color" content="#00266b">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Dancing+Script:wght@700&family=Montserrat:wght@600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -28,7 +28,6 @@
                         sans: ['Poppins', 'sans-serif'],
                         heading: ['Montserrat', 'sans-serif'],
                         signature: ['"Dancing Script"', 'cursive'],
-                        elite: ['"Cinzel"', 'serif'],
                     },
                     colors: {
                         ana: { dark: '#00266b', light: '#007fc1' }
@@ -120,31 +119,38 @@
     <!-- MAIN CONTENT AREA -->
     <main class="max-w-4xl mx-auto px-4 pb-20 mt-4 space-y-12">
         
-        <!-- 1. ACTIVE LEADERBOARD (Top Flight Hours) -->
+        <!-- 1. TOP FLIGHT HOURS LEADERBOARD -->
         <div>
-            <h2 class="font-heading text-xl md:text-2xl font-bold text-gray-200 mb-6 ml-2 md:ml-4 tracking-wide border-l-4 border-yellow-500 pl-4">
+            <h2 class="font-heading text-xl md:text-2xl font-bold text-gray-200 mb-4 ml-2 md:ml-4 tracking-wide border-l-4 border-yellow-500 pl-4">
                 Top Flight Hours Leaderboard
             </h2>
             
-            <div class="space-y-3">
-                <!-- Leaderboard entries only display when hours > 0. Example top pilot: -->
+            <div id="leaderboardList" class="space-y-3">
+                <!-- Currently shows awaiting logs since all pilots are at 0 Hrs -->
+                <div class="glass-panel rounded-2xl p-6 text-center border border-white/10">
+                    <p class="text-gray-400 text-sm italic">Flight logging will begin soon. Top 10 pilots will appear here automatically once hours are recorded.</p>
+                </div>
+
+                <!-- 
+                LEADERBOARD TEMPLATE (Uncomment and add when someone earns flight hours):
                 <article class="rounded-2xl p-4 flex items-center justify-between gap-4 border border-yellow-500/30 bg-gradient-to-r from-yellow-950/20 via-[#00266b]/30 to-[#0a192f]/80 backdrop-blur-xl shadow-lg">
                     <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 border border-yellow-500/40 flex items-center justify-center text-yellow-400 text-xs font-bold shrink-0 shadow-md font-mono">
+                        <div class="w-9 h-9 rounded-full bg-yellow-500/20 border border-yellow-500/40 flex items-center justify-center text-yellow-400 text-xs font-bold font-mono">
                             #1
                         </div>
                         <div>
-                            <h3 class="font-heading text-base md:text-lg font-bold text-white">Luciano</h3>
+                            <h3 class="font-heading text-base font-bold text-white">Pilot Name</h3>
                             <p class="text-gray-400 text-xs font-mono">001AN</p>
                         </div>
                     </div>
                     <div class="text-right">
-                        <span class="text-yellow-400 font-bold text-xs md:text-sm tracking-wider">2,150 Hrs</span>
+                        <span class="text-yellow-400 font-bold text-xs tracking-wider">120 Hrs</span>
                     </div>
                 </article>
+                -->
             </div>
         </div>
-        <!-- 2. SEARCH & ACTIVE ROSTER -->
+        <!-- 2. SEARCH & ACTIVE ROSTER (Strict Equality for all pilots) -->
         <div>
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 ml-2 md:ml-4">
                 <h2 class="font-heading text-xl md:text-2xl font-bold text-gray-200 tracking-wide border-l-4 border-ana-light pl-4">
@@ -156,82 +162,54 @@
                     <span class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-gray-400">
                         <i class="fa-solid fa-magnifying-glass text-xs"></i>
                     </span>
-                    <input type="text" id="pilotSearch" onkeyup="filterPilots()" placeholder="Search pilot name or ID..." class="w-full bg-white/5 border border-white/10 rounded-full pl-11 pr-4 py-2 text-xs text-white placeholder-gray-400 focus:outline-none focus:border-ana-light transition">
+                    <input type="text" id="pilotSearch" oninput="filterPilots()" placeholder="Search pilot name or ID..." class="w-full bg-white/5 border border-white/10 rounded-full pl-11 pr-4 py-2 text-xs text-white placeholder-gray-400 focus:outline-none focus:border-ana-light transition">
                 </div>
             </div>
             
             <!-- Pilot Cards Stack -->
             <div class="space-y-3" id="pilotList">
 
-                <!-- Pilot Card 1 (Luciano) -->
+                <!-- Luciano Card (Active) -->
                 <article class="pilot-card rounded-2xl p-4 flex items-center justify-between gap-4 border border-white/10 bg-gradient-to-r from-[#00266b]/30 to-[#0a192f]/60 backdrop-blur-xl shadow-lg hover:border-ana-light/50 transition-all duration-300">
                     <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-ana-light text-sm shrink-0 shadow-md">
+                        <div class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-ana-light text-sm shrink-0">
                             <i class="fa-solid fa-user"></i>
                         </div>
                         <div>
-                            <h3 class="font-heading text-base md:text-lg font-bold text-white pilot-name">Luciano</h3>
+                            <h3 class="font-heading text-base font-bold text-white pilot-name">Luciano</h3>
                             <p class="text-gray-400 text-xs font-mono pilot-id">001AN</p>
                         </div>
                     </div>
-                    <div class="flex items-center gap-3">
-                        <span class="text-xs text-ana-light font-medium">0 Hrs</span>
-                        <a href="#" target="_blank" class="bg-ana-light hover:bg-blue-400 text-white text-[11px] px-3.5 py-1.5 rounded-full font-medium transition flex items-center gap-1.5 shadow-md shrink-0 border border-white/10">
-                            <i class="fa-solid fa-plane text-[10px]"></i> IFC
+                    <div class="flex items-center gap-4">
+                        <span class="text-xs text-gray-400 font-light">0 Hrs</span>
+                        <a href="#" target="_blank" class="bg-ana-light hover:bg-blue-400 text-white text-[11px] px-3.5 py-1 rounded-full font-medium transition flex items-center gap-1.5 shadow-md shrink-0 border border-white/10">
+                            <i class="fa-solid fa-plane text-[9px]"></i> IFC
                         </a>
                     </div>
                 </article>
 
-                <!-- Future roster cards will stack right here! -->
-
-            </div>
-        </div>
-
-        <!-- 3. EXECUTIVE LEADERSHIP -->
-        <div class="pt-6 border-t border-white/10">
-            <h2 class="font-heading text-xl md:text-2xl font-bold text-gray-200 mb-6 ml-2 md:ml-4 tracking-wide border-l-4 border-ana-light pl-4">
-                Executive Leadership
-            </h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
-                <!-- CEO Card -->
-                <article class="glass-panel rounded-3xl p-5 flex items-center justify-between gap-4 border border-white/10 hover:border-white/30 transition-all duration-300">
+                <!-- 
+                ============================================================
+                FUTURE PILOT CARD TEMPLATE (Uncomment to activate new pilot)
+                ============================================================
+                <article class="pilot-card rounded-2xl p-4 flex items-center justify-between gap-4 border border-white/10 bg-gradient-to-r from-[#00266b]/30 to-[#0a192f]/60 backdrop-blur-xl shadow-lg hover:border-ana-light/50 transition-all duration-300">
                     <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-ana-light text-base shrink-0 shadow-md">
-                            <i class="fa-solid fa-user-tie"></i>
+                        <div class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-ana-light text-sm shrink-0">
+                            <i class="fa-solid fa-user"></i>
                         </div>
                         <div>
-                            <h3 class="font-heading text-base md:text-lg font-bold text-white">Luciano</h3>
-                            <p class="text-gray-400 text-xs font-mono">001AN</p>
+                            <h3 class="font-heading text-base font-bold text-white pilot-name">Pilot Name</h3>
+                            <p class="text-gray-400 text-xs font-mono pilot-id">002AN</p>
                         </div>
                     </div>
-                    <div class="flex items-center gap-3">
-                        <span class="text-xs text-ana-light font-medium">0 Hrs</span>
-                        <a href="#" target="_blank" class="bg-ana-light hover:bg-blue-400 text-white text-[11px] px-3.5 py-1.5 rounded-full font-medium transition flex items-center gap-1.5 shadow-md shrink-0 border border-white/10">
-                            <i class="fa-solid fa-plane text-[10px]"></i> IFC
-                        </a>
-                    </div>
-                </article>
-
-                <!-- COO Card (Placeholder) -->
-                <article class="glass-panel rounded-3xl p-5 flex items-center justify-between gap-4 border border-white/10 hover:border-white/30 transition-all duration-300">
                     <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-ana-light text-base shrink-0 shadow-md">
-                            <i class="fa-solid fa-user-gear"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-heading text-base md:text-lg font-bold text-white">[Insert Name]</h3>
-                            <p class="text-gray-400 text-xs font-mono">002AN</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <span class="text-xs text-ana-light font-medium">0 Hrs</span>
-                        <a href="#" target="_blank" class="bg-ana-light hover:bg-blue-400 text-white text-[11px] px-3.5 py-1.5 rounded-full font-medium transition flex items-center gap-1.5 shadow-md shrink-0 border border-white/10">
-                            <i class="fa-solid fa-plane text-[10px]"></i> IFC
+                        <span class="text-xs text-gray-400 font-light">0 Hrs</span>
+                        <a href="#" target="_blank" class="bg-ana-light hover:bg-blue-400 text-white text-[11px] px-3.5 py-1 rounded-full font-medium transition flex items-center gap-1.5 shadow-md shrink-0 border border-white/10">
+                            <i class="fa-solid fa-plane text-[9px]"></i> IFC
                         </a>
                     </div>
                 </article>
+                -->
 
             </div>
         </div>
@@ -279,18 +257,18 @@
     <!-- Link to external Menu Javascript -->
     <script src="script.js"></script>
 
-    <!-- Instant Search & Filter Script -->
+    <!-- Search & Filter Script -->
     <script>
         function filterPilots() {
-            let input = document.getElementById('pilotSearch').value.toLowerCase();
+            let input = document.getElementById('pilotSearch').value.toLowerCase().trim();
             let cards = document.getElementsByClassName('pilot-card');
 
             for (let i = 0; i < cards.length; i++) {
                 let name = cards[i].querySelector('.pilot-name').innerText.toLowerCase();
                 let id = cards[i].querySelector('.pilot-id').innerText.toLowerCase();
 
-                if (name.includes(input) || id.includes(input)) {
-                    cards[i].style.display = "";
+                if (input === "" || name.includes(input) || id.includes(input)) {
+                    cards[i].style.display = "flex";
                 } else {
                     cards[i].style.display = "none";
                 }
