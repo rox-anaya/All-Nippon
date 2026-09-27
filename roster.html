@@ -102,7 +102,7 @@
                 </div>
             </div>
 
-            <a href="apply.html" class="block py-3 text-base font-medium hover:text-ana-light transition"><i class="fa-solid fa-paper-plane w-6"></i> Apply</a>
+            <a href="apply.html" class="block py-3 text-base font-medium hover:text-ana-light transition border-b border-white/5"><i class="fa-solid fa-paper-plane w-6"></i> Apply</a>
         </div>
     </div>
     <!-- ============================================== -->
@@ -120,14 +120,38 @@
     <!-- MAIN CONTENT AREA -->
     <main class="max-w-4xl mx-auto px-4 pb-20 mt-4 space-y-12">
         
-        <!-- 1. LEADERBOARD & SEARCH SECTION (Now First!) -->
+        <!-- 1. ACTIVE LEADERBOARD (Top Flight Hours) -->
+        <div>
+            <h2 class="font-heading text-xl md:text-2xl font-bold text-gray-200 mb-6 ml-2 md:ml-4 tracking-wide border-l-4 border-yellow-500 pl-4">
+                Top Flight Hours Leaderboard
+            </h2>
+            
+            <div class="space-y-3">
+                <!-- Leaderboard entries only display when hours > 0. Example top pilot: -->
+                <article class="rounded-2xl p-4 flex items-center justify-between gap-4 border border-yellow-500/30 bg-gradient-to-r from-yellow-950/20 via-[#00266b]/30 to-[#0a192f]/80 backdrop-blur-xl shadow-lg">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 border border-yellow-500/40 flex items-center justify-center text-yellow-400 text-xs font-bold shrink-0 shadow-md font-mono">
+                            #1
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-base md:text-lg font-bold text-white">Luciano</h3>
+                            <p class="text-gray-400 text-xs font-mono">001AN</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-yellow-400 font-bold text-xs md:text-sm tracking-wider">2,150 Hrs</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <!-- 2. SEARCH & ACTIVE ROSTER -->
         <div>
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 ml-2 md:ml-4">
-                <h2 class="font-heading text-xl md:text-2xl font-bold text-gray-200 tracking-wide border-l-4 border-yellow-500 pl-4">
-                    Active Leaderboard & Roster
+                <h2 class="font-heading text-xl md:text-2xl font-bold text-gray-200 tracking-wide border-l-4 border-ana-light pl-4">
+                    Active Roster
                 </h2>
                 
-                <!-- Search Bar with dynamic filtering script -->
+                <!-- Search Bar -->
                 <div class="relative w-full md:w-72">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-gray-400">
                         <i class="fa-solid fa-magnifying-glass text-xs"></i>
@@ -142,8 +166,8 @@
                 <!-- Pilot Card 1 (Luciano) -->
                 <article class="pilot-card rounded-2xl p-4 flex items-center justify-between gap-4 border border-white/10 bg-gradient-to-r from-[#00266b]/30 to-[#0a192f]/60 backdrop-blur-xl shadow-lg hover:border-ana-light/50 transition-all duration-300">
                     <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 border border-yellow-500/40 flex items-center justify-center text-yellow-400 text-sm font-bold shrink-0 shadow-md">
-                            <i class="fa-solid fa-crown"></i>
+                        <div class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-ana-light text-sm shrink-0 shadow-md">
+                            <i class="fa-solid fa-user"></i>
                         </div>
                         <div>
                             <h3 class="font-heading text-base md:text-lg font-bold text-white pilot-name">Luciano</h3>
@@ -151,21 +175,19 @@
                         </div>
                     </div>
                     <div class="flex items-center gap-3">
-                        <div class="hidden sm:block text-right">
-                            <p class="text-xs text-gray-300 font-medium">Sora no Takumi</p>
-                            <p class="text-[10px] text-ana-light">2,150 Hrs</p>
-                        </div>
+                        <span class="text-xs text-ana-light font-medium">0 Hrs</span>
                         <a href="#" target="_blank" class="bg-ana-light hover:bg-blue-400 text-white text-[11px] px-3.5 py-1.5 rounded-full font-medium transition flex items-center gap-1.5 shadow-md shrink-0 border border-white/10">
                             <i class="fa-solid fa-plane text-[10px]"></i> IFC
                         </a>
                     </div>
                 </article>
 
-                <!-- More pilot cards can be added here following the exact same structure -->
+                <!-- Future roster cards will stack right here! -->
 
             </div>
         </div>
-        <!-- 2. EXECUTIVE LEADERSHIP CARDS -->
+
+        <!-- 3. EXECUTIVE LEADERSHIP -->
         <div class="pt-6 border-t border-white/10">
             <h2 class="font-heading text-xl md:text-2xl font-bold text-gray-200 mb-6 ml-2 md:ml-4 tracking-wide border-l-4 border-ana-light pl-4">
                 Executive Leadership
@@ -174,33 +196,41 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
                 <!-- CEO Card -->
-                <article class="glass-panel rounded-3xl p-5 flex items-center gap-4 border border-white/10 hover:border-white/30 transition-all duration-300">
-                    <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-xl text-ana-light shrink-0">
-                        <i class="fa-solid fa-user-tie"></i>
+                <article class="glass-panel rounded-3xl p-5 flex items-center justify-between gap-4 border border-white/10 hover:border-white/30 transition-all duration-300">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-ana-light text-base shrink-0 shadow-md">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-base md:text-lg font-bold text-white">Luciano</h3>
+                            <p class="text-gray-400 text-xs font-mono">001AN</p>
+                        </div>
                     </div>
-                    <div class="flex-1 min-w-0">
-                        <span class="text-cyan-400 text-[10px] font-bold uppercase tracking-widest block mb-0.5">Chief Executive Officer</span>
-                        <h3 class="font-heading text-lg font-bold text-white truncate">Luciano</h3>
-                        <p class="text-gray-400 text-xs font-mono">001AN</p>
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs text-ana-light font-medium">0 Hrs</span>
+                        <a href="#" target="_blank" class="bg-ana-light hover:bg-blue-400 text-white text-[11px] px-3.5 py-1.5 rounded-full font-medium transition flex items-center gap-1.5 shadow-md shrink-0 border border-white/10">
+                            <i class="fa-solid fa-plane text-[10px]"></i> IFC
+                        </a>
                     </div>
-                    <a href="#" class="bg-white/10 hover:bg-ana-light text-white text-[11px] px-3.5 py-1.5 rounded-full font-medium transition shrink-0 border border-white/10 flex items-center gap-1.5">
-                        <i class="fa-solid fa-plane text-[10px]"></i> IFC
-                    </a>
                 </article>
 
                 <!-- COO Card (Placeholder) -->
-                <article class="glass-panel rounded-3xl p-5 flex items-center gap-4 border border-white/10 hover:border-white/30 transition-all duration-300">
-                    <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-xl text-ana-light shrink-0">
-                        <i class="fa-solid fa-user-gear"></i>
+                <article class="glass-panel rounded-3xl p-5 flex items-center justify-between gap-4 border border-white/10 hover:border-white/30 transition-all duration-300">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-ana-light text-base shrink-0 shadow-md">
+                            <i class="fa-solid fa-user-gear"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-base md:text-lg font-bold text-white">[Insert Name]</h3>
+                            <p class="text-gray-400 text-xs font-mono">002AN</p>
+                        </div>
                     </div>
-                    <div class="flex-1 min-w-0">
-                        <span class="text-blue-400 text-[10px] font-bold uppercase tracking-widest block mb-0.5">Chief Operating Officer</span>
-                        <h3 class="font-heading text-lg font-bold text-white truncate">[Insert Name]</h3>
-                        <p class="text-gray-400 text-xs font-mono">002AN</p>
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs text-ana-light font-medium">0 Hrs</span>
+                        <a href="#" target="_blank" class="bg-ana-light hover:bg-blue-400 text-white text-[11px] px-3.5 py-1.5 rounded-full font-medium transition flex items-center gap-1.5 shadow-md shrink-0 border border-white/10">
+                            <i class="fa-solid fa-plane text-[10px]"></i> IFC
+                        </a>
                     </div>
-                    <a href="#" class="bg-white/10 hover:bg-ana-light text-white text-[11px] px-3.5 py-1.5 rounded-full font-medium transition shrink-0 border border-white/10 flex items-center gap-1.5">
-                        <i class="fa-solid fa-plane text-[10px]"></i> IFC
-                    </a>
                 </article>
 
             </div>
@@ -249,7 +279,7 @@
     <!-- Link to external Menu Javascript -->
     <script src="script.js"></script>
 
-    <!-- Instant Search & Filter Script (Case-Insensitive) -->
+    <!-- Instant Search & Filter Script -->
     <script>
         function filterPilots() {
             let input = document.getElementById('pilotSearch').value.toLowerCase();
@@ -259,7 +289,6 @@
                 let name = cards[i].querySelector('.pilot-name').innerText.toLowerCase();
                 let id = cards[i].querySelector('.pilot-id').innerText.toLowerCase();
 
-                // If input matches name or ID, show the card, otherwise hide it
                 if (name.includes(input) || id.includes(input)) {
                     cards[i].style.display = "";
                 } else {
