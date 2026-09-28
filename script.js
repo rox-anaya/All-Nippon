@@ -77,3 +77,55 @@ if ('serviceWorker' in navigator) {
         });
     });
 }
+
+/* ========================================================
+   GLOBAL VOICE CABIN BRIEFING SYSTEM (ANVG)
+   ======================================================== */
+
+function speakAudioMessage(messageText) {
+    if (!('speechSynthesis' in window)) return;
+    
+    // Stop any existing voice announcement
+    window.speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(messageText);
+    utterance.rate = 0.95; // Calm, professional flight deck pace
+    utterance.pitch = 1.0;
+    utterance.lang = 'en-US';
+
+    // Small delay to allow the DOM to render comfortably
+    setTimeout(() => {
+        window.speechSynthesis.speak(utterance);
+    }, 450);
+}
+
+// Automatically announce the current page on load if enabled
+document.addEventListener('DOMContentLoaded', () => {
+    const isVoiceEnabled = localStorage.getItem('anvg_voice_briefing') === 'true';
+    if (!isVoiceEnabled) return;
+
+    // Detect the current file name
+    const currentPath = window.location.pathname;
+    const pageName = currentPath.split("/").pop() || "index.html";
+
+    // Sector briefings mapped by file name
+    const pageBriefings = {
+        "index.html": "Welcome aboard All Nippon Virtual Group. Flight deck systems online.",
+        "events.html": "Events and flight schedules sector. View upcoming group flights.",
+        "routes.html": "Operational route center. Explore global departures and arrivals.",
+        "ranks.html": "Pilot ranking deck. Progression criteria and operational tiers.",
+        "training.html": "Flight training division. Review stage 1 theory and checkride syllabi.",
+        "roster.html": "Active pilot directory and flight hours leaderboard.",
+        "fleet.html": "Fleet catalog. All Nippon passenger, regional, and freighter airframes.",
+        "codeshare.html": "Codeshare alliances and Star Alliance partner network.",
+        "changelog.html": "System changelog and flight dispatch utilities.",
+        "apply.html": "Recruitment desk. Verify flight requirements and apply.",
+        "about.html": "About All Nippon Virtual Group. Our mission and background.",
+        "staff.html": "Executive staff and flight administration team.",
+        "settings.html": "Flight deck settings panel."
+    };
+
+    if (pageBriefings[pageName]) {
+        speakAudioMessage(pageBriefings[pageName]);
+    }
+});
