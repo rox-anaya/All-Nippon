@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Settings - All Nippon Virtual Group</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00266b">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                        signature: ['"Dancing Script"', 'cursive'],
+                    },
+                    colors: {
+                        ana: { dark: '#00266b', light: '#007fc1' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans antialiased overflow-x-hidden">
+
+    <!-- HEADER -->
+    <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl glass-panel rounded-full flex justify-between items-center px-6 py-3 z-50 transition-all">
+        <a href="index.html" class="flex items-center">
+            <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790497605/Picsart_26-09-27_13-51-21-265_j4qz5z.png" alt="ANVG Logo" class="h-10 w-auto">
+        </a>
+        <button onclick="openMenu()" class="text-white text-2xl hover:text-ana-light transition">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </header>
+
+    <!-- ================= HAMBURGER MENU ================= -->
+    <div id="menuOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] hidden opacity-0 transition-opacity duration-300" onclick="closeMenu()"></div>
+    
+    <div id="sideMenu" class="fixed top-0 right-0 h-full w-[70vw] max-w-[280px] border-l border-white/20 bg-gradient-to-b from-[#00266b]/95 to-[#0a192f]/95 backdrop-blur-xl z-[110] translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
+        
+        <div class="flex items-center justify-between p-6 border-b border-white/10">
+            <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790497605/Picsart_26-09-27_13-51-21-265_j4qz5z.png" alt="ANVG Logo" class="h-8 w-auto">
+            <button onclick="closeMenu()" class="text-white text-3xl hover:text-red-400 transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto px-6 py-6 space-y-2">
+            <a href="index.html" class="block py-3 text-base font-medium hover:text-ana-light transition border-b border-white/5"><i class="fa-solid fa-house w-6 text-ana-light"></i> Home</a>
+            
+            <div class="border-b border-white/5">
+                <button onclick="toggleSubmenu('aboutSub')" class="w-full flex justify-between items-center py-3 text-base font-medium hover:text-ana-light transition">
+                    <span><i class="fa-solid fa-circle-info w-6 text-ana-light"></i> About Us</span>
+                    <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" id="aboutSub-arrow"></i>
+                </button>
+                <div id="aboutSub" class="hidden flex-col pl-8 border-l-2 border-ana-light/30 ml-3 mb-3 space-y-3 text-sm text-gray-300">
+                    <a href="about.html" class="block hover:text-white transition mt-2">About Us</a>
+                    <a href="staff.html" class="block hover:text-white transition">Staff</a>
+                </div>
+            </div>
+
+            <div class="border-b border-white/5">
+                <button onclick="toggleSubmenu('opsSub')" class="w-full flex justify-between items-center py-3 text-base font-medium hover:text-ana-light transition">
+                    <span><i class="fa-solid fa-plane-departure w-6 text-ana-light"></i> Operations</span>
+                    <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" id="opsSub-arrow"></i>
+                </button>
+                <div id="opsSub" class="hidden flex-col pl-8 border-l-2 border-ana-light/30 ml-3 mb-3 space-y-3 text-sm text-gray-300">
+                    <a href="fleet.html" class="block hover:text-white transition mt-2">Fleet</a>
+                    <a href="events.html" class="block hover:text-white transition">Events</a>
+                    <a href="routes.html" class="block hover:text-white transition">Routes</a>
+                    <a href="ranks.html" class="block hover:text-white transition">Ranks</a>
+                </div>
+            </div>
+
+            <a href="training.html" class="block py-3 text-base font-medium hover:text-ana-light transition border-b border-white/5"><i class="fa-solid fa-book-open-reader w-6 text-ana-light"></i> Training</a>
+            
+            <div class="border-b border-white/5">
+                <button onclick="toggleSubmenu('changeSub')" class="w-full flex justify-between items-center py-3 text-base font-medium text-ana-light transition">
+                    <span><i class="fa-solid fa-clock-rotate-left w-6 text-ana-light"></i> Change log</span>
+                    <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300 rotate-180" id="changeSub-arrow"></i>
+                </button>
+                <div id="changeSub" class="flex flex-col pl-8 border-l-2 border-ana-light/30 ml-3 mb-3 space-y-3 text-sm text-gray-300">
+                    <a href="changelog.html" class="block hover:text-white transition mt-2">Change log</a>
+                    <a href="settings.html" class="block text-white font-medium transition">Settings</a>
+                </div>
+            </div>
+
+            <a href="apply.html" class="block py-3 text-base font-medium text-ana-light hover:text-white transition"><i class="fa-solid fa-paper-plane w-6"></i> Apply</a>
+        </div>
+
+        <!-- METUPOLO™ & ANAYA BRANDING CARD -->
+        <div class="p-4 mx-4 mb-6 rounded-2xl glass-panel bg-white/5 text-center border border-white/10">
+            <p class="text-[9px] tracking-[0.2em] text-gray-400 font-bold mb-1">POWERED BY METUPOLO™</p>
+            <p class="text-sm text-gray-300 mb-4 flex items-center justify-center gap-2">
+                Developed By <span class="font-signature text-2xl text-ana-light translate-y-1">Anaya</span>
+            </p>
+            <a href="ifc-profile.html" class="inline-block w-full bg-ana-light hover:bg-blue-400 text-white text-sm px-4 py-2 rounded-full font-medium transition shadow-lg shadow-blue-500/30">
+                IFC Profile
+            </a>
+        </div>
+    </div>
+    <!-- ============================================== -->
+
+    <!-- PAGE HEADER -->
+    <section class="pt-32 pb-8 px-4 text-center max-w-4xl mx-auto">
+        <h1 class="font-heading text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-200 mb-4">
+            Flight Deck Settings
+        </h1>
+        <p class="text-gray-200 text-lg md:text-xl font-light leading-relaxed">
+            Customize your virtual flight operations portal. Enable automated voice briefings, configure audio cues, and manage browser preferences.
+        </p>
+    </section>
+
+    <!-- MAIN SETTINGS AREA -->
+    <main class="max-w-3xl mx-auto px-4 pb-20 mt-4 space-y-8">
+        
+        <!-- AUDIO BRIEFINGS SECTION -->
+        <div>
+            <h2 class="font-heading text-xl md:text-2xl font-bold text-gray-200 mb-6 ml-2 md:ml-4 tracking-wide border-l-4 border-ana-light pl-4">
+                Cockpit Voice Briefings
+            </h2>
+
+            <div class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10 space-y-6">
+                
+                <!-- Toggle Row -->
+                <div class="flex items-center justify-between gap-4">
+                    <div>
+                        <h3 class="font-heading text-base md:text-lg font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-volume-high text-ana-light"></i> Voice Sector Announcement
+                        </h3>
+                        <p class="text-gray-300 font-light text-xs md:text-sm mt-1 max-w-md">
+                            When enabled, the automated flight deck assistant announces brief sector information every time you navigate to a new page.
+                        </p>
+                    </div>
+
+                    <!-- Custom Glass Toggle -->
+                    <label class="relative inline-flex items-center cursor-pointer shrink-0">
+                        <input type="checkbox" id="voiceToggle" onchange="toggleVoiceBriefing()" class="sr-only peer">
+                        <div class="w-14 h-7 bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-ana-light"></div>
+                    </label>
+                </div>
+
+                <hr class="border-white/10">
+
+                <!-- Test Audio Button -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
+                    <span class="text-xs text-gray-400">
+                        <i class="fa-solid fa-circle-info text-ana-light mr-1"></i> Audio requires browser speech synthesis support.
+                    </span>
+                    <button onclick="testVoiceBriefing()" class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white text-xs px-5 py-2.5 rounded-full font-medium transition border border-white/10 shrink-0">
+                        <i class="fa-solid fa-play text-xs text-ana-light"></i> Test Cabin Audio
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        <!-- DATA & STORAGE PREFERENCES -->
+        <div>
+            <h2 class="font-heading text-xl md:text-2xl font-bold text-gray-200 mb-6 ml-2 md:ml-4 tracking-wide border-l-4 border-yellow-500 pl-4">
+                Storage & Cache
+            </h2>
+
+            <div class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                <div>
+                    <h3 class="font-heading text-base md:text-lg font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-trash-can text-yellow-400"></i> Clear Local Settings
+                    </h3>
+                    <p class="text-gray-300 font-light text-xs md:text-sm mt-1 max-w-md">
+                        Reset all cached audio preferences, stored filters, and site configurations stored in your device's browser memory.
+                    </p>
+                </div>
+                <button onclick="resetPreferences()" class="inline-flex items-center justify-center gap-2 bg-red-500/20 hover:bg-red-500/30 text-red-300 text-xs px-5 py-2.5 rounded-full font-medium transition border border-red-500/30 shrink-0">
+                    <i class="fa-solid fa-arrows-rotate text-xs"></i> Reset
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#020914] text-gray-400 pt-16 pb-8 px-6 mt-12 border-t border-white/10">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+            <div>
+                <h4 class="font-heading text-white text-lg font-bold mb-6 flex items-center gap-2">
+                    <i class="fa-solid fa-compass text-ana-light"></i> Navigation
+                </h4>
+                <ul class="space-y-3">
+                    <li><a href="apply.html" class="hover:text-white transition">Apply</a></li>
+                    <li><a href="about.html" class="hover:text-white transition">Learn More</a></li>
+                    <li><a href="events.html" class="hover:text-white transition">Events</a></li>
+                    <li><a href="roster.html" class="hover:text-white transition">Roster</a></li>
+                    <li><a href="routes.html" class="hover:text-white transition">Routes</a></li>
+                    <li><a href="codeshare.html" class="hover:text-white transition">Codeshares</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-heading text-white text-lg font-bold mb-6 flex items-center gap-2">
+                    <i class="fa-solid fa-users text-ana-light"></i> Community
+                </h4>
+                <ul class="space-y-4">
+                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-regular fa-comments w-5"></i> IFC Forum</a></li>
+                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-thread w-5"></i> IFC Thread</a></li>
+                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-w w-5"></i> Waypoints CC</a></li>
+                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-instagram w-5"></i> Instagram</a></li>
+                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-youtube w-5"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto">
+            <hr class="border-white/10 mb-8">
+            <div class="text-center text-xs space-y-2">
+                <p class="text-white/60">© 2026 All Nippon Virtual Group — Built for the Infinite Flight Community</p>
+                <p class="text-white/40">All Nippon Virtual Group is no way related to the real-world All Nippon Airways. All trademarks and logos remain the property of their respective owners.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script File -->
+    <script src="script.js"></script>
+
+    <!-- Settings Initialization Script -->
+    <script>
+        // Load initial toggle state from localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            const isEnabled = localStorage.getItem('anvg_voice_briefing') === 'true';
+            document.getElementById('voiceToggle').checked = isEnabled;
+        });
+
+        // Toggle handler
+        function toggleVoiceBriefing() {
+            const toggle = document.getElementById('voiceToggle');
+            localStorage.setItem('anvg_voice_briefing', toggle.checked);
+            
+            if (toggle.checked) {
+                speakAudioMessage("Voice sector announcements enabled. Welcome aboard.");
+            } else {
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
+                }
+            }
+        }
+
+        // Test button handler
+        function testVoiceBriefing() {
+            speakAudioMessage("This is an audio briefing check for the All Nippon Virtual Group flight operations deck. All systems operational.");
+        }
+
+        // Reset preferences handler
+        function resetPreferences() {
+            localStorage.removeItem('anvg_voice_briefing');
+            document.getElementById('voiceToggle').checked = false;
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+            alert("Settings preferences have been reset to default.");
+        }
+    </script>
+</body>
+</html>
