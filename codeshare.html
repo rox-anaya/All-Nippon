@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codeshare Network - All Nippon Virtual Group</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00266b">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Link to your separate CSS file -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                        signature: ['"Dancing Script"', 'cursive'],
+                    },
+                    colors: {
+                        ana: { dark: '#00266b', light: '#007fc1' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans antialiased overflow-x-hidden">
+
+    <!-- HEADER -->
+    <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl glass-panel rounded-full flex justify-between items-center px-6 py-3 z-50 transition-all">
+        <a href="index.html" class="flex items-center">
+            <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790497605/Picsart_26-09-27_13-51-21-265_j4qz5z.png" alt="ANVG Logo" class="h-10 w-auto">
+        </a>
+        <button onclick="openMenu()" class="text-white text-2xl hover:text-ana-light transition">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </header>
+
+    <!-- ================= HAMBURGER MENU ================= -->
+    <div id="menuOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] hidden opacity-0 transition-opacity duration-300" onclick="closeMenu()"></div>
+    
+    <div id="sideMenu" class="fixed top-0 right-0 h-full w-[70vw] max-w-[280px] border-l border-white/20 bg-gradient-to-b from-[#00266b]/95 to-[#0a192f]/95 backdrop-blur-xl z-[110] translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
+        
+        <div class="flex items-center justify-between p-6 border-b border-white/10">
+            <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790497605/Picsart_26-09-27_13-51-21-265_j4qz5z.png" alt="ANVG Logo" class="h-8 w-auto">
+            <button onclick="closeMenu()" class="text-white text-3xl hover:text-red-400 transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto px-6 py-6 space-y-2">
+            <a href="index.html" class="block py-3 text-base font-medium hover:text-ana-light transition border-b border-white/5"><i class="fa-solid fa-house w-6 text-ana-light"></i> Home</a>
+            
+            <div class="border-b border-white/5">
+                <button onclick="toggleSubmenu('aboutSub')" class="w-full flex justify-between items-center py-3 text-base font-medium hover:text-ana-light transition">
+                    <span><i class="fa-solid fa-circle-info w-6 text-ana-light"></i> About Us</span>
+                    <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" id="aboutSub-arrow"></i>
+                </button>
+                <div id="aboutSub" class="hidden flex-col pl-8 border-l-2 border-ana-light/30 ml-3 mb-3 space-y-3 text-sm text-gray-300">
+                    <a href="about.html" class="block hover:text-white transition mt-2">About Us</a>
+                    <a href="staff.html" class="block hover:text-white transition">Staff</a>
+                </div>
+            </div>
+
+            <div class="border-b border-white/5">
+                <button onclick="toggleSubmenu('opsSub')" class="w-full flex justify-between items-center py-3 text-base font-medium text-ana-light transition">
+                    <span><i class="fa-solid fa-plane-departure w-6 text-ana-light"></i> Operations</span>
+                    <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300 rotate-180" id="opsSub-arrow"></i>
+                </button>
+                <div id="opsSub" class="flex flex-col pl-8 border-l-2 border-ana-light/30 ml-3 mb-3 space-y-3 text-sm text-gray-300">
+                    <a href="fleet.html" class="block hover:text-white transition mt-2">Fleet</a>
+                    <a href="events.html" class="block hover:text-white transition">Events</a>
+                    <a href="routes.html" class="block hover:text-white transition">Routes</a>
+                    <a href="ranks.html" class="block hover:text-white transition">Ranks</a>
+                </div>
+            </div>
+
+            <a href="training.html" class="block py-3 text-base font-medium hover:text-ana-light transition border-b border-white/5"><i class="fa-solid fa-book-open-reader w-6 text-ana-light"></i> Training</a>
+            
+            <div class="border-b border-white/5">
+                <button onclick="toggleSubmenu('changeSub')" class="w-full flex justify-between items-center py-3 text-base font-medium hover:text-ana-light transition">
+                    <span><i class="fa-solid fa-clock-rotate-left w-6 text-ana-light"></i> Change log</span>
+                    <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" id="changeSub-arrow"></i>
+                </button>
+                <div id="changeSub" class="hidden flex-col pl-8 border-l-2 border-ana-light/30 ml-3 mb-3 space-y-3 text-sm text-gray-300">
+                    <a href="changelog.html" class="block hover:text-white transition mt-2">Change log</a>
+                    <a href="settings.html" class="block hover:text-white transition">Settings</a>
+                </div>
+            </div>
+
+            <a href="apply.html" class="block py-3 text-base font-medium text-ana-light hover:text-white transition"><i class="fa-solid fa-paper-plane w-6"></i> Apply</a>
+        </div>
+
+        <!-- METUPOLO™ & ANAYA BRANDING CARD -->
+        <div class="p-4 mx-4 mb-6 rounded-2xl glass-panel bg-white/5 text-center border border-white/10">
+            <p class="text-[9px] tracking-[0.2em] text-gray-400 font-bold mb-1">POWERED BY METUPOLO™</p>
+            <p class="text-sm text-gray-300 mb-4 flex items-center justify-center gap-2">
+                Developed By <span class="font-signature text-2xl text-ana-light translate-y-1">Anaya</span>
+            </p>
+            <a href="ifc-profile.html" class="inline-block w-full bg-ana-light hover:bg-blue-400 text-white text-sm px-4 py-2 rounded-full font-medium transition shadow-lg shadow-blue-500/30">
+                IFC Profile
+            </a>
+        </div>
+    </div>
+    <!-- ============================================== -->
+
+    <!-- PAGE HEADER -->
+    <section class="pt-32 pb-8 px-4 text-center max-w-4xl mx-auto">
+        <h1 class="font-heading text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-200 mb-4">
+            Codeshare Alliances
+        </h1>
+        <p class="text-gray-200 text-lg md:text-xl font-light leading-relaxed">
+            Expanding our wings through global cooperation. Connect to worldwide destinations through our official Star Alliance and virtual airline partner networks.
+        </p>
+    </section>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="max-w-4xl mx-auto px-4 pb-20 mt-4 space-y-8">
+        
+        <div>
+            <h2 class="font-heading text-xl md:text-2xl font-bold text-gray-200 mb-6 ml-2 md:ml-4 tracking-wide border-l-4 border-ana-light pl-4">
+                Partner Airlines
+            </h2>
+
+            <div class="space-y-4">
+
+                <!-- 1. PARTNER CARD (Example Partner) -->
+                <article class="glass-panel rounded-2xl overflow-hidden border border-white/10 transition-all duration-300">
+                    <button onclick="toggleCodeshare('partner1')" class="w-full p-4 md:p-5 flex items-center justify-between text-left hover:bg-white/5 transition">
+                        <div class="flex items-center gap-4">
+                            <!-- Profile Picture / Logo Placeholder -->
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-white/5 border border-white/15 p-2 flex items-center justify-center shrink-0 shadow-md">
+                                <i class="fa-solid fa-plane-tail text-ana-light text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h3 class="font-heading text-base md:text-lg font-bold text-white">United Virtual Airlines</h3>
+                                    <span class="bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[9px] px-2 py-0.5 rounded-full uppercase tracking-wider font-mono">Partner</span>
+                                </div>
+                                <p class="text-gray-400 text-xs mt-0.5">Star Alliance Network Affiliate</p>
+                            </div>
+                        </div>
+
+                        <!-- Collapse Arrow -->
+                        <div class="ml-4 w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-300 shrink-0">
+                            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300" id="partner1-arrow"></i>
+                        </div>
+                    </button>
+
+                    <!-- Collapsible Content (Hidden by default) -->
+                    <div id="partner1-desc" class="hidden px-5 pb-5 pt-2 border-t border-white/5 text-gray-300 text-xs md:text-sm font-light leading-relaxed bg-black/20">
+                        <p class="mb-3">
+                            ANVG pilots holding Rank First Officer and above can file select transpacific and North American routes operated by United Virtual. Flights logged under this codeshare earn standard progression hours towards your ANVG career wings.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-[10px] font-mono text-gray-400">
+                            <span class="bg-white/5 px-2.5 py-1 rounded-md border border-white/5">Primary Hubs: KDEN, KORD, KSFO</span>
+                            <span class="bg-white/5 px-2.5 py-1 rounded-md border border-white/5">Approved Fleet: B77W, B789, A320</span>
+                        </div>
+                    </div>
+                </article>
+                <!-- 2. DUPLICATE CARD (Unknown VA Template) -->
+                <article class="glass-panel rounded-2xl overflow-hidden border border-white/10 transition-all duration-300">
+                    <button onclick="toggleCodeshare('partnerUnknown')" class="w-full p-4 md:p-5 flex items-center justify-between text-left hover:bg-white/5 transition">
+                        <div class="flex items-center gap-4">
+                            <!-- Profile Picture / Logo Placeholder (Will update photo later) -->
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-white/5 border border-white/15 p-2 flex items-center justify-center shrink-0 shadow-md">
+                                <i class="fa-regular fa-image text-gray-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h3 class="font-heading text-base md:text-lg font-bold text-white">Unknown VA</h3>
+                                    <span class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[9px] px-2 py-0.5 rounded-full uppercase tracking-wider font-mono">Pending Agreement</span>
+                                </div>
+                                <p class="text-gray-400 text-xs mt-0.5">Codeshare Partner Organization</p>
+                            </div>
+                        </div>
+
+                        <!-- Collapse Arrow -->
+                        <div class="ml-4 w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-300 shrink-0">
+                            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300" id="partnerUnknown-arrow"></i>
+                        </div>
+                    </button>
+
+                    <!-- Collapsible Content -->
+                    <div id="partnerUnknown-desc" class="hidden px-5 pb-5 pt-2 border-t border-white/5 text-gray-300 text-xs md:text-sm font-light leading-relaxed bg-black/20">
+                        <p class="mb-3">
+                            Codeshare agreement details, route availability, and reciprocal flight logging permissions will be announced here once official terms are approved by both virtual airline leadership teams.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-[10px] font-mono text-gray-400">
+                            <span class="bg-white/5 px-2.5 py-1 rounded-md border border-white/5">Primary Hubs: TBA</span>
+                            <span class="bg-white/5 px-2.5 py-1 rounded-md border border-white/5">Status: In Review</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Future codeshare partners can be duplicated right here! -->
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#020914] text-gray-400 pt-16 pb-8 px-6 mt-12 border-t border-white/10">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+            <div>
+                <h4 class="font-heading text-white text-lg font-bold mb-6 flex items-center gap-2">
+                    <i class="fa-solid fa-compass text-ana-light"></i> Navigation
+                </h4>
+                <ul class="space-y-3">
+                    <li><a href="apply.html" class="hover:text-white transition">Apply</a></li>
+                    <li><a href="about.html" class="hover:text-white transition">Learn More</a></li>
+                    <li><a href="events.html" class="hover:text-white transition">Events</a></li>
+                    <li><a href="roster.html" class="hover:text-white transition">Roster</a></li>
+                    <li><a href="routes.html" class="hover:text-white transition">Routes</a></li>
+                    <li><a href="codeshare.html" class="text-white transition">Codeshares</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-heading text-white text-lg font-bold mb-6 flex items-center gap-2">
+                    <i class="fa-solid fa-users text-ana-light"></i> Community
+                </h4>
+                <ul class="space-y-4">
+                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-regular fa-comments w-5"></i> IFC Forum</a></li>
+                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-thread w-5"></i> IFC Thread</a></li>
+                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-w w-5"></i> Waypoints CC</a></li>
+                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-instagram w-5"></i> Instagram</a></li>
+                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-youtube w-5"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto">
+            <hr class="border-white/10 mb-8">
+            <div class="text-center text-xs space-y-2">
+                <p class="text-white/60">© 2026 All Nippon Virtual Group — Built for the Infinite Flight Community</p>
+                <p class="text-white/40">All Nippon Virtual Group is no way related to the real-world All Nippon Airways. All trademarks and logos remain the property of their respective owners.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Link to external Menu Javascript -->
+    <script src="script.js"></script>
+
+    <!-- Codeshare Accordion Toggle Script -->
+    <script>
+        function toggleCodeshare(id) {
+            const desc = document.getElementById(id + '-desc');
+            const arrow = document.getElementById(id + '-arrow');
+
+            if (desc.classList.contains('hidden')) {
+                desc.classList.remove('hidden');
+                arrow.classList.add('rotate-180');
+            } else {
+                desc.classList.add('hidden');
+                arrow.classList.remove('rotate-180');
+            }
+        }
+    </script>
+</body>
+</html>
