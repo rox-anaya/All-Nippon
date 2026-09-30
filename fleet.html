@@ -15,7 +15,7 @@
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Link to your separate CSS file -->
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
     <!-- Tailwind CSS -->
@@ -109,195 +109,289 @@
             <p class="text-sm text-gray-300 mb-4 flex items-center justify-center gap-2">
                 Developed By <span class="font-signature text-2xl text-ana-light translate-y-1">Anaya</span>
             </p>
-            <a href="ifc-profile.html" class="inline-block w-full bg-ana-light hover:bg-blue-400 text-white text-sm px-4 py-2 rounded-full font-medium transition shadow-lg shadow-blue-500/30">
-                IFC Profile
+            <a href="https://waypoint-live.app/va/all-nippon-virtual-airways" target="_blank" class="inline-block w-full bg-ana-light hover:bg-blue-400 text-white text-sm px-4 py-2 rounded-full font-medium transition shadow-lg shadow-blue-500/30">
+                Waypoints VA
             </a>
         </div>
     </div>
     <!-- ============================================== -->
 
     <!-- PAGE HEADER -->
-    <section class="pt-32 pb-8 px-4 text-center max-w-3xl mx-auto">
+    <section class="pt-32 pb-4 px-4 text-center max-w-3xl mx-auto">
         <h1 class="font-heading text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-200 mb-4">
             The Wings of ANVG
         </h1>
         <p class="text-gray-200 text-lg md:text-xl font-light leading-relaxed">
-            From nimble regional turboprops navigating island approaches to massive wide-body flagships crossing oceans, our fleet is diverse, modern, and equipped for any mission. Discover the aircraft you will command as an ANVG pilot.
+            Spanning full-service passenger travel, dedicated transpacific freight, and regional low-cost routes. Discover the aircraft you will command as an ANVG pilot.
         </p>
+
+        <!-- INTERACTIVE DIVISION FILTER TABS -->
+        <div class="flex flex-wrap justify-center gap-2 md:gap-3 mt-8">
+            <button onclick="filterFleet('all')" id="tab-all" class="px-5 py-2 rounded-full text-xs font-semibold bg-white/20 text-white border border-white/30 transition">
+                All Fleet
+            </button>
+            <button onclick="filterFleet('ana')" id="tab-ana" class="px-5 py-2 rounded-full text-xs font-semibold bg-white/5 text-gray-300 hover:text-white border border-white/10 transition">
+                <i class="fa-solid fa-plane text-ana-light mr-1"></i> ANA Mainline
+            </button>
+            <button onclick="filterFleet('nca')" id="tab-nca" class="px-5 py-2 rounded-full text-xs font-semibold bg-white/5 text-gray-300 hover:text-white border border-white/10 transition">
+                <i class="fa-solid fa-box text-sky-400 mr-1"></i> NCA Cargo
+            </button>
+            <button onclick="filterFleet('peach')" id="tab-peach" class="px-5 py-2 rounded-full text-xs font-semibold bg-white/5 text-gray-300 hover:text-white border border-white/10 transition">
+                <i class="fa-solid fa-heart text-pink-400 mr-1"></i> Peach Aviation
+            </button>
+            <button onclick="filterFleet('airjapan')" id="tab-airjapan" class="px-5 py-2 rounded-full text-xs font-semibold bg-white/5 text-gray-300 hover:text-white border border-white/10 transition">
+                <i class="fa-solid fa-sun text-teal-300 mr-1"></i> AirJapan
+            </button>
+        </div>
     </section>
 
     <!-- MAIN CONTENT AREA - FLEET GRID -->
-    <main class="max-w-7xl mx-auto px-4 pb-20 mt-8">
+    <main class="max-w-7xl mx-auto px-4 pb-20 mt-8 space-y-12">
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+        <!-- SECTION 1: ANA MAINLINE FLEET -->
+        <div id="section-ana" class="fleet-division space-y-6">
+            <div class="flex items-center gap-3 border-l-4 border-ana-light pl-4">
+                <div>
+                    <h2 class="font-heading text-xl md:text-2xl font-bold text-white">All Nippon Airways — Mainline</h2>
+                    <p class="text-xs text-gray-400">Flagship full-service domestic & international operations</p>
+                </div>
+            </div>
 
-            <!-- Dash 8-Q400 -->
-            <article class="glass-panel rounded-3xl overflow-hidden group border border-white/10 hover:border-ana-light/50 transition-all duration-300">
-                <div class="w-full aspect-video overflow-hidden relative">
-                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790505583/Screenshot_20260927_154918_com.infiniteflight.dev2_lqqyvo.jpg" alt="Dash 8-Q400" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                </div>
-                <div class="p-6 md:p-8">
-                    <!-- Added gap-2 and whitespace-nowrap to prevent text wrapping -->
-                    <div class="flex items-start justify-between mb-3 gap-2">
-                        <h2 class="font-heading text-2xl font-bold text-white">Dash 8-Q400</h2>
-                        <span class="bg-white/10 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider text-gray-300 whitespace-nowrap shrink-0 mt-1">Regional</span>
-                    </div>
-                    <p class="text-gray-300 font-light text-sm leading-relaxed">
-                        Operated primarily under ANVG's regional operations, the Dash 8-Q400 is the ultimate regional workhorse. It executes short hops with incredible efficiency, connecting smaller islands and regional airports where larger jets cannot operate.
-                    </p>
-                </div>
-            </article>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
 
-            <!-- A320-200 -->
-            <article class="glass-panel rounded-3xl overflow-hidden group border border-white/10 hover:border-ana-light/50 transition-all duration-300">
-                <div class="w-full aspect-video overflow-hidden relative">
-                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790505576/Screenshot_20260927_155101_com.infiniteflight.dev2_zyoynt.jpg" alt="A320-200" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                </div>
-                <div class="p-6 md:p-8">
-                    <div class="flex items-start justify-between mb-3 gap-2">
-                        <h2 class="font-heading text-2xl font-bold text-white">A320-200</h2>
-                        <span class="bg-white/10 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider text-gray-300 whitespace-nowrap shrink-0 mt-1">Short-Haul</span>
+                <!-- Dash 8-Q400 -->
+                <article class="glass-panel rounded-3xl overflow-hidden group border border-white/10 hover:border-ana-light/50 transition-all duration-300">
+                    <div class="w-full aspect-video overflow-hidden relative">
+                        <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790505583/Screenshot_20260927_154918_com.infiniteflight.dev2_lqqyvo.jpg" alt="Dash 8-Q400" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
-                    <p class="text-gray-300 font-light text-sm leading-relaxed">
-                        A versatile and highly reliable narrow-body, the A320-200 provides a perfect balance of capacity and frequency. It handles a mix of high-demand domestic sectors and key short-haul international routes across our network.
-                    </p>
-                </div>
-            </article>
+                    <div class="p-6 md:p-8">
+                        <div class="flex items-start justify-between mb-3 gap-2">
+                            <h3 class="font-heading text-2xl font-bold text-white">Dash 8-Q400</h3>
+                            <span class="bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap shrink-0 mt-1">ANA Regional</span>
+                        </div>
+                        <p class="text-gray-300 font-light text-sm leading-relaxed">
+                            Operated primarily under ANVG's regional wings, the Dash 8-Q400 is the ultimate regional workhorse. It executes short hops with incredible efficiency, connecting smaller islands and regional airports where larger jets cannot operate.
+                        </p>
+                    </div>
+                </article>
 
-            <!-- B737-800 -->
-            <article class="glass-panel rounded-3xl overflow-hidden group border border-white/10 hover:border-ana-light/50 transition-all duration-300">
-                <div class="w-full aspect-video overflow-hidden relative">
-                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790505569/Screenshot_20260927_155220_com.infiniteflight.dev2_gvnkxs.jpg" alt="B737-800" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                </div>
-                <div class="p-6 md:p-8">
-                    <div class="flex items-start justify-between mb-3 gap-2">
-                        <h2 class="font-heading text-2xl font-bold text-white">B737-800</h2>
-                        <span class="bg-white/10 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider text-gray-300 whitespace-nowrap shrink-0 mt-1">Short-Haul</span>
+                <!-- A320-200 -->
+                <article class="glass-panel rounded-3xl overflow-hidden group border border-white/10 hover:border-ana-light/50 transition-all duration-300">
+                    <div class="w-full aspect-video overflow-hidden relative">
+                        <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790505576/Screenshot_20260927_155101_com.infiniteflight.dev2_zyoynt.jpg" alt="A320-200" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
-                    <p class="text-gray-300 font-light text-sm leading-relaxed">
-                        The backbone of ANVG's domestic network. The Boeing 737-800 flies high-frequency routes across the virtual archipelago, offering proven reliability and quick turnarounds to keep the domestic timetable running smoothly.
-                    </p>
-                </div>
-            </article>
+                    <div class="p-6 md:p-8">
+                        <div class="flex items-start justify-between mb-3 gap-2">
+                            <h3 class="font-heading text-2xl font-bold text-white">A320-200</h3>
+                            <span class="bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap shrink-0 mt-1">Short-Haul</span>
+                        </div>
+                        <p class="text-gray-300 font-light text-sm leading-relaxed">
+                            A versatile and highly reliable narrow-body, the A320-200 provides a perfect balance of capacity and frequency. It handles a mix of high-demand domestic sectors and key short-haul international routes across our network.
+                        </p>
+                    </div>
+                </article>
 
-            <!-- B787-8 -->
-            <article class="glass-panel rounded-3xl overflow-hidden group border border-white/10 hover:border-ana-light/50 transition-all duration-300">
-                <div class="w-full aspect-video overflow-hidden relative">
-                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790506018/Screenshot_20260927_155344_com.infiniteflight.dev2_abkmae.jpg" alt="B787-8" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                </div>
-                <div class="p-6 md:p-8">
-                    <div class="flex items-start justify-between mb-3 gap-2">
-                        <h2 class="font-heading text-2xl font-bold text-white">B787-8 Dreamliner</h2>
-                        <span class="bg-white/10 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider text-gray-300 whitespace-nowrap shrink-0 mt-1">Mid/Long-Haul</span>
+                <!-- B737-800 -->
+                <article class="glass-panel rounded-3xl overflow-hidden group border border-white/10 hover:border-ana-light/50 transition-all duration-300">
+                    <div class="w-full aspect-video overflow-hidden relative">
+                        <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790505569/Screenshot_20260927_155220_com.infiniteflight.dev2_gvnkxs.jpg" alt="B737-800" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
-                    <p class="text-gray-300 font-light text-sm leading-relaxed">
-                        A pioneer in modern aviation, the B787-8 is highly adaptable. It serves both high-density domestic routes and pioneers thin, long-haul international connections across the expanding ANVG virtual network.
-                    </p>
-                </div>
-            </article>
-            <!-- B787-9 -->
-            <article class="glass-panel rounded-3xl overflow-hidden group border border-white/10 hover:border-ana-light/50 transition-all duration-300">
-                <div class="w-full aspect-video overflow-hidden relative">
-                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790506021/Screenshot_20260927_155448_com.infiniteflight.dev2_yu4zt8.jpg" alt="B787-9" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                </div>
-                <div class="p-6 md:p-8">
-                    <div class="flex items-start justify-between mb-3 gap-2">
-                        <h2 class="font-heading text-2xl font-bold text-white">B787-9 Dreamliner</h2>
-                        <span class="bg-white/10 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider text-gray-300 whitespace-nowrap shrink-0 mt-1">Long-Haul</span>
+                    <div class="p-6 md:p-8">
+                        <div class="flex items-start justify-between mb-3 gap-2">
+                            <h3 class="font-heading text-2xl font-bold text-white">B737-800</h3>
+                            <span class="bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap shrink-0 mt-1">Domestic Core</span>
+                        </div>
+                        <p class="text-gray-300 font-light text-sm leading-relaxed">
+                            The backbone of ANVG's domestic network. The Boeing 737-800 flies high-frequency routes across the virtual archipelago, offering proven reliability and quick turnarounds to keep the domestic timetable running smoothly.
+                        </p>
                     </div>
-                    <p class="text-gray-300 font-light text-sm leading-relaxed">
-                        The stretched variant of the Dreamliner family. Offering greater range and increased passenger capacity, the B787-9 forms the modern core of ANVG's international long-haul network, connecting our hubs to Europe and the Americas.
-                    </p>
-                </div>
-            </article>
+                </article>
+                <!-- B787-8 -->
+                <article class="glass-panel rounded-3xl overflow-hidden group border border-white/10 hover:border-ana-light/50 transition-all duration-300">
+                    <div class="w-full aspect-video overflow-hidden relative">
+                        <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790506018/Screenshot_20260927_155344_com.infiniteflight.dev2_abkmae.jpg" alt="B787-8" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="p-6 md:p-8">
+                        <div class="flex items-start justify-between mb-3 gap-2">
+                            <h3 class="font-heading text-2xl font-bold text-white">B787-8 Dreamliner</h3>
+                            <span class="bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap shrink-0 mt-1">Mid/Long-Haul</span>
+                        </div>
+                        <p class="text-gray-300 font-light text-sm leading-relaxed">
+                            A pioneer in modern aviation, the B787-8 is highly adaptable. It serves both high-density domestic routes and pioneers thin, long-haul international connections across the expanding ANVG virtual network.
+                        </p>
+                    </div>
+                </article>
 
-            <!-- B787-10 -->
-            <article class="glass-panel rounded-3xl overflow-hidden group border border-white/10 hover:border-ana-light/50 transition-all duration-300">
-                <div class="w-full aspect-video overflow-hidden relative">
-                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790506025/Screenshot_20260927_155601_com.infiniteflight.dev2_ksvwa3.jpg" alt="B787-10" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                </div>
-                <div class="p-6 md:p-8">
-                    <div class="flex items-start justify-between mb-3 gap-2">
-                        <h2 class="font-heading text-2xl font-bold text-white">B787-10 Dreamliner</h2>
-                        <span class="bg-white/10 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider text-gray-300 whitespace-nowrap shrink-0 mt-1">High-Density</span>
+                <!-- B787-9 -->
+                <article class="glass-panel rounded-3xl overflow-hidden group border border-white/10 hover:border-ana-light/50 transition-all duration-300">
+                    <div class="w-full aspect-video overflow-hidden relative">
+                        <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790506021/Screenshot_20260927_155448_com.infiniteflight.dev2_yu4zt8.jpg" alt="B787-9" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
-                    <p class="text-gray-300 font-light text-sm leading-relaxed">
-                        The longest of the Dreamliner family, maximizing passenger capacity while maintaining exceptional fuel efficiency. It is optimized for high-demand routes to major destinations across Asia and heavily trafficked domestic trunk routes.
-                    </p>
-                </div>
-            </article>
-
-            <!-- B777-200ER -->
-            <article class="glass-panel rounded-3xl overflow-hidden group border border-white/10 hover:border-ana-light/50 transition-all duration-300">
-                <div class="w-full aspect-video overflow-hidden relative">
-                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790506028/Screenshot_20260927_155746_com.infiniteflight.dev2_vimku5.jpg" alt="B777-200ER" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                </div>
-                <div class="p-6 md:p-8">
-                    <div class="flex items-start justify-between mb-3 gap-2">
-                        <h2 class="font-heading text-2xl font-bold text-white">B777-200ER</h2>
-                        <span class="bg-white/10 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider text-gray-300 whitespace-nowrap shrink-0 mt-1">Heavy</span>
+                    <div class="p-6 md:p-8">
+                        <div class="flex items-start justify-between mb-3 gap-2">
+                            <h3 class="font-heading text-2xl font-bold text-white">B787-9 Dreamliner</h3>
+                            <span class="bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap shrink-0 mt-1">Long-Haul</span>
+                        </div>
+                        <p class="text-gray-300 font-light text-sm leading-relaxed">
+                            The stretched variant of the Dreamliner family. Offering greater range and increased passenger capacity, the B787-9 forms the modern core of ANVG's international long-haul network, connecting our hubs to Europe and the Americas.
+                        </p>
                     </div>
-                    <p class="text-gray-300 font-light text-sm leading-relaxed">
-                        A massive twin-engine heavy traditionally utilized by ANVG for moving large numbers of passengers on high-demand domestic trunk routes, as well as serving select mid-range international sectors.
-                    </p>
-                </div>
-            </article>
+                </article>
 
-            <!-- B777-300ER -->
-            <article class="glass-panel rounded-3xl overflow-hidden group border border-white/10 hover:border-ana-light/50 transition-all duration-300">
-                <div class="w-full aspect-video overflow-hidden relative">
-                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790506029/Screenshot_20260927_160210_com.fds.infiniteflight_bofzzd.jpg" alt="B777-300ER" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                </div>
-                <div class="p-6 md:p-8">
-                    <div class="flex items-start justify-between mb-3 gap-2">
-                        <h2 class="font-heading text-2xl font-bold text-white">B777-300ER</h2>
-                        <span class="bg-white/10 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider text-gray-300 whitespace-nowrap shrink-0 mt-1">Flagship</span>
+                <!-- B787-10 -->
+                <article class="glass-panel rounded-3xl overflow-hidden group border border-white/10 hover:border-ana-light/50 transition-all duration-300">
+                    <div class="w-full aspect-video overflow-hidden relative">
+                        <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790506025/Screenshot_20260927_155601_com.infiniteflight.dev2_ksvwa3.jpg" alt="B787-10" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
-                    <p class="text-gray-300 font-light text-sm leading-relaxed">
-                        The true flagship of ANVG's international long-haul fleet. The 777-300ER operates the most prestigious and longest routes in the network, routinely flying transpacific and transatlantic journeys to North America and Europe.
-                    </p>
-                </div>
-            </article>
-
-            <!-- B777F -->
-            <article class="glass-panel rounded-3xl overflow-hidden group border border-white/10 hover:border-ana-light/50 transition-all duration-300">
-                <div class="w-full aspect-video overflow-hidden relative">
-                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790506030/Screenshot_20260927_160309_com.fds.infiniteflight_oxybyl.jpg" alt="B777F" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                </div>
-                <div class="p-6 md:p-8">
-                    <div class="flex items-start justify-between mb-3 gap-2">
-                        <h2 class="font-heading text-2xl font-bold text-white">B777F (Cargo)</h2>
-                        <span class="bg-white/10 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider text-gray-300 whitespace-nowrap shrink-0 mt-1">Logistics</span>
+                    <div class="p-6 md:p-8">
+                        <div class="flex items-start justify-between mb-3 gap-2">
+                            <h3 class="font-heading text-2xl font-bold text-white">B787-10 Dreamliner</h3>
+                            <span class="bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap shrink-0 mt-1">High-Density</span>
+                        </div>
+                        <p class="text-gray-300 font-light text-sm leading-relaxed">
+                            The longest of the Dreamliner family, maximizing passenger capacity while maintaining exceptional fuel efficiency. It is optimized for high-demand routes to major destinations across Asia and heavily trafficked domestic trunk routes.
+                        </p>
                     </div>
-                    <p class="text-gray-300 font-light text-sm leading-relaxed">
-                        The powerhouse of ANVG Cargo. This dedicated heavy freighter drives our virtual global logistics network, capable of carrying massive payloads across continents to keep the supply chains moving.
-                    </p>
-                </div>
-            </article>
+                </article>
 
-            <!-- A380 -->
-            <article class="glass-panel rounded-3xl overflow-hidden group border border-white/10 hover:border-ana-light/50 transition-all duration-300">
-                <div class="w-full aspect-video overflow-hidden relative">
-                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790506025/Screenshot_20260927_160442_com.fds.infiniteflight_vqrnuy.jpg" alt="A380" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                </div>
-                <div class="p-6 md:p-8">
-                    <div class="flex items-start justify-between mb-3 gap-2">
-                        <h2 class="font-heading text-2xl font-bold text-white">A380-800</h2>
-                        <span class="bg-white/10 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider text-gray-300 whitespace-nowrap shrink-0 mt-1">Leisure Heavy</span>
+                <!-- B777-200ER -->
+                <article class="glass-panel rounded-3xl overflow-hidden group border border-white/10 hover:border-ana-light/50 transition-all duration-300">
+                    <div class="w-full aspect-video overflow-hidden relative">
+                        <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790506028/Screenshot_20260927_155746_com.infiniteflight.dev2_vimku5.jpg" alt="B777-200ER" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     </div>
-                    <p class="text-gray-300 font-light text-sm leading-relaxed">
-                        Affectionately known as the "Flying Honu". ANVG operates these iconic double-decker giants exclusively on highly popular leisure routes, offering unmatched passenger volume and a unique flying experience.
-                    </p>
-                </div>
-            </article>
+                    <div class="p-6 md:p-8">
+                        <div class="flex items-start justify-between mb-3 gap-2">
+                            <h3 class="font-heading text-2xl font-bold text-white">B777-200ER</h3>
+                            <span class="bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap shrink-0 mt-1">Heavy Domestic</span>
+                        </div>
+                        <p class="text-gray-300 font-light text-sm leading-relaxed">
+                            A massive twin-engine heavy traditionally utilized by ANVG for moving large numbers of passengers on high-demand domestic trunk routes, as well as serving select mid-range international sectors.
+                        </p>
+                    </div>
+                </article>
 
+                <!-- B777-300ER -->
+                <article class="glass-panel rounded-3xl overflow-hidden group border border-white/10 hover:border-ana-light/50 transition-all duration-300">
+                    <div class="w-full aspect-video overflow-hidden relative">
+                        <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790506029/Screenshot_20260927_160210_com.fds.infiniteflight_bofzzd.jpg" alt="B777-300ER" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="p-6 md:p-8">
+                        <div class="flex items-start justify-between mb-3 gap-2">
+                            <h3 class="font-heading text-2xl font-bold text-white">B777-300ER</h3>
+                            <span class="bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap shrink-0 mt-1">Flagship</span>
+                        </div>
+                        <p class="text-gray-300 font-light text-sm leading-relaxed">
+                            The true flagship of ANVG's international long-haul fleet. The 777-300ER operates the most prestigious and longest routes in the network, routinely flying transpacific and transatlantic journeys to North America and Europe.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
         </div>
+        <!-- SECTION 2: NIPPON CARGO AIRLINES (NCA) -->
+        <div id="section-nca" class="fleet-division space-y-6 pt-4">
+            <div class="flex items-center gap-3 border-l-4 border-sky-500 pl-4">
+                <div>
+                    <h2 class="font-heading text-xl md:text-2xl font-bold text-white">Nippon Cargo Airlines (NCA)</h2>
+                    <p class="text-xs text-sky-300">Dedicated heavy freight division across Pacific trade routes</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+
+                <!-- B747-8F (Template Card) -->
+                <article class="glass-panel rounded-3xl overflow-hidden group border border-sky-500/30 hover:border-sky-400 transition-all duration-300">
+                    <div class="w-full aspect-video overflow-hidden relative">
+                        <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790506029/Screenshot_20260927_160210_com.fds.infiniteflight_bofzzd.jpg" alt="Boeing 747-8F NCA" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <span class="absolute top-4 right-4 bg-sky-950/80 backdrop-blur-md text-sky-200 border border-sky-400/40 text-[10px] font-mono px-3 py-1 rounded-full uppercase tracking-wider">
+                            Official Livery in IF
+                        </span>
+                    </div>
+                    <div class="p-6 md:p-8">
+                        <div class="flex items-start justify-between mb-3 gap-2">
+                            <h3 class="font-heading text-2xl font-bold text-white">Boeing 747-8F</h3>
+                            <span class="bg-sky-500/20 text-sky-300 border border-sky-500/30 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap shrink-0 mt-1">Heavy Freighter</span>
+                        </div>
+                        <p class="text-gray-300 font-light text-sm leading-relaxed">
+                            The legendary Queen of the Skies commanding ANVG's heavy cargo logistics. Connecting Tokyo Narita (RJAA) to Anchorage (PANC) and Chicago (KORD) with massive nose-loading and main-deck freight capacity.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+
+        <!-- SECTION 3: PEACH AVIATION (LCC) -->
+        <div id="section-peach" class="fleet-division space-y-6 pt-4">
+            <div class="flex items-center gap-3 border-l-4 border-pink-500 pl-4">
+                <div>
+                    <h2 class="font-heading text-xl md:text-2xl font-bold text-white">Peach Aviation</h2>
+                    <p class="text-xs text-pink-300">High-frequency low-cost & leisure hops across Japan and East Asia</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+
+                <!-- A320-200 (Peach Template Card) -->
+                <article class="glass-panel rounded-3xl overflow-hidden group border border-pink-500/30 hover:border-pink-400 transition-all duration-300">
+                    <div class="w-full aspect-video overflow-hidden relative">
+                        <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790505576/Screenshot_20260927_155101_com.infiniteflight.dev2_zyoynt.jpg" alt="A320-200 Peach" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <span class="absolute top-4 right-4 bg-pink-950/80 backdrop-blur-md text-pink-200 border border-pink-400/40 text-[10px] font-mono px-3 py-1 rounded-full uppercase tracking-wider">
+                            Official Livery in IF
+                        </span>
+                    </div>
+                    <div class="p-6 md:p-8">
+                        <div class="flex items-start justify-between mb-3 gap-2">
+                            <h3 class="font-heading text-2xl font-bold text-white">Airbus A320-200</h3>
+                            <span class="bg-pink-500/20 text-pink-300 border border-pink-500/30 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap shrink-0 mt-1">LCC Regional</span>
+                        </div>
+                        <p class="text-gray-300 font-light text-sm leading-relaxed">
+                            Sporting signature fuchsia wings out of Kansai (RJBB) and Naha (ROAH), Peach connects travelers to scenic domestic getaways and East Asian destinations with unmatched point-to-point agility.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+
+        <!-- SECTION 4: AIRJAPAN -->
+        <div id="section-airjapan" class="fleet-division space-y-6 pt-4">
+            <div class="flex items-center gap-3 border-l-4 border-teal-400 pl-4">
+                <div>
+                    <h2 class="font-heading text-xl md:text-2xl font-bold text-white">AirJapan</h2>
+                    <p class="text-xs text-teal-300">Medium-haul leisure connections to Southeast Asia and Oceania</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+
+                <!-- B787-8 (AirJapan Template Card) -->
+                <article class="glass-panel rounded-3xl overflow-hidden group border border-teal-500/30 hover:border-teal-400 transition-all duration-300">
+                    <div class="w-full aspect-video overflow-hidden relative">
+                        <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790506018/Screenshot_20260927_155344_com.infiniteflight.dev2_abkmae.jpg" alt="B787-8 AirJapan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <span class="absolute top-4 right-4 bg-teal-950/80 backdrop-blur-md text-teal-200 border border-teal-400/40 text-[10px] font-mono px-3 py-1 rounded-full uppercase tracking-wider">
+                            Standard B787 Airframe
+                        </span>
+                    </div>
+                    <div class="p-6 md:p-8">
+                        <div class="flex items-start justify-between mb-3 gap-2">
+                            <h3 class="font-heading text-2xl font-bold text-white">Boeing 787-8</h3>
+                            <span class="bg-teal-500/20 text-teal-300 border border-teal-500/30 text-[10px] md:text-xs px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap shrink-0 mt-1">Leisure Long-Haul</span>
+                        </div>
+                        <p class="text-gray-300 font-light text-sm leading-relaxed">
+                            Combining full Dreamliner comfort with low-cost efficiency, AirJapan bridges Tokyo Narita with Bangkok (VTBS), Singapore (WSSS), and popular Asian leisure corridors.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+
     </main>
 
     <!-- FOOTER -->
     <footer class="bg-[#020914] text-gray-400 pt-16 pb-8 px-6 mt-12 border-t border-white/10">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
-            
             <div>
                 <h4 class="font-heading text-white text-lg font-bold mb-6 flex items-center gap-2">
                     <i class="fa-solid fa-compass text-ana-light"></i> Navigation
@@ -311,31 +405,67 @@
                     <li><a href="codeshare.html" class="hover:text-white transition">Codeshares</a></li>
                 </ul>
             </div>
-
             <div>
                 <h4 class="font-heading text-white text-lg font-bold mb-6 flex items-center gap-2">
                     <i class="fa-solid fa-users text-ana-light"></i> Community
                 </h4>
                 <ul class="space-y-4">
-                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-regular fa-comments w-5"></i> IFC Forum</a></li>
-                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-thread w-5"></i> IFC Thread</a></li>
-                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-w w-5"></i> Waypoints CC</a></li>
+                    <li><a href="https://waypoint-live.app/va/all-nippon-virtual-airways" target="_blank" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-w w-5 text-ana-light"></i> Waypoints Portal</a></li>
+                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-discord w-5"></i> Official Discord</a></li>
                     <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-instagram w-5"></i> Instagram</a></li>
                     <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-youtube w-5"></i> YouTube</a></li>
                 </ul>
             </div>
         </div>
-
         <div class="max-w-6xl mx-auto">
             <hr class="border-white/10 mb-8">
             <div class="text-center text-xs space-y-2">
-                <p class="text-white/60">© 2026 All Nippon Virtual Group — Built for the Infinite Flight Community</p>
-                <p class="text-white/40">All Nippon Virtual Group is no way related to the real-world All Nippon Airways. All trademarks and logos remain the property of their respective owners.</p>
+                <p class="text-white/60">© 2026 All Nippon Virtual Group — Official Community Airline on Waypoints</p>
+                <p class="text-white/40">All Nippon Virtual Group is not affiliated with the real-world All Nippon Airways or ANA Holdings. All trademarks and logos remain the property of their respective owners.</p>
             </div>
         </div>
     </footer>
 
     <!-- Link to external Javascript file -->
     <script src="script.js"></script>
+
+    <!-- Division Filter Script -->
+    <script>
+        function filterFleet(division) {
+            const sections = {
+                'ana': document.getElementById('section-ana'),
+                'nca': document.getElementById('section-nca'),
+                'peach': document.getElementById('section-peach'),
+                'airjapan': document.getElementById('section-airjapan')
+            };
+
+            const tabs = ['all', 'ana', 'nca', 'peach', 'airjapan'];
+
+            // Update tab styles
+            tabs.forEach(tab => {
+                const btn = document.getElementById('tab-' + tab);
+                if (tab === division) {
+                    btn.classList.add('bg-white/20', 'text-white', 'border-white/30');
+                    btn.classList.remove('bg-white/5', 'text-gray-300', 'border-white/10');
+                } else {
+                    btn.classList.remove('bg-white/20', 'text-white', 'border-white/30');
+                    btn.classList.add('bg-white/5', 'text-gray-300', 'border-white/10');
+                }
+            });
+
+            // Show / Hide sections
+            if (division === 'all') {
+                Object.values(sections).forEach(sec => sec.classList.remove('hidden'));
+            } else {
+                Object.keys(sections).forEach(key => {
+                    if (key === division) {
+                        sections[key].classList.remove('hidden');
+                    } else {
+                        sections[key].classList.add('hidden');
+                    }
+                });
+            }
+        }
+    </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System Settings - All Nippon Virtual Group</title>
+    <title>Flight Deck Settings - All Nippon Virtual Group</title>
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
@@ -110,8 +110,8 @@
             <p class="text-sm text-gray-300 mb-4 flex items-center justify-center gap-2">
                 Developed By <span class="font-signature text-2xl text-ana-light translate-y-1">Anaya</span>
             </p>
-            <a href="ifc-profile.html" class="inline-block w-full bg-ana-light hover:bg-blue-400 text-white text-sm px-4 py-2 rounded-full font-medium transition shadow-lg shadow-blue-500/30">
-                IFC Profile
+            <a href="https://waypoint-live.app/va/all-nippon-virtual-airways" target="_blank" class="inline-block w-full bg-ana-light hover:bg-blue-400 text-white text-sm px-4 py-2 rounded-full font-medium transition shadow-lg shadow-blue-500/30">
+                Waypoints VA
             </a>
         </div>
     </div>
@@ -123,14 +123,59 @@
             Flight Deck Settings
         </h1>
         <p class="text-gray-200 text-lg md:text-xl font-light leading-relaxed">
-            Customize your virtual flight operations portal. Enable automated voice briefings, configure audio cues, and manage browser preferences.
+            Customize your virtual flight operations portal. Switch subsidiary color atmospheres, enable voice sector briefings, and manage browser preferences.
         </p>
     </section>
 
     <!-- MAIN SETTINGS AREA -->
     <main class="max-w-3xl mx-auto px-4 pb-20 mt-4 space-y-8">
         
-        <!-- AUDIO BRIEFINGS SECTION -->
+        <!-- 1. AIRLINE BRAND THEME PICKER -->
+        <div>
+            <h2 class="font-heading text-xl md:text-2xl font-bold text-gray-200 mb-4 ml-2 md:ml-4 tracking-wide border-l-4 border-ana-light pl-4">
+                Subsidiary Atmosphere & Colors
+            </h2>
+
+            <div class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10">
+                <p class="text-xs md:text-sm text-gray-300 font-light mb-6">
+                    Immerse yourself into our different group operations. Choosing an airline restyles the background gradients, buttons, active badges, and lighting across the entire portal.
+                </p>
+
+                <!-- Airline Theme Buttons Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    
+                    <!-- All Nippon Airways (Default) -->
+                    <button onclick="setTheme('ana')" id="btn-theme-ana" class="p-4 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 transition flex flex-col items-center gap-2 group text-center cursor-pointer">
+                        <div class="w-8 h-8 rounded-full bg-[#007fc1] shadow-lg shadow-[#007fc1]/50 group-hover:scale-110 transition"></div>
+                        <span class="text-xs font-bold text-white">All Nippon</span>
+                        <span class="text-[10px] text-gray-400">Triton Blue</span>
+                    </button>
+
+                    <!-- Peach Aviation (Pink) -->
+                    <button onclick="setTheme('peach')" id="btn-theme-peach" class="p-4 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 transition flex flex-col items-center gap-2 group text-center cursor-pointer">
+                        <div class="w-8 h-8 rounded-full bg-[#e6007e] shadow-lg shadow-[#e6007e]/50 group-hover:scale-110 transition"></div>
+                        <span class="text-xs font-bold text-white">Peach</span>
+                        <span class="text-[10px] text-pink-400">Fuchsia Pink</span>
+                    </button>
+
+                    <!-- Nippon Cargo Airlines (NCA) -->
+                    <button onclick="setTheme('nca')" id="btn-theme-nca" class="p-4 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 transition flex flex-col items-center gap-2 group text-center cursor-pointer">
+                        <div class="w-8 h-8 rounded-full bg-[#005bac] shadow-lg shadow-[#005bac]/50 group-hover:scale-110 transition"></div>
+                        <span class="text-xs font-bold text-white">Nippon Cargo</span>
+                        <span class="text-[10px] text-blue-400">Cargo Navy</span>
+                    </button>
+
+                    <!-- AirJapan (Teal) -->
+                    <button onclick="setTheme('airjapan')" id="btn-theme-airjapan" class="p-4 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 transition flex flex-col items-center gap-2 group text-center cursor-pointer">
+                        <div class="w-8 h-8 rounded-full bg-[#00b4d8] shadow-lg shadow-[#00b4d8]/50 group-hover:scale-110 transition"></div>
+                        <span class="text-xs font-bold text-white">AirJapan</span>
+                        <span class="text-[10px] text-cyan-300">Sunrise Teal</span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+        <!-- 2. AUDIO BRIEFINGS SECTION -->
         <div>
             <h2 class="font-heading text-xl md:text-2xl font-bold text-gray-200 mb-6 ml-2 md:ml-4 tracking-wide border-l-4 border-ana-light pl-4">
                 Cockpit Voice Briefings
@@ -170,7 +215,8 @@
 
             </div>
         </div>
-        <!-- DATA & STORAGE PREFERENCES -->
+
+        <!-- 3. DATA & STORAGE PREFERENCES -->
         <div>
             <h2 class="font-heading text-xl md:text-2xl font-bold text-gray-200 mb-6 ml-2 md:ml-4 tracking-wide border-l-4 border-yellow-500 pl-4">
                 Storage & Cache
@@ -182,7 +228,7 @@
                         <i class="fa-solid fa-trash-can text-yellow-400"></i> Clear Local Settings
                     </h3>
                     <p class="text-gray-300 font-light text-xs md:text-sm mt-1 max-w-md">
-                        Reset all cached audio preferences, stored filters, and site configurations stored in your device's browser memory.
+                        Reset all cached airline themes, audio preferences, and site configurations stored in your device's browser memory.
                     </p>
                 </div>
                 <button onclick="resetPreferences()" class="inline-flex items-center justify-center gap-2 bg-red-500/20 hover:bg-red-500/30 text-red-300 text-xs px-5 py-2.5 rounded-full font-medium transition border border-red-500/30 shrink-0">
@@ -214,9 +260,8 @@
                     <i class="fa-solid fa-users text-ana-light"></i> Community
                 </h4>
                 <ul class="space-y-4">
-                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-regular fa-comments w-5"></i> IFC Forum</a></li>
-                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-thread w-5"></i> IFC Thread</a></li>
-                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-w w-5"></i> Waypoints CC</a></li>
+                    <li><a href="https://waypoint-live.app/va/all-nippon-virtual-airways" target="_blank" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-w w-5 text-ana-light"></i> Waypoints Portal</a></li>
+                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-discord w-5"></i> Official Discord</a></li>
                     <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-instagram w-5"></i> Instagram</a></li>
                     <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-youtube w-5"></i> YouTube</a></li>
                 </ul>
@@ -225,8 +270,8 @@
         <div class="max-w-6xl mx-auto">
             <hr class="border-white/10 mb-8">
             <div class="text-center text-xs space-y-2">
-                <p class="text-white/60">© 2026 All Nippon Virtual Group — Built for the Infinite Flight Community</p>
-                <p class="text-white/40">All Nippon Virtual Group is no way related to the real-world All Nippon Airways. All trademarks and logos remain the property of their respective owners.</p>
+                <p class="text-white/60">© 2026 All Nippon Virtual Group — Official Community Airline on Waypoints</p>
+                <p class="text-white/40">All Nippon Virtual Group is not affiliated with the real-world All Nippon Airways or ANA Holdings. All trademarks and logos remain the property of their respective owners.</p>
             </div>
         </div>
     </footer>
@@ -236,19 +281,60 @@
 
     <!-- Settings Initialization Script -->
     <script>
-        // Load initial toggle state from localStorage
+        // Load initial toggle and theme states from localStorage
         document.addEventListener('DOMContentLoaded', () => {
             const isEnabled = localStorage.getItem('anvg_voice_briefing') === 'true';
             document.getElementById('voiceToggle').checked = isEnabled;
+            
+            highlightActiveThemeButton(localStorage.getItem('anvg_theme') || 'ana');
         });
 
-        // Toggle handler
+        // Theme switching handler
+        function setTheme(themeName) {
+            localStorage.setItem('anvg_theme', themeName);
+            
+            // Call global theme applier from script.js if available
+            if (typeof applyThemeClass === 'function') {
+                applyThemeClass(themeName);
+            }
+            
+            highlightActiveThemeButton(themeName);
+
+            // Audio confirmation if voice briefing is active
+            if (localStorage.getItem('anvg_voice_briefing') === 'true' && typeof speakAudioMessage === 'function') {
+                const names = {
+                    'ana': 'All Nippon Airways blue theme active',
+                    'peach': 'Peach Aviation pink theme active',
+                    'nca': 'Nippon Cargo Airlines theme active',
+                    'airjapan': 'AirJapan sunrise teal theme active'
+                };
+                speakAudioMessage(names[themeName] || 'Theme activated');
+            }
+        }
+
+        // Highlight selected theme button with an active ring
+        function highlightActiveThemeButton(activeTheme) {
+            ['ana', 'peach', 'nca', 'airjapan'].forEach(theme => {
+                const btn = document.getElementById(`btn-theme-${theme}`);
+                if (btn) {
+                    if (theme === activeTheme) {
+                        btn.classList.add('ring-2', 'ring-white', 'bg-white/15');
+                    } else {
+                        btn.classList.remove('ring-2', 'ring-white', 'bg-white/15');
+                    }
+                }
+            });
+        }
+
+        // Toggle voice briefing handler
         function toggleVoiceBriefing() {
             const toggle = document.getElementById('voiceToggle');
             localStorage.setItem('anvg_voice_briefing', toggle.checked);
             
             if (toggle.checked) {
-                speakAudioMessage("Voice sector announcements enabled. Welcome aboard.");
+                if (typeof speakAudioMessage === 'function') {
+                    speakAudioMessage("Voice sector announcements enabled. Welcome aboard.");
+                }
             } else {
                 if ('speechSynthesis' in window) {
                     window.speechSynthesis.cancel();
@@ -258,13 +344,22 @@
 
         // Test button handler
         function testVoiceBriefing() {
-            speakAudioMessage("This is an audio briefing check for the All Nippon Virtual Group flight operations deck. All systems operational.");
+            if (typeof speakAudioMessage === 'function') {
+                speakAudioMessage("This is an audio briefing check for the All Nippon Virtual Group flight operations deck. All systems operational.");
+            }
         }
 
         // Reset preferences handler
         function resetPreferences() {
             localStorage.removeItem('anvg_voice_briefing');
+            localStorage.removeItem('anvg_theme');
             document.getElementById('voiceToggle').checked = false;
+            
+            if (typeof applyThemeClass === 'function') {
+                applyThemeClass('ana');
+            }
+            highlightActiveThemeButton('ana');
+
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
             }

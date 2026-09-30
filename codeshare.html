@@ -15,7 +15,7 @@
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Link to your separate CSS file -->
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
     <!-- Tailwind CSS -->
@@ -110,8 +110,8 @@
             <p class="text-sm text-gray-300 mb-4 flex items-center justify-center gap-2">
                 Developed By <span class="font-signature text-2xl text-ana-light translate-y-1">Anaya</span>
             </p>
-            <a href="ifc-profile.html" class="inline-block w-full bg-ana-light hover:bg-blue-400 text-white text-sm px-4 py-2 rounded-full font-medium transition shadow-lg shadow-blue-500/30">
-                IFC Profile
+            <a href="https://waypoint-live.app/va/all-nippon-virtual-airways" target="_blank" class="inline-block w-full bg-ana-light hover:bg-blue-400 text-white text-sm px-4 py-2 rounded-full font-medium transition shadow-lg shadow-blue-500/30">
+                Waypoints VA
             </a>
         </div>
     </div>
@@ -123,10 +123,9 @@
             Codeshare Alliances
         </h1>
         <p class="text-gray-200 text-lg md:text-xl font-light leading-relaxed">
-            Expanding our wings through global cooperation. Connect to worldwide destinations through our official Star Alliance and virtual airline partner networks.
+            Expanding our wings through global simulation partnerships. Connect to worldwide destinations through our official codeshare airline network on Waypoints.
         </p>
     </section>
-
     <!-- MAIN CONTENT AREA -->
     <main class="max-w-4xl mx-auto px-4 pb-20 mt-4 space-y-8">
         
@@ -137,7 +136,7 @@
 
             <div class="space-y-4">
 
-                <!-- 1. PARTNER CARD (Example Partner) -->
+                <!-- 1. PARTNER CARD (United Virtual Example) -->
                 <article class="glass-panel rounded-2xl overflow-hidden border border-white/10 transition-all duration-300">
                     <button onclick="toggleCodeshare('partner1')" class="w-full p-4 md:p-5 flex items-center justify-between text-left hover:bg-white/5 transition">
                         <div class="flex items-center gap-4">
@@ -150,7 +149,7 @@
                                     <h3 class="font-heading text-base md:text-lg font-bold text-white">United Virtual Airlines</h3>
                                     <span class="bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[9px] px-2 py-0.5 rounded-full uppercase tracking-wider font-mono">Partner</span>
                                 </div>
-                                <p class="text-gray-400 text-xs mt-0.5">Star Alliance Network Affiliate</p>
+                                <p class="text-gray-400 text-xs mt-0.5">Transpacific Codeshare Affiliate</p>
                             </div>
                         </div>
 
@@ -160,10 +159,10 @@
                         </div>
                     </button>
 
-                    <!-- Collapsible Content (Hidden by default) -->
+                    <!-- Collapsible Content -->
                     <div id="partner1-desc" class="hidden px-5 pb-5 pt-2 border-t border-white/5 text-gray-300 text-xs md:text-sm font-light leading-relaxed bg-black/20">
                         <p class="mb-3">
-                            ANVG pilots holding Rank First Officer and above can file select transpacific and North American routes operated by United Virtual. Flights logged under this codeshare earn standard progression hours towards your ANVG career wings.
+                            ANVG pilots holding First Officer rank and above can fly select transpacific and North American routes operated by United Virtual. Flights logged under this agreement earn standard progression hours logged via the Waypoints Crew Center[span_3](start_span)[span_3](end_span).
                         </p>
                         <div class="flex flex-wrap gap-2 text-[10px] font-mono text-gray-400">
                             <span class="bg-white/5 px-2.5 py-1 rounded-md border border-white/5">Primary Hubs: KDEN, KORD, KSFO</span>
@@ -171,20 +170,21 @@
                         </div>
                     </div>
                 </article>
-                <!-- 2. DUPLICATE CARD (Unknown VA Template) -->
+
+                <!-- 2. PARTNER CARD (Pending Partner Template) -->
                 <article class="glass-panel rounded-2xl overflow-hidden border border-white/10 transition-all duration-300">
                     <button onclick="toggleCodeshare('partnerUnknown')" class="w-full p-4 md:p-5 flex items-center justify-between text-left hover:bg-white/5 transition">
                         <div class="flex items-center gap-4">
-                            <!-- Profile Picture / Logo Placeholder (Will update photo later) -->
+                            <!-- Profile Picture / Logo Placeholder -->
                             <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-white/5 border border-white/15 p-2 flex items-center justify-center shrink-0 shadow-md">
                                 <i class="fa-regular fa-image text-gray-400 text-xl"></i>
                             </div>
                             <div>
                                 <div class="flex items-center gap-2">
-                                    <h3 class="font-heading text-base md:text-lg font-bold text-white">Unknown VA</h3>
+                                    <h3 class="font-heading text-base md:text-lg font-bold text-white">Prospective Partner</h3>
                                     <span class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[9px] px-2 py-0.5 rounded-full uppercase tracking-wider font-mono">Pending Agreement</span>
                                 </div>
-                                <p class="text-gray-400 text-xs mt-0.5">Codeshare Partner Organization</p>
+                                <p class="text-gray-400 text-xs mt-0.5">Codeshare Alliance Review</p>
                             </div>
                         </div>
 
@@ -197,22 +197,19 @@
                     <!-- Collapsible Content -->
                     <div id="partnerUnknown-desc" class="hidden px-5 pb-5 pt-2 border-t border-white/5 text-gray-300 text-xs md:text-sm font-light leading-relaxed bg-black/20">
                         <p class="mb-3">
-                            Codeshare agreement details, route availability, and reciprocal flight logging permissions will be announced here once official terms are approved by both virtual airline leadership teams.
+                            Reciprocal route availability, mutual callsign permissions, and Waypoints PIREP logging criteria will be announced here once official terms are confirmed between leadership teams[span_4](start_span)[span_4](end_span).
                         </p>
                         <div class="flex flex-wrap gap-2 text-[10px] font-mono text-gray-400">
                             <span class="bg-white/5 px-2.5 py-1 rounded-md border border-white/5">Primary Hubs: TBA</span>
-                            <span class="bg-white/5 px-2.5 py-1 rounded-md border border-white/5">Status: In Review</span>
+                            <span class="bg-white/5 px-2.5 py-1 rounded-md border border-white/5">Status: Pending Verification</span>
                         </div>
                     </div>
                 </article>
-
-                <!-- Future codeshare partners can be duplicated right here! -->
 
             </div>
         </div>
 
     </main>
-
     <!-- FOOTER -->
     <footer class="bg-[#020914] text-gray-400 pt-16 pb-8 px-6 mt-12 border-t border-white/10">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
@@ -226,7 +223,7 @@
                     <li><a href="events.html" class="hover:text-white transition">Events</a></li>
                     <li><a href="roster.html" class="hover:text-white transition">Roster</a></li>
                     <li><a href="routes.html" class="hover:text-white transition">Routes</a></li>
-                    <li><a href="codeshare.html" class="text-white transition">Codeshares</a></li>
+                    <li><a href="codeshare.html" class="text-white transition font-medium">Codeshares</a></li>
                 </ul>
             </div>
             <div>
@@ -234,9 +231,8 @@
                     <i class="fa-solid fa-users text-ana-light"></i> Community
                 </h4>
                 <ul class="space-y-4">
-                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-regular fa-comments w-5"></i> IFC Forum</a></li>
-                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-thread w-5"></i> IFC Thread</a></li>
-                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-w w-5"></i> Waypoints CC</a></li>
+                    <li><a href="https://waypoint-live.app/va/all-nippon-virtual-airways" target="_blank" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-w w-5 text-ana-light"></i> Waypoints Portal</a></li>
+                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-discord w-5"></i> Official Discord</a></li>
                     <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-instagram w-5"></i> Instagram</a></li>
                     <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-youtube w-5"></i> YouTube</a></li>
                 </ul>
@@ -245,13 +241,13 @@
         <div class="max-w-6xl mx-auto">
             <hr class="border-white/10 mb-8">
             <div class="text-center text-xs space-y-2">
-                <p class="text-white/60">© 2026 All Nippon Virtual Group — Built for the Infinite Flight Community</p>
-                <p class="text-white/40">All Nippon Virtual Group is no way related to the real-world All Nippon Airways. All trademarks and logos remain the property of their respective owners.</p>
+                <p class="text-white/60">© 2026 All Nippon Virtual Group — Official Community Airline on Waypoints</p>
+                <p class="text-white/40">All Nippon Virtual Group is not affiliated with the real-world All Nippon Airways or ANA Holdings. All trademarks and logos remain the property of their respective owners.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Link to external Menu Javascript -->
+    <!-- Link to external Javascript file -->
     <script src="script.js"></script>
 
     <!-- Codeshare Accordion Toggle Script -->

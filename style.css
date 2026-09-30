@@ -1,10 +1,44 @@
 /* All Nippon Virtual Group - Main Stylesheet */
 
+/* ================= THEME COLOR VARIABLES ================= */
+:root {
+    /* Default: All Nippon Airways (ANA) */
+    --brand-color: #007fc1;
+    --brand-dark: #00266b;
+    --brand-bg: linear-gradient(135deg, #0a192f 0%, #00266b 50%, #007fc1 100%);
+    --brand-glow: rgba(0, 127, 193, 0.35);
+}
+
+/* Peach Aviation (Pink / Fuchsia) */
+body.theme-peach {
+    --brand-color: #e6007e;
+    --brand-dark: #4a0026;
+    --brand-bg: linear-gradient(135deg, #16020c 0%, #4a0026 50%, #e6007e 100%);
+    --brand-glow: rgba(230, 0, 126, 0.35);
+}
+
+/* Nippon Cargo Airlines (NCA) */
+body.theme-nca {
+    --brand-color: #005bac;
+    --brand-dark: #021a36;
+    --brand-bg: linear-gradient(135deg, #030d1a 0%, #021a36 50%, #005bac 100%);
+    --brand-glow: rgba(0, 91, 172, 0.35);
+}
+
+/* AirJapan (Sunrise Teal) */
+body.theme-airjapan {
+    --brand-color: #00b4d8;
+    --brand-dark: #062a4a;
+    --brand-bg: linear-gradient(135deg, #021220 0%, #062a4a 50%, #00b4d8 100%);
+    --brand-glow: rgba(0, 180, 216, 0.35);
+}
+
+/* ================= BASE STYLING ================= */
 body {
-    /* ANA Inspired Gradient Background */
-    background: linear-gradient(135deg, #0a192f 0%, #00266b 50%, #007fc1 100%);
+    background: var(--brand-bg);
     background-attachment: fixed;
     color: white;
+    transition: background 0.4s ease;
     
     /* Disables text selection/copying on mobile and desktop */
     -webkit-user-select: none;
@@ -28,7 +62,21 @@ body {
     background-attachment: fixed;
 }
 
-/* Custom Scrollbar */
+/* ================= DYNAMIC THEME OVERRIDES ================= */
+/* Changes Tailwind-styled accents to whatever airline theme is active */
+.bg-ana-light {
+    background-color: var(--brand-color) !important;
+}
+
+.text-ana-light {
+    color: var(--brand-color) !important;
+}
+
+.border-ana-light {
+    border-color: var(--brand-color) !important;
+}
+
+/* Custom Scrollbar styled dynamically with the active airline color */
 ::-webkit-scrollbar { 
     width: 8px; 
 }
@@ -36,6 +84,6 @@ body {
     background: #0a192f; 
 }
 ::-webkit-scrollbar-thumb { 
-    background: #007fc1; 
+    background: var(--brand-color); 
     border-radius: 4px; 
 }

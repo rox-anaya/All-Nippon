@@ -15,7 +15,7 @@
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Link to your separate CSS file -->
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
     <!-- Tailwind CSS -->
@@ -76,7 +76,7 @@
             </div>
 
             <div class="border-b border-white/5">
-                <button onclick="toggleSubmenu('opsSub')" class="w-full flex justify-between items-center py-3 text-base font-medium hover:text-ana-light transition">
+                <button onclick="toggleSubmenu('opsSub')" class="w-full flex justify-between items-center py-3 text-base font-medium text-ana-light transition">
                     <span><i class="fa-solid fa-plane-departure w-6 text-ana-light"></i> Operations</span>
                     <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300 rotate-180" id="opsSub-arrow"></i>
                 </button>
@@ -103,6 +103,17 @@
 
             <a href="apply.html" class="block py-3 text-base font-medium hover:text-ana-light transition border-b border-white/5"><i class="fa-solid fa-paper-plane w-6"></i> Apply</a>
         </div>
+
+        <!-- METUPOLO™ & ANAYA BRANDING CARD -->
+        <div class="p-4 mx-4 mb-6 rounded-2xl glass-panel bg-white/5 text-center border border-white/10">
+            <p class="text-[9px] tracking-[0.2em] text-gray-400 font-bold mb-1">POWERED BY METUPOLO™</p>
+            <p class="text-sm text-gray-300 mb-4 flex items-center justify-center gap-2">
+                Developed By <span class="font-signature text-2xl text-ana-light translate-y-1">Anaya</span>
+            </p>
+            <a href="https://waypoint-live.app/va/all-nippon-virtual-airways" target="_blank" class="inline-block w-full bg-ana-light hover:bg-blue-400 text-white text-sm px-4 py-2 rounded-full font-medium transition shadow-lg shadow-blue-500/30">
+                Waypoints VA
+            </a>
+        </div>
     </div>
     <!-- ============================================== -->
 
@@ -112,10 +123,9 @@
             Pilot Roster
         </h1>
         <p class="text-gray-200 text-lg md:text-xl font-light leading-relaxed">
-            Explore our active leaderboard and roster of virtual aviators flying across the global network.
+            Active leaderboard and pilot registry flying across All Nippon Virtual Group's four operational divisions.
         </p>
     </section>
-
     <!-- MAIN CONTENT AREA -->
     <main class="max-w-4xl mx-auto px-4 pb-20 mt-4 space-y-12">
         
@@ -126,13 +136,13 @@
             </h2>
             
             <div id="leaderboardList" class="space-y-3">
-                <!-- Currently shows awaiting logs since all pilots are at 0 Hrs -->
+                <!-- Awaiting logs placeholder -->
                 <div class="glass-panel rounded-2xl p-6 text-center border border-white/10">
-                    <p class="text-gray-400 text-sm italic">Flight logging will begin soon. Top 10 pilots will appear here automatically once hours are recorded.</p>
+                    <p class="text-gray-400 text-sm italic">Flight logging is synced via Waypoints. Top pilots will populate automatically as flight hours are recorded.</p>
                 </div>
 
                 <!-- 
-                LEADERBOARD TEMPLATE (Uncomment and add when someone earns flight hours):
+                LEADERBOARD TEMPLATE:
                 <article class="rounded-2xl p-4 flex items-center justify-between gap-4 border border-yellow-500/30 bg-gradient-to-r from-yellow-950/20 via-[#00266b]/30 to-[#0a192f]/80 backdrop-blur-xl shadow-lg">
                     <div class="flex items-center gap-4">
                         <div class="w-9 h-9 rounded-full bg-yellow-500/20 border border-yellow-500/40 flex items-center justify-center text-yellow-400 text-xs font-bold font-mono">
@@ -150,7 +160,8 @@
                 -->
             </div>
         </div>
-        <!-- 2. SEARCH & ACTIVE ROSTER (Strict Equality for all pilots) -->
+
+        <!-- 2. SEARCH & ACTIVE ROSTER -->
         <div>
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 ml-2 md:ml-4">
                 <h2 class="font-heading text-xl md:text-2xl font-bold text-gray-200 tracking-wide border-l-4 border-ana-light pl-4">
@@ -177,20 +188,20 @@
                         </div>
                         <div>
                             <h3 class="font-heading text-base font-bold text-white pilot-name">Luciano</h3>
-                            <p class="text-gray-400 text-xs font-mono pilot-id">001AN</p>
+                            <p class="text-gray-400 text-xs font-mono pilot-id">ANVG-001</p>
                         </div>
                     </div>
                     <div class="flex items-center gap-4">
-                        <span class="text-xs text-gray-400 font-light">0 Hrs</span>
-                        <a href="#" target="_blank" class="bg-ana-light hover:bg-blue-400 text-white text-[11px] px-3.5 py-1 rounded-full font-medium transition flex items-center gap-1.5 shadow-md shrink-0 border border-white/10">
-                            <i class="fa-solid fa-plane text-[9px]"></i> IFC
+                        <span class="text-xs text-gray-400 font-mono">0.0 Hrs</span>
+                        <a href="https://waypoint-live.app/va/all-nippon-virtual-airways" target="_blank" class="bg-ana-light hover:bg-blue-400 text-white text-[11px] px-3.5 py-1 rounded-full font-medium transition flex items-center gap-1.5 shadow-md shrink-0 border border-white/10">
+                            <i class="fa-solid fa-w text-[9px]"></i> Waypoints
                         </a>
                     </div>
                 </article>
 
                 <!-- 
                 ============================================================
-                FUTURE PILOT CARD TEMPLATE (Uncomment to activate new pilot)
+                FUTURE PILOT CARD TEMPLATE (Duplicate to activate new pilots)
                 ============================================================
                 <article class="pilot-card rounded-2xl p-4 flex items-center justify-between gap-4 border border-white/10 bg-gradient-to-r from-[#00266b]/30 to-[#0a192f]/60 backdrop-blur-xl shadow-lg hover:border-ana-light/50 transition-all duration-300">
                     <div class="flex items-center gap-4">
@@ -199,13 +210,13 @@
                         </div>
                         <div>
                             <h3 class="font-heading text-base font-bold text-white pilot-name">Pilot Name</h3>
-                            <p class="text-gray-400 text-xs font-mono pilot-id">002AN</p>
+                            <p class="text-gray-400 text-xs font-mono pilot-id">ANVG-002</p>
                         </div>
                     </div>
                     <div class="flex items-center gap-4">
-                        <span class="text-xs text-gray-400 font-light">0 Hrs</span>
-                        <a href="#" target="_blank" class="bg-ana-light hover:bg-blue-400 text-white text-[11px] px-3.5 py-1 rounded-full font-medium transition flex items-center gap-1.5 shadow-md shrink-0 border border-white/10">
-                            <i class="fa-solid fa-plane text-[9px]"></i> IFC
+                        <span class="text-xs text-gray-400 font-mono">0.0 Hrs</span>
+                        <a href="https://waypoint-live.app/va/all-nippon-virtual-airways" target="_blank" class="bg-ana-light hover:bg-blue-400 text-white text-[11px] px-3.5 py-1 rounded-full font-medium transition flex items-center gap-1.5 shadow-md shrink-0 border border-white/10">
+                            <i class="fa-solid fa-w text-[9px]"></i> Waypoints
                         </a>
                     </div>
                 </article>
@@ -215,7 +226,6 @@
         </div>
 
     </main>
-
     <!-- FOOTER -->
     <footer class="bg-[#020914] text-gray-400 pt-16 pb-8 px-6 mt-12 border-t border-white/10">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
@@ -227,7 +237,7 @@
                     <li><a href="apply.html" class="hover:text-white transition">Apply</a></li>
                     <li><a href="about.html" class="hover:text-white transition">Learn More</a></li>
                     <li><a href="events.html" class="hover:text-white transition">Events</a></li>
-                    <li><a href="roster.html" class="hover:text-white transition">Roster</a></li>
+                    <li><a href="roster.html" class="text-white transition font-medium">Roster</a></li>
                     <li><a href="routes.html" class="hover:text-white transition">Routes</a></li>
                     <li><a href="codeshare.html" class="hover:text-white transition">Codeshares</a></li>
                 </ul>
@@ -237,9 +247,8 @@
                     <i class="fa-solid fa-users text-ana-light"></i> Community
                 </h4>
                 <ul class="space-y-4">
-                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-regular fa-comments w-5"></i> IFC Forum</a></li>
-                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-thread w-5"></i> IFC Thread</a></li>
-                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-w w-5"></i> Waypoints CC</a></li>
+                    <li><a href="https://waypoint-live.app/va/all-nippon-virtual-airways" target="_blank" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-w w-5 text-ana-light"></i> Waypoints Portal</a></li>
+                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-discord w-5"></i> Official Discord</a></li>
                     <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-instagram w-5"></i> Instagram</a></li>
                     <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-youtube w-5"></i> YouTube</a></li>
                 </ul>
@@ -248,13 +257,13 @@
         <div class="max-w-6xl mx-auto">
             <hr class="border-white/10 mb-8">
             <div class="text-center text-xs space-y-2">
-                <p class="text-white/60">© 2026 All Nippon Virtual Group — Built for the Infinite Flight Community</p>
-                <p class="text-white/40">All Nippon Virtual Group is no way related to the real-world All Nippon Airways. All trademarks and logos remain the property of their respective owners.</p>
+                <p class="text-white/60">© 2026 All Nippon Virtual Group — Official Community Airline on Waypoints</p>
+                <p class="text-white/40">All Nippon Virtual Group is not affiliated with the real-world All Nippon Airways or ANA Holdings. All trademarks and logos remain the property of their respective owners.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Link to external Menu Javascript -->
+    <!-- Script File -->
     <script src="script.js"></script>
 
     <!-- Search & Filter Script -->

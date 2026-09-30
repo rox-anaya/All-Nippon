@@ -15,7 +15,7 @@
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Link to your separate CSS file -->
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
     <!-- Tailwind CSS -->
@@ -110,8 +110,8 @@
             <p class="text-sm text-gray-300 mb-4 flex items-center justify-center gap-2">
                 Developed By <span class="font-signature text-2xl text-ana-light translate-y-1">Anaya</span>
             </p>
-            <a href="ifc-profile.html" class="inline-block w-full bg-ana-light hover:bg-blue-400 text-white text-sm px-4 py-2 rounded-full font-medium transition shadow-lg shadow-blue-500/30">
-                IFC Profile
+            <a href="https://waypoint-live.app/va/all-nippon-virtual-airways" target="_blank" class="inline-block w-full bg-ana-light hover:bg-blue-400 text-white text-sm px-4 py-2 rounded-full font-medium transition shadow-lg shadow-blue-500/30">
+                Waypoints VA
             </a>
         </div>
     </div>
@@ -123,10 +123,9 @@
             System Updates & Tools
         </h1>
         <p class="text-gray-200 text-lg md:text-xl font-light leading-relaxed">
-            Discover internal flight utility tools built for our pilots, alongside ongoing change records, network integrations, and future feature rollouts.
+            Discover internal flight utility tools built for our pilots, alongside ongoing change records, Waypoints integrations, and future feature rollouts.
         </p>
     </section>
-
     <!-- MAIN CONTENT AREA -->
     <main class="max-w-4xl mx-auto px-4 pb-20 mt-4 space-y-12">
         
@@ -140,7 +139,7 @@
                 <!-- Dispatch Desk v1 Card -->
                 <article class="glass-panel rounded-3xl p-5 md:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-5 border border-white/10 hover:border-ana-light/50 transition-all duration-300">
                     <div class="flex items-center gap-5">
-                        <!-- App Logo (Left side) -->
+                        <!-- App Logo -->
                         <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-black/40 border border-white/15 p-2 shrink-0 flex items-center justify-center shadow-lg">
                             <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790533812/6iIN8su_udmemd.png" alt="Dispatch Desk Logo" class="w-full h-full object-contain">
                         </div>
@@ -165,10 +164,9 @@
                         </a>
                     </div>
                 </article>
-
-                <!-- Future Apps can be pasted right here! -->
             </div>
         </div>
+
         <!-- 2. CHANGELOG & OPERATIONAL TIMELINE -->
         <div>
             <h2 class="font-heading text-xl md:text-2xl font-bold text-gray-200 mb-6 ml-2 md:ml-4 tracking-wide border-l-4 border-yellow-500 pl-4">
@@ -177,53 +175,62 @@
             
             <div class="space-y-6">
 
-                <!-- Log Entry: Current Version -->
+                <!-- Log Entry: Version 1.1.0 (Waypoints Architecture) -->
                 <article class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10">
                     <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-4 mb-4">
                         <div>
-                            <span class="text-ana-light text-xs font-mono font-bold tracking-widest uppercase">Version 1.0.0</span>
-                            <h3 class="font-heading text-lg md:text-xl font-bold text-white mt-0.5">Foundation Launch & Operational Setup</h3>
+                            <span class="text-ana-light text-xs font-mono font-bold tracking-widest uppercase">Version 1.1.0</span>
+                            <h3 class="font-heading text-lg md:text-xl font-bold text-white mt-0.5">Waypoints Community Airline & Multi-Brand Architecture</h3>
                         </div>
-                        <span class="bg-white/10 text-gray-300 text-xs px-3 py-1 rounded-full font-mono">Current Build</span>
+                        <span class="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs px-3 py-1 rounded-full font-mono">Current Build</span>
                     </div>
 
                     <ul class="space-y-3 text-sm text-gray-300 font-light">
                         <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-handshake text-cyan-400 mt-1 shrink-0 text-xs"></i>
-                            <span><strong class="text-white font-medium">Codeshare Network:</strong> Codeshare agreements and route lists will be unlocked and visible right after official partnership agreements are finalized.</span>
+                            <i class="fa-solid fa-cloud text-cyan-400 mt-1 shrink-0 text-xs"></i>
+                            <span><strong class="text-white font-medium">Waypoints Integration:</strong> Transitioned live flight tracking, automated pilot testing, and PIREP logging directly into Waypoints Crew Center.</span>
                         </li>
                         <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-sliders text-yellow-400 mt-1 shrink-0 text-xs"></i>
-                            <span><strong class="text-white font-medium">System Settings:</strong> Customized pilot interface settings, audio preferences, and layout controls will be added in next month's scheduled release.</span>
+                            <i class="fa-solid fa-palette text-pink-400 mt-1 shrink-0 text-xs"></i>
+                            <span><strong class="text-white font-medium">Subsidiary Themes:</strong> Integrated multi-airline color switching (ANA Triton Blue, Peach Fuchsia, NCA Cargo Blue, AirJapan Sunrise Teal) synced to browser memory.</span>
                         </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-plane-departure text-blue-400 mt-1 shrink-0 text-xs"></i>
+                            <span><strong class="text-white font-medium">Fleet Expansion:</strong> Formatted dedicated operational divisions for Nippon Cargo Airlines (B747-8F), Peach Aviation (A320-200), and AirJapan (B787-8).</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-volume-high text-yellow-400 mt-1 shrink-0 text-xs"></i>
+                            <span><strong class="text-white font-medium">Flight Deck Audio:</strong> Deployed automated browser-based speech synthesis sector briefings with user controls.</span>
+                        </li>
+                    </ul>
+                </article>
+
+                <!-- Log Entry: Version 1.0.0 -->
+                <article class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10 opacity-80">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-4 mb-4">
+                        <div>
+                            <span class="text-gray-400 text-xs font-mono font-bold tracking-widest uppercase">Version 1.0.0</span>
+                            <h3 class="font-heading text-lg md:text-xl font-bold text-white mt-0.5">Foundation Launch & Operational Setup</h3>
+                        </div>
+                        <span class="bg-white/10 text-gray-400 text-xs px-3 py-1 rounded-full font-mono">Legacy</span>
+                    </div>
+
+                    <ul class="space-y-3 text-sm text-gray-300 font-light">
                         <li class="flex items-start gap-3">
                             <i class="fa-solid fa-globe text-emerald-400 mt-1 shrink-0 text-xs"></i>
                             <span><strong class="text-white font-medium">Global Navigation:</strong> Launched high-performance interactive 3D globe route explorer featuring core hubs and worldwide destinations.</span>
                         </li>
                         <li class="flex items-start gap-3">
                             <i class="fa-solid fa-id-card text-blue-400 mt-1 shrink-0 text-xs"></i>
-                            <span><strong class="text-white font-medium">Pilot Roster:</strong> Introduced search and filter directory with individual pilot callsigns (<code class="text-xs text-ana-light font-mono">001AN</code>).</span>
+                            <span><strong class="text-white font-medium">Pilot Roster:</strong> Introduced searchable directory with individual pilot callsign assignments.</span>
                         </li>
                     </ul>
                 </article>
-
-                <!-- Future Changelog Entry Template:
-                <article class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10">
-                    <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
-                        <h3 class="font-heading text-lg font-bold text-white">Version 1.1.0</h3>
-                        <span class="bg-white/10 text-gray-300 text-xs px-3 py-1 rounded-full font-mono">Upcoming</span>
-                    </div>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li>Description of change here</li>
-                    </ul>
-                </article>
-                -->
 
             </div>
         </div>
 
     </main>
-
     <!-- FOOTER -->
     <footer class="bg-[#020914] text-gray-400 pt-16 pb-8 px-6 mt-12 border-t border-white/10">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
@@ -245,9 +252,8 @@
                     <i class="fa-solid fa-users text-ana-light"></i> Community
                 </h4>
                 <ul class="space-y-4">
-                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-regular fa-comments w-5"></i> IFC Forum</a></li>
-                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-thread w-5"></i> IFC Thread</a></li>
-                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-w w-5"></i> Waypoints CC</a></li>
+                    <li><a href="https://waypoint-live.app/va/all-nippon-virtual-airways" target="_blank" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-w w-5 text-ana-light"></i> Waypoints Portal</a></li>
+                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-discord w-5"></i> Official Discord</a></li>
                     <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-instagram w-5"></i> Instagram</a></li>
                     <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-youtube w-5"></i> YouTube</a></li>
                 </ul>
@@ -256,13 +262,13 @@
         <div class="max-w-6xl mx-auto">
             <hr class="border-white/10 mb-8">
             <div class="text-center text-xs space-y-2">
-                <p class="text-white/60">© 2026 All Nippon Virtual Group — Built for the Infinite Flight Community</p>
-                <p class="text-white/40">All Nippon Virtual Group is no way related to the real-world All Nippon Airways. All trademarks and logos remain the property of their respective owners.</p>
+                <p class="text-white/60">© 2026 All Nippon Virtual Group — Official Community Airline on Waypoints</p>
+                <p class="text-white/40">All Nippon Virtual Group is not affiliated with the real-world All Nippon Airways or ANA Holdings. All trademarks and logos remain the property of their respective owners.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Link to external Menu Javascript -->
+    <!-- Link to external Javascript file -->
     <script src="script.js"></script>
 </body>
 </html>
