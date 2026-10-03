@@ -166,7 +166,7 @@ async function loadPublicStats() {
 }
 
 /* ========================================================
-   PAGE INITIALIZATION & GESTURE CONTROLLER
+   PAGE INITIALIZATION & CEO SECRET ADMIN TRIGGER
    ======================================================== */
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Re-verify saved color theme
@@ -203,36 +203,65 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Sync live database counters to homepage
     loadPublicStats();
 
-    // 4. Secret Gesture: Press and hold "POWERED BY METUPOLO" or "Waypoints VA" button for 2 seconds
-    let holdTimer = null;
-    const triggerTarget = document.querySelector('.bottom-menu-footer') || 
-                          document.querySelector('#sideMenu .mt-auto') || 
-                          document.querySelector('#sideMenu button') ||
-                          document.querySelector('#sideMenu a:last-child');
+    // 4. CEO Card Secret Trigger (Triple Tap OR 2-Second Hold)
+    const ceoCard = document.getElementById('ceoCard') || 
+                    document.querySelector('[data-role="ceo"]') ||
+                    Array.from(document.querySelectorAll('h3, h4, p, span'))
+                         .find(el => el.textContent.toLowerCase().includes('chief executive'))?.closest('.glass-panel');
 
-    function startPressHold(e) {
-        holdTimer = setTimeout(() => {
-            if (navigator.vibrate) navigator.vibrate(80);
+    if (ceoCard) {
+        let tapCount = 0;
+        let tapTimer = null;
+        let holdTimer = null;
+
+        function triggerAdminRedirect() {
+            if (navigator.vibrate) navigator.vibrate([40, 60, 40]);
             window.location.href = 'admin.html';
-        }, 2000);
-    }
-
-    function cancelPressHold() {
-        if (holdTimer) {
-            clearTimeout(holdTimer);
-            holdTimer = null;
         }
-    }
 
-    if (triggerTarget) {
-        // Mobile screen hold
-        triggerTarget.addEventListener('touchstart', startPressHold, { passive: true });
-        triggerTarget.addEventListener('touchend', cancelPressHold);
-        triggerTarget.addEventListener('touchcancel', cancelPressHold);
+        // Tap handler (Triple tap within 1.2s)
+        function registerTap() {
+            tapCount++;
+            clearTimeout(tapTimer);
 
-        // Desktop mouse hold
-        triggerTarget.addEventListener('mousedown', startPressHold);
-        triggerTarget.addEventListener('mouseup', cancelPressHold);
-        triggerTarget.addEventListener('mouseleave', cancelPressHold);
+            if (tapCount >= 3) {
+                tapCount = 0;
+                triggerAdminRedirect();
+                return;
+            }
+
+            tapTimer = setTimeout(() => {
+                tapCount = 0;
+            }, 1200);
+        }
+
+        // Long-press handler (2 seconds hold)
+        function startHold() {
+            holdTimer = setTimeout(() => {
+                triggerAdminRedirect();
+            }, 2000);
+        }
+
+        function cancelHold() {
+            if (holdTimer) {
+                clearTimeout(holdTimer);
+                holdTimer = null;
+            }
+        }
+
+        // Touch events (Mobile)
+        ceoCard.addEventListener('touchstart', (e) => {
+            startHold();
+            registerTap();
+        }, { passive: true });
+
+        ceoCard.addEventListener('touchend', cancelHold);
+        ceoCard.addEventListener('touchcancel', cancelHold);
+
+        // Click / Mouse events (Desktop)
+        ceoCard.addEventListener('mousedown', startHold);
+        ceoCard.addEventListener('mouseup', cancelHold);
+        ceoCard.addEventListener('mouseleave', cancelHold);
+        ceoCard.addEventListener('click', registerTap);
     }
 });
