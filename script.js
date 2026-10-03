@@ -209,28 +209,53 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Sync live database counters to homepage
     loadPublicStats();
 
-    // 4. Secret Admin Trigger: Triple-tap the header logo within 1.2 seconds
-    let logoClickCount = 0;
-    let logoTimer = null;
+        // 4. Secret Admin Trigger: Triple-tap the header logo
+    let tapCount = 0;
+    let tapTimer = null;
 
-    const headerLogoLink = document.querySelector('header a[href="index.html"]') || document.querySelector('header img');
+    // Target the logo image or its container link
+    const logoTarget = document.querySelector('header a img') || document.querySelector('header img');
 
-    if (headerLogoLink) {
-        headerLogoLink.addEventListener('click', (e) => {
-            logoClickCount++;
-            clearTimeout(logoTimer);
+    if (logoTarget) {
+        // Handle direct mobile screen taps
+        logoTarget.addEventListener('touchstart', (e) => {
+            tapCount++;
+            clearTimeout(tapTimer);
 
-            if (logoClickCount === 3) {
+            if (tapCount === 3) {
                 e.preventDefault();
                 e.stopPropagation();
-                logoClickCount = 0;
+                tapCount = 0;
                 window.location.href = 'admin.html';
                 return;
             }
 
-            logoTimer = setTimeout(() => {
-                logoClickCount = 0;
-            }, 1200);
+            tapTimer = setTimeout(() => {
+                tapCount = 0;
+            }, 1000);
+        }, { passive: false });
+
+        // Fallback for desktop mouse clicks
+        logoTarget.addEventListener('click', (e) => {
+            tapCount++;
+            clearTimeout(tapTimer);
+
+            if (tapCount >= 3) {
+                e.preventDefault();
+                e.stopPropagation();
+                tapCount = 0;
+                window.location.href = 'admin.html';
+                return;
+            }
+
+            // Prevent default single-click reload if tapping quickly
+            if (tapCount > 1) {
+                e.preventDefault();
+            }
+
+            tapTimer = setTimeout(() => {
+                tapCount = 0;
+            }, 1000);
         });
     }
-});
+  
