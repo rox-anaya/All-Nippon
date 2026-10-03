@@ -113,7 +113,6 @@ function prevSlide() {
     showSlide(currentSlide);
 }
 
-// Only run interval if the carousel exists on the current page
 if (slides && slides.length > 0) {
     setInterval(nextSlide, 5000);
 }
@@ -128,7 +127,6 @@ if ('serviceWorker' in navigator) {
         });
     });
 }
-
 /* ========================================================
    GLOBAL VOICE CABIN BRIEFING SYSTEM (ANVG)
    ======================================================== */
@@ -148,57 +146,91 @@ function speakAudioMessage(messageText) {
     }, 450);
 }
 
-// Automatically announce current sector on load if enabled
+/* ========================================================
+   LIVE DATABASE PUBLIC STATS LOADER (ANVG)
+   ======================================================== */
+async function loadPublicStats() {
+    if (!db) return;
+    try {
+        const { data, error } = await db.from('statistics').select('*').eq('id', 1).single();
+        if (error || !data) return;
+
+        const elHours = document.getElementById('displayHours');
+        const elPireps = document.getElementById('displayPireps');
+        const elHubs = document.getElementById('displayHubs');
+        const elAircraft = document.getElementById('displayAircraft');
+        const elDest = document.getElementById('displayDestinations');
+
+        if (elHours && data.total_hours) elHours.innerText = data.total_hours;
+        if (elPireps && data.total_pireps) elPireps.innerText = data.total_pireps;
+        if (elHubs && data.hubs) elHubs.innerText = data.hubs;
+        if (elAircraft && data.aircraft_family) elAircraft.innerText = data.aircraft_family;
+        if (elDest && data.destinations) elDest.innerText = data.destinations;
+    } catch (err) {
+        console.warn('Public stats sync skipped:', err);
+    }
+}
+
+/* ========================================================
+   PAGE INITIALIZATION & SECRET ADMIN SHORTCUT
+   ======================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-    // Re-verify theme in case body rendered after initial IIFE
+    // 1. Re-verify theme
     const savedTheme = localStorage.getItem('anvg_theme') || 'ana';
     applyThemeClass(savedTheme);
 
+    // 2. Play audio greeting if enabled
     const isVoiceEnabled = localStorage.getItem('anvg_voice_briefing') === 'true';
-    if (!isVoiceEnabled) return;
+    if (isVoiceEnabled) {
+        const currentPath = window.location.pathname;
+        const pageName = currentPath.split("/").pop() || "index.html";
 
-    const currentPath = window.location.pathname;
-    const pageName = currentPath.split("/").pop() || "index.html";
+        const pageBriefings = {
+            "index.html": "Welcome aboard All Nippon Virtual Group. Flight deck systems online.",
+            "events.html": "Events and flight schedules sector. View upcoming group flights.",
+            "routes.html": "Operational route center. Explore global departures and arrivals.",
+            "ranks.html": "Pilot ranking deck. Progression criteria and operational tiers.",
+            "training.html": "Flight training division. Review stage 1 theory and checkride syllabi.",
+            "roster.html": "Active pilot directory and flight hours leaderboard.",
+            "fleet.html": "Fleet catalog. All Nippon passenger, regional, and freighter airframes.",
+            "codeshare.html": "Codeshare alliances and partner network.",
+            "changelog.html": "System changelog and flight dispatch utilities.",
+            "apply.html": "Recruitment desk. Verify flight requirements and apply.",
+            "about.html": "About All Nippon Virtual Group. Our mission and background.",
+            "staff.html": "Executive staff and flight administration team.",
+            "settings.html": "Flight deck settings panel."
+        };
 
-    const pageBriefings = {
-        "index.html": "Welcome aboard All Nippon Virtual Group. Flight deck systems online.",
-        "events.html": "Events and flight schedules sector. View upcoming group flights.",
-        "routes.html": "Operational route center. Explore global departures and arrivals.",
-        "ranks.html": "Pilot ranking deck. Progression criteria and operational tiers.",
-        "training.html": "Flight training division. Review stage 1 theory and checkride syllabi.",
-        "roster.html": "Active pilot directory and flight hours leaderboard.",
-        "fleet.html": "Fleet catalog. All Nippon passenger, regional, and freighter airframes.",
-        "codeshare.html": "Codeshare alliances and partner network.",
-        "changelog.html": "System changelog and flight dispatch utilities.",
-        "apply.html": "Recruitment desk. Verify flight requirements and apply.",
-        "about.html": "About All Nippon Virtual Group. Our mission and background.",
-        "staff.html": "Executive staff and flight administration team.",
-        "settings.html": "Flight deck settings panel."
-    };
+        if (pageBriefings[pageName]) {
+            speakAudioMessage(pageBriefings[pageName]);
+        }
+    }
 
-    if (pageBriefings[pageName]) {
-        speakAudioMessage(pageBriefings[pageName]);
+    // 3. Sync live database counters to homepage
+    loadPublicStats();
+
+    // 4. Secret Admin Trigger: Triple-tap the header logo within 1.2 seconds
+    let logoClickCount = 0;
+    let logoTimer = null;
+
+    const headerLogoLink = document.querySelector('header a[href="index.html"]') || document.querySelector('header img');
+
+    if (headerLogoLink) {
+        headerLogoLink.addEventListener('click', (e) => {
+            logoClickCount++;
+            clearTimeout(logoTimer);
+
+            if (logoClickCount === 3) {
+                e.preventDefault();
+                e.stopPropagation();
+                logoClickCount = 0;
+                window.location.href = 'admin.html';
+                return;
+            }
+
+            logoTimer = setTimeout(() => {
+                logoClickCount = 0;
+            }, 1200);
+        });
     }
 });
-// Secret Admin Shortcut: Triple-click the logo to open admin panel
-let logoClickCount = 0;
-let logoTimer = null;
-
-const navLogo = document.querySelector('header img'); // Finds your ANVG header logo
-if (navLogo) {
-    navLogo.addEventListener('click', (e) => {
-        logoClickCount++;
-        clearTimeout(logoTimer);
-
-        if (logoClickCount === 3) {
-            e.preventDefault(); // Stops normal home page refresh
-            window.location.href = 'admin.html';
-            logoClickCount = 0;
-        }
-
-        // Resets count if you take longer than 800ms
-        logoTimer = setTimeout(() => {
-            logoClickCount = 0;
-        }, 800);
-    });
-}
