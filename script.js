@@ -1,4 +1,15 @@
 /* ========================================================
+   SUPABASE DATABASE CONFIGURATION (ANVG)
+   ======================================================== */
+const SUPABASE_URL = 'https://syculxnokrkluyzuempj.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_uSljNgeCYIweqTOPbfvk4Q_vnDyc9fC';
+
+let db = null;
+if (typeof supabase !== 'undefined') {
+    db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+}
+
+/* ========================================================
    GLOBAL AIRLINE COLOR THEME ENGINE (ANVG)
    ======================================================== */
 
