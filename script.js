@@ -180,3 +180,25 @@ document.addEventListener('DOMContentLoaded', () => {
         speakAudioMessage(pageBriefings[pageName]);
     }
 });
+// Secret Admin Shortcut: Triple-click the logo to open admin panel
+let logoClickCount = 0;
+let logoTimer = null;
+
+const navLogo = document.querySelector('header img'); // Finds your ANVG header logo
+if (navLogo) {
+    navLogo.addEventListener('click', (e) => {
+        logoClickCount++;
+        clearTimeout(logoTimer);
+
+        if (logoClickCount === 3) {
+            e.preventDefault(); // Stops normal home page refresh
+            window.location.href = 'admin.html';
+            logoClickCount = 0;
+        }
+
+        // Resets count if you take longer than 800ms
+        logoTimer = setTimeout(() => {
+            logoClickCount = 0;
+        }, 800);
+    });
+}
