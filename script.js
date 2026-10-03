@@ -12,8 +12,6 @@ if (typeof supabase !== 'undefined') {
 /* ========================================================
    GLOBAL AIRLINE COLOR THEME ENGINE (ANVG)
    ======================================================== */
-
-// 1. Immediately apply the saved airline theme across all pages
 (function() {
     const savedTheme = localStorage.getItem('anvg_theme') || 'ana';
     applyThemeClass(savedTheme);
@@ -27,12 +25,10 @@ function applyThemeClass(theme) {
     }
 }
 
-// 2. Called when selecting an airline button in settings.html
 function setTheme(themeName) {
     localStorage.setItem('anvg_theme', themeName);
     applyThemeClass(themeName);
     
-    // Voice confirmation if enabled
     if (localStorage.getItem('anvg_voice_briefing') === 'true') {
         const names = {
             'ana': 'All Nippon Airways blue theme active',
@@ -44,12 +40,12 @@ function setTheme(themeName) {
     }
 }
 
-// ================= HAMBURGER MENU LOGIC =================
-const menuOverlay = document.getElementById('menuOverlay');
-const sideMenu = document.getElementById('sideMenu');
-
+// ================= FIXED HAMBURGER MENU LOGIC =================
 function openMenu() {
+    const menuOverlay = document.getElementById('menuOverlay');
+    const sideMenu = document.getElementById('sideMenu');
     if (!menuOverlay || !sideMenu) return;
+
     menuOverlay.classList.remove('hidden');
     setTimeout(() => {
         menuOverlay.classList.remove('opacity-0');
@@ -59,7 +55,10 @@ function openMenu() {
 }
 
 function closeMenu() {
+    const menuOverlay = document.getElementById('menuOverlay');
+    const sideMenu = document.getElementById('sideMenu');
     if (!menuOverlay || !sideMenu) return;
+
     menuOverlay.classList.add('opacity-0');
     sideMenu.classList.add('translate-x-full');
     setTimeout(() => {
@@ -68,7 +67,6 @@ function closeMenu() {
     document.body.style.overflow = ''; 
 }
 
-// Submenu accordion logic
 function toggleSubmenu(id) {
     const submenu = document.getElementById(id);
     const arrow = document.getElementById(id + '-arrow');
@@ -77,15 +75,15 @@ function toggleSubmenu(id) {
     if (submenu.classList.contains('hidden')) {
         submenu.classList.remove('hidden');
         submenu.classList.add('flex');
-        arrow.classList.add('rotate-180');
+        if (arrow) arrow.classList.add('rotate-180');
     } else {
         submenu.classList.add('hidden');
         submenu.classList.remove('flex');
-        arrow.classList.remove('rotate-180');
+        if (arrow) arrow.classList.remove('rotate-180');
     }
 }
 
-// ================= PHOTO GALLERY / CAROUSEL LOGIC =================
+// ================= CAROUSEL LOGIC =================
 const slides = document.querySelectorAll('.carousel-slide');
 let currentSlide = 0;
 
@@ -120,20 +118,16 @@ if (slides && slides.length > 0) {
 // ================= PWA SETUP =================
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').then(registration => {
-            console.log('PWA ServiceWorker registered successfully!');
-        }).catch(err => {
-            console.log('PWA ServiceWorker registration failed: ', err);
+        navigator.serviceWorker.register('sw.js').catch(err => {
+            console.log('SW registration note:', err);
         });
     });
 }
 /* ========================================================
    GLOBAL VOICE CABIN BRIEFING SYSTEM (ANVG)
    ======================================================== */
-
 function speakAudioMessage(messageText) {
     if (!('speechSynthesis' in window)) return;
-    
     window.speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(messageText);
@@ -172,10 +166,10 @@ async function loadPublicStats() {
 }
 
 /* ========================================================
-   PAGE INITIALIZATION & SECRET ADMIN SHORTCUT
+   PAGE INITIALIZATION & GESTURE CONTROLLER
    ======================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Re-verify theme
+    // 1. Re-verify saved color theme
     const savedTheme = localStorage.getItem('anvg_theme') || 'ana';
     applyThemeClass(savedTheme);
 
@@ -187,17 +181,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const pageBriefings = {
             "index.html": "Welcome aboard All Nippon Virtual Group. Flight deck systems online.",
-            "events.html": "Events and flight schedules sector. View upcoming group flights.",
-            "routes.html": "Operational route center. Explore global departures and arrivals.",
-            "ranks.html": "Pilot ranking deck. Progression criteria and operational tiers.",
-            "training.html": "Flight training division. Review stage 1 theory and checkride syllabi.",
-            "roster.html": "Active pilot directory and flight hours leaderboard.",
+            "events.html": "Events sector. Upcoming group flight operations.",
+            "routes.html": "Route center. Global network departures and arrivals.",
+            "ranks.html": "Pilot ranking deck. Career progression tiers.",
+            "training.html": "Training division. Stage 1 theory and checkride syllabi.",
+            "roster.html": "Pilot roster and flight hours leaderboard.",
             "fleet.html": "Fleet catalog. All Nippon passenger, regional, and freighter airframes.",
             "codeshare.html": "Codeshare alliances and partner network.",
-            "changelog.html": "System changelog and flight dispatch utilities.",
+            "changelog.html": "System changelog and dispatch utilities.",
             "apply.html": "Recruitment desk. Verify flight requirements and apply.",
-            "about.html": "About All Nippon Virtual Group. Our mission and background.",
-            "staff.html": "Executive staff and flight administration team.",
+            "about.html": "About All Nippon Virtual Group.",
+            "staff.html": "Executive staff and administration team.",
             "settings.html": "Flight deck settings panel."
         };
 
@@ -209,52 +203,36 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Sync live database counters to homepage
     loadPublicStats();
 
-        // 4. Secret Admin Trigger: Triple-tap the header logo
-    let tapCount = 0;
-    let tapTimer = null;
+    // 4. Secret Gesture: Press and hold "POWERED BY METUPOLO" or "Waypoints VA" button for 2 seconds
+    let holdTimer = null;
+    const triggerTarget = document.querySelector('.bottom-menu-footer') || 
+                          document.querySelector('#sideMenu .mt-auto') || 
+                          document.querySelector('#sideMenu button') ||
+                          document.querySelector('#sideMenu a:last-child');
 
-    // Target the logo image or its container link
-    const logoTarget = document.querySelector('header a img') || document.querySelector('header img');
-
-    if (logoTarget) {
-        // Handle direct mobile screen taps
-        logoTarget.addEventListener('touchstart', (e) => {
-            tapCount++;
-            clearTimeout(tapTimer);
-
-            if (tapCount === 3) {
-                e.preventDefault();
-                e.stopPropagation();
-                tapCount = 0;
-                window.location.href = 'admin.html';
-                return;
-            }
-
-            tapTimer = setTimeout(() => {
-                tapCount = 0;
-            }, 1000);
-        }, { passive: false });
-
-        // Fallback for desktop mouse clicks
-        logoTarget.addEventListener('click', (e) => {
-            tapCount++;
-            clearTimeout(tapTimer);
-
-            if (tapCount >= 3) {
-                e.preventDefault();
-                e.stopPropagation();
-                tapCount = 0;
-                window.location.href = 'admin.html';
-                return;
-            }
-
-            // Prevent default single-click reload if tapping quickly
-            if (tapCount > 1) {
-                e.preventDefault();
-            }
-
-            tapTimer = setTimeout(() => {
-                tapCount = 0;
-            }, 1000);
-        });
+    function startPressHold(e) {
+        holdTimer = setTimeout(() => {
+            if (navigator.vibrate) navigator.vibrate(80);
+            window.location.href = 'admin.html';
+        }, 2000);
     }
+
+    function cancelPressHold() {
+        if (holdTimer) {
+            clearTimeout(holdTimer);
+            holdTimer = null;
+        }
+    }
+
+    if (triggerTarget) {
+        // Mobile screen hold
+        triggerTarget.addEventListener('touchstart', startPressHold, { passive: true });
+        triggerTarget.addEventListener('touchend', cancelPressHold);
+        triggerTarget.addEventListener('touchcancel', cancelPressHold);
+
+        // Desktop mouse hold
+        triggerTarget.addEventListener('mousedown', startPressHold);
+        triggerTarget.addEventListener('mouseup', cancelPressHold);
+        triggerTarget.addEventListener('mouseleave', cancelPressHold);
+    }
+});
