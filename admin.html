@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Ops Admin - All Nippon Virtual Group</title>
     
+    <!-- PWA Manifest & Theme Color -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#00266b">
     
+    <!-- Google Fonts & FontAwesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 
+    <!-- Supabase SDK & Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -32,7 +35,7 @@
 </head>
 <body class="font-sans antialiased overflow-x-hidden text-gray-200 bg-[#001030] min-h-screen">
 
-    <!-- TOP HEADER -->
+    <!-- ================= TOP HEADER ================= -->
     <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl glass-panel rounded-full flex justify-between items-center px-6 py-3 z-50 transition-all border border-white/10">
         <a href="index.html" class="flex items-center gap-3">
             <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790497605/Picsart_26-09-27_13-51-21-265_j4qz5z.png" alt="ANVG Logo" class="h-9 w-auto">
@@ -43,7 +46,7 @@
         </a>
     </header>
 
-    <!-- PASSWORD SCREEN -->
+    <!-- ================= SECURITY PASSCODE GATE ================= -->
     <div id="authGate" class="min-h-screen flex items-center justify-center px-4 pt-20">
         <div class="glass-panel p-8 md:p-10 rounded-3xl max-w-md w-full border border-white/10 text-center shadow-2xl">
             <div class="w-14 h-14 rounded-2xl bg-ana-light/20 border border-ana-light/30 flex items-center justify-center text-ana-light text-2xl mx-auto mb-4">
@@ -61,22 +64,26 @@
             <p id="passError" class="text-xs text-red-400 mt-3 hidden font-mono">Incorrect PIN. Access Denied.</p>
         </div>
     </div>
-    <!-- MAIN ADMIN PANEL (Hidden until unlocked) -->
+
+    <!-- ================= MAIN ADMIN PANEL ================= -->
     <div id="adminPanel" class="hidden min-h-screen pt-28 pb-20 px-4 max-w-5xl mx-auto">
         
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
             <div>
                 <h1 class="font-heading text-3xl font-bold text-white">Operations Management</h1>
-                <p class="text-xs text-gray-400">Database controls for live portal records, statistics, and recruitment.</p>
+                <p class="text-xs text-gray-400">Database controls for live portal records, statistics, staff, and homepage content.</p>
             </div>
             <button onclick="lockAdmin()" class="self-start md:self-auto bg-white/5 hover:bg-red-500/20 text-gray-300 hover:text-red-400 border border-white/10 text-xs px-4 py-2 rounded-full font-mono transition">
                 <i class="fa-solid fa-lock mr-1"></i> Lock Session
             </button>
         </div>
 
-        <!-- TAB NAVIGATION -->
+        <!-- TAB NAVIGATION BAR -->
         <div class="flex items-center gap-2 overflow-x-auto pb-3 mb-8 border-b border-white/10 scrollbar-none">
-            <button onclick="switchTab('stats')" id="tab-btn-stats" class="tab-btn bg-ana-light text-white text-xs px-4 py-2 rounded-xl font-medium transition shrink-0">
+            <button onclick="switchTab('portal')" id="tab-btn-portal" class="tab-btn bg-ana-light text-white text-xs px-4 py-2 rounded-xl font-medium transition shrink-0">
+                <i class="fa-solid fa-house mr-1.5"></i> Portal Home
+            </button>
+            <button onclick="switchTab('stats')" id="tab-btn-stats" class="tab-btn bg-white/5 hover:bg-white/10 text-gray-300 text-xs px-4 py-2 rounded-xl font-medium transition shrink-0">
                 <i class="fa-solid fa-chart-line mr-1.5"></i> Statistics
             </button>
             <button onclick="switchTab('events')" id="tab-btn-events" class="tab-btn bg-white/5 hover:bg-white/10 text-gray-300 text-xs px-4 py-2 rounded-xl font-medium transition shrink-0">
@@ -91,10 +98,136 @@
             <button onclick="switchTab('codeshare')" id="tab-btn-codeshare" class="tab-btn bg-white/5 hover:bg-white/10 text-gray-300 text-xs px-4 py-2 rounded-xl font-medium transition shrink-0">
                 <i class="fa-solid fa-handshake mr-1.5"></i> Codeshare
             </button>
+            <button onclick="switchTab('staff')" id="tab-btn-staff" class="tab-btn bg-white/5 hover:bg-white/10 text-gray-300 text-xs px-4 py-2 rounded-xl font-medium transition shrink-0">
+                <i class="fa-solid fa-users-gear mr-1.5"></i> Staff
+            </button>
+            <button onclick="switchTab('changelog')" id="tab-btn-changelog" class="tab-btn bg-white/5 hover:bg-white/10 text-gray-300 text-xs px-4 py-2 rounded-xl font-medium transition shrink-0">
+                <i class="fa-solid fa-clock-rotate-left mr-1.5"></i> Changelog
+            </button>
         </div>
 
-        <!-- 1. TAB: STATISTICS -->
-        <section id="tab-stats" class="tab-content space-y-6">
+              <!-- ================= 0. TAB: PORTAL HOME & BRANDING ================= -->
+        <section id="tab-portal" class="tab-content space-y-8">
+            <div class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="font-heading text-xl font-bold text-white">Homepage & Global Portal Controls</h2>
+                    <span class="text-[10px] font-mono text-cyan-300 bg-cyan-500/10 border border-cyan-500/20 px-3 py-1 rounded-full">Live Instant Sync</span>
+                </div>
+                <form onsubmit="saveHomeConfig(event)" class="space-y-6">
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-4">
+                        <h3 class="text-xs font-mono uppercase text-ana-light font-bold">Global Portal Defaults</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="text-[11px] text-gray-400 font-mono uppercase">Global Theme</label>
+                                <select id="confTheme" class="w-full bg-[#0a192f] border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                                    <option value="ana">Triton Blue (ANA Default)</option>
+                                    <option value="peach">Peach Aviation</option>
+                                    <option value="nca">Nippon Cargo (NCA)</option>
+                                    <option value="airjapan">AirJapan Sunrise</option>
+                                    <option value="staralliance">Star Alliance Gold</option>
+                                    <option value="honu">Flying Honu Hawaii</option>
+                                    <option value="oled">Tokyo Midnight OLED</option>
+                                    <option value="sakura">Sakura Blossom</option>
+                                    <option value="b787hud">Boeing 787 HUD</option>
+                                    <option value="airbuseis">Airbus EIS2 Cockpit</option>
+                                    <option value="pikachu">Pokemon Pikachu Jet</option>
+                                    <option value="polar">Polar Daylight Frost</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-[11px] text-gray-400 font-mono uppercase">Global Weather FX</label>
+                                <select id="confWeather" class="w-full bg-[#0a192f] border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                                    <option value="calm">Calm / CAVOK (Off)</option>
+                                    <option value="rain">Monsoon Rain</option>
+                                    <option value="snow">Sapporo Snow</option>
+                                    <option value="wind">Jetstream Wind</option>
+                                    <option value="sakura">Sakura Petals</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-[11px] text-gray-400 font-mono uppercase">Logo Image URL</label>
+                                <input type="url" id="confLogo" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xs font-mono uppercase text-ana-light font-bold">Live NOTAM Alert Banner</h3>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" id="confNotamActive" class="w-4 h-4 accent-ana-light">
+                                <span class="text-xs text-white">Enable Banner on Website</span>
+                            </label>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="md:col-span-2">
+                                <label class="text-[11px] text-gray-400 font-mono uppercase">NOTAM Message</label>
+                                <input type="text" id="confNotamText" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                            </div>
+                            <div>
+                                <label class="text-[11px] text-gray-400 font-mono uppercase">Banner Hex Color</label>
+                                <input type="color" id="confNotamColor" value="#007fc1" class="w-full h-10 bg-white/5 border border-white/15 rounded-xl px-2 py-1 cursor-pointer">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-4">
+                        <h3 class="text-xs font-mono uppercase text-ana-light font-bold">Hero & Brand Identity</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-[11px] text-gray-400 font-mono uppercase">Virtual Airline Name</label>
+                                <input type="text" id="confVaName" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                            </div>
+                            <div>
+                                <label class="text-[11px] text-gray-400 font-mono uppercase">Tagline</label>
+                                <input type="text" id="confVaTagline" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-[11px] text-gray-400 font-mono uppercase">Hero Badge Text</label>
+                                <input type="text" id="confHeroBadge" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                            </div>
+                            <div>
+                                <label class="text-[11px] text-gray-400 font-mono uppercase">Hero Background Image URL</label>
+                                <input type="url" id="confHeroBg" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-4">
+                        <h3 class="text-xs font-mono uppercase text-ana-light font-bold">Mission & CEO Message</h3>
+                        <div>
+                            <label class="text-[11px] text-gray-400 font-mono uppercase">Mission Statement Text</label>
+                            <textarea id="confMission" rows="3" class="w-full bg-white/5 border border-white/15 rounded-xl p-3 text-white text-sm focus:border-ana-light outline-none"></textarea>
+                        </div>
+                        <div>
+                            <label class="text-[11px] text-gray-400 font-mono uppercase">CEO Quote</label>
+                            <textarea id="confCeoQuote" rows="3" class="w-full bg-white/5 border border-white/15 rounded-xl p-3 text-white text-sm focus:border-ana-light outline-none"></textarea>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-[11px] text-gray-400 font-mono uppercase">CEO Name</label>
+                                <input type="text" id="confCeoName" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                            </div>
+                            <div>
+                                <label class="text-[11px] text-gray-400 font-mono uppercase">CEO Role Title</label>
+                                <input type="text" id="confCeoRole" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end pt-2">
+                        <button type="submit" class="bg-ana-light hover:bg-blue-400 text-white text-xs px-8 py-3 rounded-full font-bold transition shadow-lg shadow-blue-500/20">
+                            Save & Push Live to Portal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- ================= 1. TAB: STATISTICS ================= -->
+        <section id="tab-stats" class="tab-content hidden space-y-6">
             <div class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="font-heading text-xl font-bold text-white">Global Airline Statistics</h2>
@@ -134,7 +267,7 @@
             </div>
         </section>
 
-        <!-- 2. TAB: EVENTS -->
+        <!-- ================= 2. TAB: EVENTS ================= -->
         <section id="tab-events" class="tab-content hidden space-y-8">
             <div class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10">
                 <h2 class="font-heading text-xl font-bold text-white mb-4">Publish New Group Flight</h2>
@@ -145,7 +278,7 @@
                             <input type="text" id="evTitle" required placeholder="The Flying Honu Escapade" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
                         </div>
                         <div>
-                            <label class="text-[11px] text-gray-400 font-mono uppercase">Direct Image URL (Imgur / Cloudinary)</label>
+                            <label class="text-[11px] text-gray-400 font-mono uppercase">Direct Image URL</label>
                             <input type="url" id="evImg" required placeholder="https://i.imgur.com/..." class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
                         </div>
                     </div>
@@ -173,7 +306,7 @@
                     </div>
                     <div>
                         <label class="text-[11px] text-gray-400 font-mono uppercase">Briefing Description</label>
-                        <textarea id="evDesc" rows="3" required placeholder="Group flight route, server notes, ATC details..." class="w-full bg-white/5 border border-white/15 rounded-xl p-3 text-white text-sm focus:border-ana-light outline-none"></textarea>
+                        <textarea id="evDesc" rows="3" required placeholder="Group flight route, server notes..." class="w-full bg-white/5 border border-white/15 rounded-xl p-3 text-white text-sm focus:border-ana-light outline-none"></textarea>
                     </div>
                     <div class="flex justify-end">
                         <button type="submit" class="bg-ana-light hover:bg-blue-400 text-white text-xs px-6 py-2.5 rounded-full font-bold transition shadow-lg shadow-blue-500/20">
@@ -188,7 +321,7 @@
             </div>
         </section>
 
-        <!-- 3. TAB: FLEET -->
+              <!-- ================= 3. TAB: FLEET ================= -->
         <section id="tab-fleet" class="tab-content hidden space-y-8">
             <div class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10">
                 <h2 class="font-heading text-xl font-bold text-white mb-4">Register Aircraft to Fleet</h2>
@@ -196,30 +329,30 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
                             <label class="text-[11px] text-gray-400 font-mono uppercase">Aircraft Model</label>
-                            <input type="text" id="flName" required placeholder="e.g. Boeing 787-9 Dreamliner" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                            <input type="text" id="flName" required placeholder="e.g. Boeing 787-9" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
                         </div>
                         <div>
                             <label class="text-[11px] text-gray-400 font-mono uppercase">Division</label>
                             <select id="flDivision" class="w-full bg-[#0a192f] border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
-                                <option value="ana">All Nippon Airways (Mainline)</option>
-                                <option value="nca">Nippon Cargo Airlines (NCA)</option>
+                                <option value="ana">All Nippon Airways</option>
+                                <option value="nca">Nippon Cargo Airlines</option>
                                 <option value="peach">Peach Aviation</option>
                                 <option value="airjapan">AirJapan</option>
                             </select>
                         </div>
                         <div>
                             <label class="text-[11px] text-gray-400 font-mono uppercase">Category</label>
-                            <input type="text" id="flCategory" required placeholder="Long Haul / Widebody" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                            <input type="text" id="flCategory" required placeholder="Long Haul" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="text-[11px] text-gray-400 font-mono uppercase">Photo Direct URL</label>
-                            <input type="url" id="flImg" required placeholder="https://i.imgur.com/..." class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                            <label class="text-[11px] text-gray-400 font-mono uppercase">Photo URL</label>
+                            <input type="url" id="flImg" required placeholder="https://..." class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
                         </div>
                         <div>
                             <label class="text-[11px] text-gray-400 font-mono uppercase">Specs / Notes</label>
-                            <input type="text" id="flDesc" placeholder="Range: 7,530 NM | Capacity: 395" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                            <input type="text" id="flDesc" placeholder="Range: 7,530 NM" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
                         </div>
                     </div>
                     <div class="flex justify-end">
@@ -235,7 +368,7 @@
             </div>
         </section>
 
-        <!-- 4. TAB: ROSTER -->
+        <!-- ================= 4. TAB: ROSTER ================= -->
         <section id="tab-roster" class="tab-content hidden space-y-8">
             <div class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10">
                 <h2 class="font-heading text-xl font-bold text-white mb-4">Enroll Certified Pilot</h2>
@@ -271,7 +404,7 @@
             </div>
         </section>
 
-        <!-- 5. TAB: CODESHARES -->
+        <!-- ================= 5. TAB: CODESHARES ================= -->
         <section id="tab-codeshare" class="tab-content hidden space-y-8">
             <div class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10">
                 <h2 class="font-heading text-xl font-bold text-white mb-4">Add Alliance Partner</h2>
@@ -279,7 +412,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
                             <label class="text-[11px] text-gray-400 font-mono uppercase">Partner Airline Name</label>
-                            <input type="text" id="cdName" required placeholder="United Virtual Airlines" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                            <input type="text" id="cdName" required placeholder="United Virtual" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
                         </div>
                         <div>
                             <label class="text-[11px] text-gray-400 font-mono uppercase">Alliance / Tag</label>
@@ -293,16 +426,16 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label class="text-[11px] text-gray-400 font-mono uppercase">Primary Hubs</label>
-                            <input type="text" id="cdHubs" placeholder="KDEN, KORD, KSFO" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                            <input type="text" id="cdHubs" placeholder="KDEN, KORD" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
                         </div>
                         <div>
                             <label class="text-[11px] text-gray-400 font-mono uppercase">Approved Fleet</label>
-                            <input type="text" id="cdFleet" placeholder="B77W, B789, A320" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                            <input type="text" id="cdFleet" placeholder="B77W, B789" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
                         </div>
                     </div>
                     <div>
-                        <label class="text-[11px] text-gray-400 font-mono uppercase">Agreement Description</label>
-                        <textarea id="cdDesc" rows="2" placeholder="Pilots can file reciprocal routes logged via Waypoints..." class="w-full bg-white/5 border border-white/15 rounded-xl p-3 text-white text-sm focus:border-ana-light outline-none"></textarea>
+                        <label class="text-[11px] text-gray-400 font-mono uppercase">Description</label>
+                        <textarea id="cdDesc" rows="2" placeholder="Agreement details..." class="w-full bg-white/5 border border-white/15 rounded-xl p-3 text-white text-sm focus:border-ana-light outline-none"></textarea>
                     </div>
                     <div class="flex justify-end">
                         <button type="submit" class="bg-ana-light hover:bg-blue-400 text-white text-xs px-6 py-2.5 rounded-full font-bold transition shadow-lg shadow-blue-500/20">
@@ -317,19 +450,123 @@
             </div>
         </section>
 
+        <!-- ================= 6. TAB: STAFF MANAGEMENT ================= -->
+        <section id="tab-staff" class="tab-content hidden space-y-8">
+            <div class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10">
+                <h2 class="font-heading text-xl font-bold text-white mb-4">Manage Leadership & Staff Members</h2>
+                <form onsubmit="createStaffMember(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[11px] text-gray-400 font-mono uppercase">Staff Name</label>
+                            <input type="text" id="staffName" required placeholder="e.g. Luciano" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[11px] text-gray-400 font-mono uppercase">Role / Position Title</label>
+                            <input type="text" id="staffRole" required placeholder="e.g. Route Manager" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="text-[11px] text-gray-400 font-mono uppercase">Department</label>
+                            <input type="text" id="staffDept" required placeholder="Route Operations" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[11px] text-gray-400 font-mono uppercase">Callsign</label>
+                            <input type="text" id="staffCallsign" required placeholder="ANVG-003" class="w-full uppercase bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[11px] text-gray-400 font-mono uppercase">Vector Icon (Role Avatar)</label>
+                            <select id="staffIcon" class="w-full bg-[#0a192f] border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                                <option value="fa-solid fa-route">✈️ Route & Navigation</option>
+                                <option value="fa-solid fa-users">👥 Human Resources</option>
+                                <option value="fa-solid fa-bullhorn">📢 Media & Publicity</option>
+                                <option value="fa-solid fa-headset">🎧 Crew Centre & Support</option>
+                                <option value="fa-solid fa-graduation-cap">🎓 Training & Standards</option>
+                                <option value="fa-solid fa-calendar-check">📅 Events Coordinator</option>
+                                <option value="fa-solid fa-user-tie">👔 Executive Board</option>
+                                <option value="fa-solid fa-shield-halved">🛡️ Security & Compliance</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-[11px] text-gray-400 font-mono uppercase">Bio / Description</label>
+                        <textarea id="staffBio" rows="2" placeholder="Bio details..." class="w-full bg-white/5 border border-white/15 rounded-xl p-3 text-white text-sm focus:border-ana-light outline-none"></textarea>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="submit" class="bg-ana-light hover:bg-blue-400 text-white text-xs px-6 py-2.5 rounded-full font-bold transition shadow-lg shadow-blue-500/20">
+                            Add Staff Member
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <h3 class="font-heading text-lg font-bold text-white mb-3">Active Staff Roster</h3>
+                <div id="staffListAdmin" class="space-y-3"></div>
+            </div>
+        </section>
+
+        <!-- ================= 7. TAB: CHANGELOG & APPS MANAGER ================= -->
+        <section id="tab-changelog" class="tab-content hidden space-y-8">
+            <div class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10">
+                <h2 class="font-heading text-xl font-bold text-white mb-4">Publish Changelog Entry or Tool</h2>
+                <form onsubmit="createChangelog(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="text-[11px] text-gray-400 font-mono uppercase">Entry Type</label>
+                            <select id="clType" class="w-full bg-[#0a192f] border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                                <option value="release">Changelog Release</option>
+                                <option value="app">Operations App / Tool</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-[11px] text-gray-400 font-mono uppercase">Version / Badge (e.g. v1.1.0)</label>
+                            <input type="text" id="clVersion" required placeholder="v1.1.0" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[11px] text-gray-400 font-mono uppercase">Title</label>
+                            <input type="text" id="clTitle" required placeholder="Waypoints Architecture Update" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[11px] text-gray-400 font-mono uppercase">App / Image URL (Optional)</label>
+                            <input type="url" id="clImg" placeholder="https://..." class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[11px] text-gray-400 font-mono uppercase">External App Link (If App Type)</label>
+                            <input type="url" id="clLink" placeholder="https://vercel.app/" class="w-full bg-white/5 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:border-ana-light outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-[11px] text-gray-400 font-mono uppercase">Description / Bullet Points</label>
+                        <textarea id="clDesc" rows="3" required placeholder="Detail the features or updates introduced..." class="w-full bg-white/5 border border-white/15 rounded-xl p-3 text-white text-sm focus:border-ana-light outline-none"></textarea>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="submit" class="bg-ana-light hover:bg-blue-400 text-white text-xs px-6 py-2.5 rounded-full font-bold transition shadow-lg shadow-blue-500/20">
+                            Publish Record
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <h3 class="font-heading text-lg font-bold text-white mb-3">Published Releases & Tools</h3>
+                <div id="changelogListAdmin" class="space-y-3"></div>
+            </div>
+        </section>
+
     </div>
-    <!-- ADMIN CONTROLLER LOGIC -->
+
+      <!-- ================= ADMIN LOGIC CONTROLLER ================= -->
     <script>
         const SUPABASE_URL = 'https://syculxnokrkluyzuempj.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_uSljNgeCYIweqTOPbfvk4Q_vnDyc9fC';
         const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
         const ADMIN_PIN = '1234';
 
+        // PIN Authentication check
         function verifyAdminPass(e) {
             e.preventDefault();
-            const input = document.getElementById('adminPass').value;
-            if (input === ADMIN_PIN) {
+            if (document.getElementById('adminPass').value === ADMIN_PIN) {
                 sessionStorage.setItem('anvg_admin_auth', 'true');
                 document.getElementById('authGate').classList.add('hidden');
                 document.getElementById('adminPanel').classList.remove('hidden');
@@ -339,39 +576,95 @@
             }
         }
 
+        // Lock session and reload
         function lockAdmin() {
             sessionStorage.removeItem('anvg_admin_auth');
             location.reload();
         }
 
+        // Auto unlock if session is active
         if (sessionStorage.getItem('anvg_admin_auth') === 'true') {
             document.getElementById('authGate').classList.add('hidden');
             document.getElementById('adminPanel').classList.remove('hidden');
             fetchAllData();
         }
 
+        // Tab switcher function
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('bg-ana-light', 'text-white');
                 btn.classList.add('bg-white/5', 'text-gray-300');
             });
-
             document.getElementById(`tab-${tabId}`).classList.remove('hidden');
             const activeBtn = document.getElementById(`tab-btn-${tabId}`);
             activeBtn.classList.remove('bg-white/5', 'text-gray-300');
             activeBtn.classList.add('bg-ana-light', 'text-white');
         }
 
+        // Fetch all data from database on load
         function fetchAllData() {
+            loadHomeConfigAdmin();
             loadStats();
             loadEvents();
             loadFleet();
             loadRoster();
             loadCodeshares();
+            loadStaffAdmin();
+            loadChangelogAdmin();
         }
 
-        // --- 1. STATS ---
+        // --- HOMEPAGE CONFIG LOADER ---
+        async function loadHomeConfigAdmin() {
+            const { data } = await db.from('home_config').select('*').eq('id', 1).single();
+            if (data) {
+                document.getElementById('confTheme').value = data.global_theme || 'ana';
+                document.getElementById('confWeather').value = data.global_weather || 'calm';
+                document.getElementById('confLogo').value = data.logo_url || '';
+                document.getElementById('confNotamActive').checked = data.notam_active || false;
+                document.getElementById('confNotamText').value = data.notam_text || '';
+                document.getElementById('confNotamColor').value = data.notam_color || '#007fc1';
+                document.getElementById('confVaName').value = data.va_name || '';
+                document.getElementById('confVaTagline').value = data.va_tagline || '';
+                document.getElementById('confHeroBadge').value = data.hero_badge || '';
+                document.getElementById('confHeroBg').value = data.hero_bg_url || '';
+                document.getElementById('confMission').value = data.mission_text || '';
+                document.getElementById('confCeoQuote').value = data.ceo_quote || '';
+                document.getElementById('confCeoName').value = data.ceo_name || '';
+                document.getElementById('confCeoRole').value = data.ceo_role || '';
+            }
+        }
+
+        // --- SAVE HOMEPAGE CONFIG ---
+        async function saveHomeConfig(e) {
+            e.preventDefault();
+            const payload = {
+                id: 1,
+                global_theme: document.getElementById('confTheme').value,
+                global_weather: document.getElementById('confWeather').value,
+                logo_url: document.getElementById('confLogo').value,
+                notam_active: document.getElementById('confNotamActive').checked,
+                notam_text: document.getElementById('confNotamText').value,
+                notam_color: document.getElementById('confNotamColor').value,
+                va_name: document.getElementById('confVaName').value,
+                va_tagline: document.getElementById('confVaTagline').value,
+                hero_badge: document.getElementById('confHeroBadge').value,
+                hero_bg_url: document.getElementById('confHeroBg').value,
+                mission_text: document.getElementById('confMission').value,
+                ceo_quote: document.getElementById('confCeoQuote').value,
+                ceo_name: document.getElementById('confCeoName').value,
+                ceo_role: document.getElementById('confCeoRole').value
+            };
+            const { error } = await db.from('home_config').upsert(payload);
+            if (!error) {
+                alert('Homepage configuration updated live!');
+                loadHomeConfigAdmin();
+            } else {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        // --- STATISTICS LOADER & SAVER ---
         async function loadStats() {
             const { data } = await db.from('statistics').select('*').eq('id', 1).single();
             if (data) {
@@ -380,9 +673,6 @@
                 document.getElementById('statInputHubs').value = data.hubs || '';
                 document.getElementById('statInputAircraft').value = data.aircraft_family || '';
                 document.getElementById('statInputDestinations').value = data.destinations || '';
-                if (document.getElementById('statLastSync')) {
-                    document.getElementById('statLastSync').innerText = `Sync: ${data.updated_date || 'Live'}`;
-                }
             }
         }
 
@@ -398,31 +688,25 @@
                 destinations: document.getElementById('statInputDestinations').value,
                 updated_date: today
             });
-            if (!error) {
-                alert('Statistics updated successfully!');
-                loadStats();
-            } else {
-                alert('Error saving stats: ' + error.message);
-            }
+            if (!error) alert('Statistics updated!');
+            else alert('Error: ' + error.message);
         }
 
-        // --- 2. EVENTS ---
+        // --- EVENTS MANAGER ---
         async function loadEvents() {
             const { data } = await db.from('events').select('*').order('id', { ascending: false });
             const container = document.getElementById('eventsListAdmin');
             if (!data || data.length === 0) {
-                container.innerHTML = '<p class="text-xs text-gray-500 italic">No events posted yet.</p>';
+                container.innerHTML = '<p class="text-xs text-gray-500 italic">No events.</p>';
                 return;
             }
             container.innerHTML = data.map(ev => `
                 <div class="glass-panel p-4 rounded-2xl flex items-center justify-between border border-white/10">
                     <div>
                         <h4 class="font-heading font-bold text-white text-sm">${ev.title}</h4>
-                        <p class="text-xs text-gray-400 font-mono">${ev.dep_icao} ➔ ${ev.arr_icao} | ${ev.time_zulu} | ${ev.dep_date}</p>
+                        <p class="text-xs text-gray-400 font-mono">${ev.dep_icao} ➔ ${ev.arr_icao} | ${ev.time_zulu}</p>
                     </div>
-                    <button onclick="deleteRecord('events', ${ev.id})" class="text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-full">
-                        Delete
-                    </button>
+                    <button onclick="deleteRecord('events', ${ev.id})" class="text-xs text-red-400 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-full">Delete</button>
                 </div>
             `).join('');
         }
@@ -440,32 +724,25 @@
                 description: document.getElementById('evDesc').value,
                 status: 'Scheduled'
             }]);
-            if (!error) {
-                alert('Event published!');
-                e.target.reset();
-                loadEvents();
-            } else {
-                alert('Error: ' + error.message);
-            }
+            if (!error) { alert('Event published!'); e.target.reset(); loadEvents(); }
+            else alert('Error: ' + error.message);
         }
 
-        // --- 3. FLEET ---
+        // --- FLEET MANAGER ---
         async function loadFleet() {
             const { data } = await db.from('fleet').select('*').order('id', { ascending: false });
             const container = document.getElementById('fleetListAdmin');
             if (!data || data.length === 0) {
-                container.innerHTML = '<p class="text-xs text-gray-500 italic">No aircraft registered yet.</p>';
+                container.innerHTML = '<p class="text-xs text-gray-500 italic">No aircraft.</p>';
                 return;
             }
             container.innerHTML = data.map(fl => `
                 <div class="glass-panel p-4 rounded-2xl flex items-center justify-between border border-white/10">
                     <div>
                         <h4 class="font-heading font-bold text-white text-sm">${fl.name}</h4>
-                        <p class="text-xs text-gray-400 uppercase font-mono">${fl.division} • ${fl.category}</p>
+                        <p class="text-xs text-gray-400 uppercase font-mono">${fl.division}</p>
                     </div>
-                    <button onclick="deleteRecord('fleet', ${fl.id})" class="text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-full">
-                        Delete
-                    </button>
+                    <button onclick="deleteRecord('fleet', ${fl.id})" class="text-xs text-red-400 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-full">Delete</button>
                 </div>
             `).join('');
         }
@@ -479,32 +756,25 @@
                 image_url: document.getElementById('flImg').value,
                 description: document.getElementById('flDesc').value
             }]);
-            if (!error) {
-                alert('Aircraft saved to fleet!');
-                e.target.reset();
-                loadFleet();
-            } else {
-                alert('Error: ' + error.message);
-            }
+            if (!error) { alert('Aircraft saved!'); e.target.reset(); loadFleet(); }
+            else alert('Error: ' + error.message);
         }
 
-        // --- 4. ROSTER ---
+        // --- ROSTER MANAGER ---
         async function loadRoster() {
             const { data } = await db.from('roster').select('*').order('hours', { ascending: false });
             const container = document.getElementById('rosterListAdmin');
             if (!data || data.length === 0) {
-                container.innerHTML = '<p class="text-xs text-gray-500 italic">No pilots enrolled yet.</p>';
+                container.innerHTML = '<p class="text-xs text-gray-500 italic">No pilots.</p>';
                 return;
             }
-            container.innerHTML = data.map(pilot => `
+            container.innerHTML = data.map(p => `
                 <div class="glass-panel p-4 rounded-2xl flex items-center justify-between border border-white/10">
                     <div>
-                        <h4 class="font-heading font-bold text-white text-sm">${pilot.pilot_name} (${pilot.callsign})</h4>
-                        <p class="text-xs text-gray-400 font-mono">${pilot.hours} Hrs • ${pilot.rank_title}</p>
+                        <h4 class="font-heading font-bold text-white text-sm">${p.pilot_name} (${p.callsign})</h4>
+                        <p class="text-xs text-gray-400 font-mono">${p.hours} Hrs • ${p.rank_title}</p>
                     </div>
-                    <button onclick="deleteRecord('roster', ${pilot.id})" class="text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-full">
-                        Delete
-                    </button>
+                    <button onclick="deleteRecord('roster', ${p.id})" class="text-xs text-red-400 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-full">Delete</button>
                 </div>
             `).join('');
         }
@@ -517,32 +787,25 @@
                 hours: parseFloat(document.getElementById('rostHours').value) || 0,
                 rank_title: document.getElementById('rostRank').value || 'Trainee'
             }]);
-            if (!error) {
-                alert('Pilot enrolled successfully!');
-                e.target.reset();
-                loadRoster();
-            } else {
-                alert('Error: ' + error.message);
-            }
+            if (!error) { alert('Pilot enrolled!'); e.target.reset(); loadRoster(); }
+            else alert('Error: ' + error.message);
         }
 
-        // --- 5. CODESHARES ---
+        // --- CODESHARE MANAGER ---
         async function loadCodeshares() {
             const { data } = await db.from('codeshares').select('*').order('id', { ascending: false });
             const container = document.getElementById('codeshareListAdmin');
             if (!data || data.length === 0) {
-                container.innerHTML = '<p class="text-xs text-gray-500 italic">No partner airlines added yet.</p>';
+                container.innerHTML = '<p class="text-xs text-gray-500 italic">No partners.</p>';
                 return;
             }
             container.innerHTML = data.map(cd => `
                 <div class="glass-panel p-4 rounded-2xl flex items-center justify-between border border-white/10">
                     <div>
                         <h4 class="font-heading font-bold text-white text-sm">${cd.va_name}</h4>
-                        <p class="text-xs text-gray-400 font-mono">${cd.network_tag} • ${cd.status}</p>
+                        <p class="text-xs text-gray-400 font-mono">${cd.network_tag}</p>
                     </div>
-                    <button onclick="deleteRecord('codeshares', ${cd.id})" class="text-xs text-red-400 hover:text-red-300 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-full">
-                        Delete
-                    </button>
+                    <button onclick="deleteRecord('codeshares', ${cd.id})" class="text-xs text-red-400 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-full">Delete</button>
                 </div>
             `).join('');
         }
@@ -557,23 +820,100 @@
                 approved_fleet: document.getElementById('cdFleet').value,
                 description: document.getElementById('cdDesc').value
             }]);
+            if (!error) { alert('Partner saved!'); e.target.reset(); loadCodeshares(); }
+            else alert('Error: ' + error.message);
+        }
+
+        // --- STAFF MANAGEMENT MANAGER ---
+        async function loadStaffAdmin() {
+            const { data } = await db.from('staff_members').select('*').order('sort_order', { ascending: true });
+            const container = document.getElementById('staffListAdmin');
+            if (!container) return;
+            if (!data || data.length === 0) {
+                container.innerHTML = '<p class="text-xs text-gray-500 italic">No staff members found.</p>';
+                return;
+            }
+            container.innerHTML = data.map(staff => `
+                <div class="glass-panel p-4 rounded-2xl flex items-center justify-between border border-white/10">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-ana-light text-base">
+                            <i class="${staff.icon_class}"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-heading font-bold text-white text-sm">${staff.name} (${staff.callsign})</h4>
+                            <p class="text-xs text-gray-400 font-mono">${staff.role_title} • ${staff.department}</p>
+                        </div>
+                    </div>
+                    <button onclick="deleteRecord('staff_members', ${staff.id})" class="text-xs text-red-400 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-full">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        async function createStaffMember(e) {
+            e.preventDefault();
+            const { error } = await db.from('staff_members').insert([{
+                name: document.getElementById('staffName').value,
+                role_title: document.getElementById('staffRole').value,
+                department: document.getElementById('staffDept').value,
+                callsign: document.getElementById('staffCallsign').value.toUpperCase(),
+                icon_class: document.getElementById('staffIcon').value,
+                bio: document.getElementById('staffBio').value,
+                sort_order: 10
+            }]);
             if (!error) {
-                alert('Codeshare partner saved!');
+                alert('Staff member added successfully!');
                 e.target.reset();
-                loadCodeshares();
+                loadStaffAdmin();
             } else {
                 alert('Error: ' + error.message);
             }
         }
 
-        async function deleteRecord(table, id) {
-            if (!confirm('Are you sure you want to remove this record?')) return;
-            const { error } = await db.from(table).delete().eq('id', id);
-            if (!error) {
-                fetchAllData();
-            } else {
-                alert('Delete error: ' + error.message);
+        // --- CHANGELOG & APPS MANAGER ---
+        async function loadChangelogAdmin() {
+            const { data } = await db.from('changelog').select('*').order('id', { ascending: false });
+            const container = document.getElementById('changelogListAdmin');
+            if (!container) return;
+            if (!data || data.length === 0) {
+                container.innerHTML = '<p class="text-xs text-gray-500 italic">No changelog entries found.</p>';
+                return;
             }
+            container.innerHTML = data.map(cl => `
+                <div class="glass-panel p-4 rounded-2xl flex items-center justify-between border border-white/10">
+                    <div>
+                        <span class="text-ana-light text-[10px] font-mono uppercase font-bold">${cl.version} • ${cl.type}</span>
+                        <h4 class="font-heading font-bold text-white text-sm">${cl.title}</h4>
+                    </div>
+                    <button onclick="deleteRecord('changelog', ${cl.id})" class="text-xs text-red-400 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-full">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        async function createChangelog(e) {
+            e.preventDefault();
+            const { error } = await db.from('changelog').insert([{
+                type: document.getElementById('clType').value,
+                version: document.getElementById('clVersion').value,
+                title: document.getElementById('clTitle').value,
+                image_url: document.getElementById('clImg').value,
+                external_link: document.getElementById('clLink').value,
+                description: document.getElementById('clDesc').value
+            }]);
+            if (!error) {
+                alert('Changelog entry published successfully!');
+                e.target.reset();
+                loadChangelogAdmin();
+            } else {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        // --- GENERAL DELETE HELPER ---
+        async function deleteRecord(table, id) {
+            if (!confirm('Remove this record?')) return;
+            const { error } = await db.from(table).delete().eq('id', id);
+            if (!error) fetchAllData();
+            else alert('Error: ' + error.message);
         }
     </script>
 </body>

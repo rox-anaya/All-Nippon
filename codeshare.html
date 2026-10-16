@@ -18,6 +18,9 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -76,7 +79,7 @@
             </div>
 
             <div class="border-b border-white/5">
-                <button onclick="toggleSubmenu('opsSub')" class="w-full flex justify-between items-center py-3 text-base font-medium text-ana-light transition">
+                <button onclick="toggleSubmenu('opsSub')" class="w-full flex justify-between items-center py-3 text-base font-medium hover:text-ana-light transition">
                     <span><i class="fa-solid fa-plane-departure w-6 text-ana-light"></i> Operations</span>
                     <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300 rotate-180" id="opsSub-arrow"></i>
                 </button>
@@ -126,90 +129,20 @@
             Expanding our wings through global simulation partnerships. Connect to worldwide destinations through our official codeshare airline network on Waypoints.
         </p>
     </section>
-    <!-- MAIN CONTENT AREA -->
+
+    <!-- MAIN CONTENT AREA - DYNAMIC CODESHARES CONTAINER -->
     <main class="max-w-4xl mx-auto px-4 pb-20 mt-4 space-y-8">
-        
         <div>
             <h2 class="font-heading text-xl md:text-2xl font-bold text-gray-200 mb-6 ml-2 md:ml-4 tracking-wide border-l-4 border-ana-light pl-4">
                 Partner Airlines
             </h2>
 
-            <div class="space-y-4">
-
-                <!-- 1. PARTNER CARD (United Virtual Example) -->
-                <article class="glass-panel rounded-2xl overflow-hidden border border-white/10 transition-all duration-300">
-                    <button onclick="toggleCodeshare('partner1')" class="w-full p-4 md:p-5 flex items-center justify-between text-left hover:bg-white/5 transition">
-                        <div class="flex items-center gap-4">
-                            <!-- Profile Picture / Logo Placeholder -->
-                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-white/5 border border-white/15 p-2 flex items-center justify-center shrink-0 shadow-md">
-                                <i class="fa-solid fa-plane-tail text-ana-light text-xl"></i>
-                            </div>
-                            <div>
-                                <div class="flex items-center gap-2">
-                                    <h3 class="font-heading text-base md:text-lg font-bold text-white">United Virtual Airlines</h3>
-                                    <span class="bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[9px] px-2 py-0.5 rounded-full uppercase tracking-wider font-mono">Partner</span>
-                                </div>
-                                <p class="text-gray-400 text-xs mt-0.5">Transpacific Codeshare Affiliate</p>
-                            </div>
-                        </div>
-
-                        <!-- Collapse Arrow -->
-                        <div class="ml-4 w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-300 shrink-0">
-                            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300" id="partner1-arrow"></i>
-                        </div>
-                    </button>
-
-                    <!-- Collapsible Content -->
-                    <div id="partner1-desc" class="hidden px-5 pb-5 pt-2 border-t border-white/5 text-gray-300 text-xs md:text-sm font-light leading-relaxed bg-black/20">
-                        <p class="mb-3">
-                            ANVG pilots holding First Officer rank and above can fly select transpacific and North American routes operated by United Virtual. Flights logged under this agreement earn standard progression hours logged via the Waypoints Crew Center[span_3](start_span)[span_3](end_span).
-                        </p>
-                        <div class="flex flex-wrap gap-2 text-[10px] font-mono text-gray-400">
-                            <span class="bg-white/5 px-2.5 py-1 rounded-md border border-white/5">Primary Hubs: KDEN, KORD, KSFO</span>
-                            <span class="bg-white/5 px-2.5 py-1 rounded-md border border-white/5">Approved Fleet: B77W, B789, A320</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 2. PARTNER CARD (Pending Partner Template) -->
-                <article class="glass-panel rounded-2xl overflow-hidden border border-white/10 transition-all duration-300">
-                    <button onclick="toggleCodeshare('partnerUnknown')" class="w-full p-4 md:p-5 flex items-center justify-between text-left hover:bg-white/5 transition">
-                        <div class="flex items-center gap-4">
-                            <!-- Profile Picture / Logo Placeholder -->
-                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-white/5 border border-white/15 p-2 flex items-center justify-center shrink-0 shadow-md">
-                                <i class="fa-regular fa-image text-gray-400 text-xl"></i>
-                            </div>
-                            <div>
-                                <div class="flex items-center gap-2">
-                                    <h3 class="font-heading text-base md:text-lg font-bold text-white">Prospective Partner</h3>
-                                    <span class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[9px] px-2 py-0.5 rounded-full uppercase tracking-wider font-mono">Pending Agreement</span>
-                                </div>
-                                <p class="text-gray-400 text-xs mt-0.5">Codeshare Alliance Review</p>
-                            </div>
-                        </div>
-
-                        <!-- Collapse Arrow -->
-                        <div class="ml-4 w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-300 shrink-0">
-                            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300" id="partnerUnknown-arrow"></i>
-                        </div>
-                    </button>
-
-                    <!-- Collapsible Content -->
-                    <div id="partnerUnknown-desc" class="hidden px-5 pb-5 pt-2 border-t border-white/5 text-gray-300 text-xs md:text-sm font-light leading-relaxed bg-black/20">
-                        <p class="mb-3">
-                            Reciprocal route availability, mutual callsign permissions, and Waypoints PIREP logging criteria will be announced here once official terms are confirmed between leadership teams[span_4](start_span)[span_4](end_span).
-                        </p>
-                        <div class="flex flex-wrap gap-2 text-[10px] font-mono text-gray-400">
-                            <span class="bg-white/5 px-2.5 py-1 rounded-md border border-white/5">Primary Hubs: TBA</span>
-                            <span class="bg-white/5 px-2.5 py-1 rounded-md border border-white/5">Status: Pending Verification</span>
-                        </div>
-                    </div>
-                </article>
-
+            <div id="codesharesContainer" class="space-y-4">
+                <!-- Dynamic codeshares loaded from Supabase -->
             </div>
         </div>
-
     </main>
+
     <!-- FOOTER -->
     <footer class="bg-[#020914] text-gray-400 pt-16 pb-8 px-6 mt-12 border-t border-white/10">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
@@ -250,11 +183,64 @@
     <!-- Link to external Javascript file -->
     <script src="script.js"></script>
 
-    <!-- Codeshare Accordion Toggle Script -->
+    <!-- Supabase Codeshares Loader & Accordion Script -->
     <script>
+        const SUPABASE_URL = 'https://syculxnokrkluyzuempj.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_uSljNgeCYIweqTOPbfvk4Q_vnDyc9fC';
+        const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        async function loadCodesharesDynamic() {
+            const container = document.getElementById('codesharesContainer');
+            if (!container || !db) return;
+
+            const { data, error } = await db.from('codeshares').select('*').order('id', { ascending: false });
+            if (error || !data || data.length === 0) {
+                container.innerHTML = '<p class="text-center text-gray-400 italic py-6">No codeshare alliance partners configured yet.</p>';
+                return;
+            }
+
+            container.innerHTML = data.map((cd, index) => {
+                const cardId = 'partner_' + (cd.id || index);
+                return `
+                <article class="glass-panel rounded-2xl overflow-hidden border border-white/10 transition-all duration-300">
+                    <button onclick="toggleCodeshare('${cardId}')" class="w-full p-4 md:p-5 flex items-center justify-between text-left hover:bg-white/5 transition">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-white/5 border border-white/15 p-2 flex items-center justify-center shrink-0 shadow-md">
+                                <i class="fa-solid fa-plane-tail text-ana-light text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h3 class="font-heading text-base md:text-lg font-bold text-white">${cd.va_name}</h3>
+                                    <span class="bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[9px] px-2 py-0.5 rounded-full uppercase tracking-wider font-mono">${cd.status || 'Active Partner'}</span>
+                                </div>
+                                <p class="text-gray-400 text-xs mt-0.5">${cd.network_tag || 'Alliance Partner'}</p>
+                            </div>
+                        </div>
+
+                        <div class="ml-4 w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-300 shrink-0">
+                            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300" id="${cardId}-arrow"></i>
+                        </div>
+                    </button>
+
+                    <div id="${cardId}-desc" class="hidden px-5 pb-5 pt-2 border-t border-white/5 text-gray-300 text-xs md:text-sm font-light leading-relaxed bg-black/20">
+                        <p class="mb-3">
+                            ${cd.description || 'Verified codeshare agreement enabling seamless route networking and pilot hour logging.'}
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-[10px] font-mono text-gray-400">
+                            <span class="bg-white/5 px-2.5 py-1 rounded-md border border-white/5">Primary Hubs: ${cd.hubs || 'TBA'}</span>
+                            <span class="bg-white/5 px-2.5 py-1 rounded-md border border-white/5">Approved Fleet: ${cd.approved_fleet || 'Standard'}</span>
+                        </div>
+                    </div>
+                </article>
+                `;
+            }).join('');
+        }
+
         function toggleCodeshare(id) {
             const desc = document.getElementById(id + '-desc');
             const arrow = document.getElementById(id + '-arrow');
+
+            if (!desc || !arrow) return;
 
             if (desc.classList.contains('hidden')) {
                 desc.classList.remove('hidden');
@@ -264,6 +250,10 @@
                 arrow.classList.remove('rotate-180');
             }
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCodesharesDynamic();
+        });
     </script>
 </body>
 </html>

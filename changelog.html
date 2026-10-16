@@ -18,6 +18,9 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -65,7 +68,7 @@
             <a href="index.html" class="block py-3 text-base font-medium hover:text-ana-light transition border-b border-white/5"><i class="fa-solid fa-house w-6 text-ana-light"></i> Home</a>
             
             <div class="border-b border-white/5">
-                <button onclick="toggleSubmenu('aboutSub')" class="w-full flex justify-between items-center py-3 text-base font-medium hover:text-ana-light transition">
+                <button onclick="toggleSubmenu('aboutSub')" class="w-full flex justify-between items-center py-3 text-base font-medium text-ana-light transition">
                     <span><i class="fa-solid fa-circle-info w-6 text-ana-light"></i> About Us</span>
                     <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" id="aboutSub-arrow"></i>
                 </button>
@@ -76,11 +79,11 @@
             </div>
 
             <div class="border-b border-white/5">
-                <button onclick="toggleSubmenu('opsSub')" class="w-full flex justify-between items-center py-3 text-base font-medium hover:text-ana-light transition">
+                <button onclick="toggleSubmenu('opsSub')" class="w-full flex justify-between items-center py-3 text-base font-medium text-ana-light transition">
                     <span><i class="fa-solid fa-plane-departure w-6 text-ana-light"></i> Operations</span>
-                    <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" id="opsSub-arrow"></i>
+                    <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300 rotate-180" id="opsSub-arrow"></i>
                 </button>
-                <div id="opsSub" class="hidden flex-col pl-8 border-l-2 border-ana-light/30 ml-3 mb-3 space-y-3 text-sm text-gray-300">
+                <div id="opsSub" class="flex flex-col pl-8 border-l-2 border-ana-light/30 ml-3 mb-3 space-y-3 text-sm text-gray-300">
                     <a href="fleet.html" class="block hover:text-white transition mt-2">Fleet</a>
                     <a href="events.html" class="block hover:text-white transition">Events</a>
                     <a href="routes.html" class="block hover:text-white transition">Routes</a>
@@ -126,7 +129,8 @@
             Discover internal flight utility tools built for our pilots, alongside ongoing change records, Waypoints integrations, and future feature rollouts.
         </p>
     </section>
-    <!-- MAIN CONTENT AREA -->
+
+    <!-- MAIN CONTENT AREA - DYNAMIC APPS & CHANGELOG -->
     <main class="max-w-4xl mx-auto px-4 pb-20 mt-4 space-y-12">
         
         <!-- 1. OUR APPS SECTION -->
@@ -135,35 +139,8 @@
                 Flight Operations Apps
             </h2>
             
-            <div class="space-y-4">
-                <!-- Dispatch Desk v1 Card -->
-                <article class="glass-panel rounded-3xl p-5 md:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-5 border border-white/10 hover:border-ana-light/50 transition-all duration-300">
-                    <div class="flex items-center gap-5">
-                        <!-- App Logo -->
-                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-black/40 border border-white/15 p-2 shrink-0 flex items-center justify-center shadow-lg">
-                            <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790533812/6iIN8su_udmemd.png" alt="Dispatch Desk Logo" class="w-full h-full object-contain">
-                        </div>
-                        
-                        <!-- App Info -->
-                        <div>
-                            <div class="flex items-center gap-2 mb-1">
-                                <h3 class="font-heading text-lg md:text-xl font-bold text-white">Dispatch Desk v1</h3>
-                                <span class="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-[9px] px-2 py-0.5 rounded-full font-mono uppercase tracking-wider">Utility</span>
-                            </div>
-                            <p class="text-gray-300 font-light text-xs md:text-sm leading-relaxed max-w-lg">
-                                Comprehensive flight preparation tool designed for Infinite Flight pilots. Calculate crosswind & headwind components, accurate fuel burn, estimated flight times, and critical operational dispatch data.
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <!-- Launch Link Button -->
-                    <div class="shrink-0 self-end sm:self-center">
-                        <a href="https://dispatch-desk-v1-orcin.vercel.app/" target="_blank" class="bg-ana-light hover:bg-blue-400 text-white text-xs md:text-sm px-5 py-2.5 rounded-full font-medium transition flex items-center gap-2 shadow-lg shadow-blue-500/20 border border-white/10">
-                            <span>Open App</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                        </a>
-                    </div>
-                </article>
+            <div id="appsContainer" class="space-y-4">
+                <!-- Dynamic Apps loaded from Supabase -->
             </div>
         </div>
 
@@ -173,64 +150,13 @@
                 Changelog & Operational Releases
             </h2>
             
-            <div class="space-y-6">
-
-                <!-- Log Entry: Version 1.1.0 (Waypoints Architecture) -->
-                <article class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10">
-                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-4 mb-4">
-                        <div>
-                            <span class="text-ana-light text-xs font-mono font-bold tracking-widest uppercase">Version 1.1.0</span>
-                            <h3 class="font-heading text-lg md:text-xl font-bold text-white mt-0.5">Waypoints Community Airline & Multi-Brand Architecture</h3>
-                        </div>
-                        <span class="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs px-3 py-1 rounded-full font-mono">Current Build</span>
-                    </div>
-
-                    <ul class="space-y-3 text-sm text-gray-300 font-light">
-                        <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-cloud text-cyan-400 mt-1 shrink-0 text-xs"></i>
-                            <span><strong class="text-white font-medium">Waypoints Integration:</strong> Transitioned live flight tracking, automated pilot testing, and PIREP logging directly into Waypoints Crew Center.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-palette text-pink-400 mt-1 shrink-0 text-xs"></i>
-                            <span><strong class="text-white font-medium">Subsidiary Themes:</strong> Integrated multi-airline color switching (ANA Triton Blue, Peach Fuchsia, NCA Cargo Blue, AirJapan Sunrise Teal) synced to browser memory.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-plane-departure text-blue-400 mt-1 shrink-0 text-xs"></i>
-                            <span><strong class="text-white font-medium">Fleet Expansion:</strong> Formatted dedicated operational divisions for Nippon Cargo Airlines (B747-8F), Peach Aviation (A320-200), and AirJapan (B787-8).</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-volume-high text-yellow-400 mt-1 shrink-0 text-xs"></i>
-                            <span><strong class="text-white font-medium">Flight Deck Audio:</strong> Deployed automated browser-based speech synthesis sector briefings with user controls.</span>
-                        </li>
-                    </ul>
-                </article>
-
-                <!-- Log Entry: Version 1.0.0 -->
-                <article class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10 opacity-80">
-                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-4 mb-4">
-                        <div>
-                            <span class="text-gray-400 text-xs font-mono font-bold tracking-widest uppercase">Version 1.0.0</span>
-                            <h3 class="font-heading text-lg md:text-xl font-bold text-white mt-0.5">Foundation Launch & Operational Setup</h3>
-                        </div>
-                        <span class="bg-white/10 text-gray-400 text-xs px-3 py-1 rounded-full font-mono">Legacy</span>
-                    </div>
-
-                    <ul class="space-y-3 text-sm text-gray-300 font-light">
-                        <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-globe text-emerald-400 mt-1 shrink-0 text-xs"></i>
-                            <span><strong class="text-white font-medium">Global Navigation:</strong> Launched high-performance interactive 3D globe route explorer featuring core hubs and worldwide destinations.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-id-card text-blue-400 mt-1 shrink-0 text-xs"></i>
-                            <span><strong class="text-white font-medium">Pilot Roster:</strong> Introduced searchable directory with individual pilot callsign assignments.</span>
-                        </li>
-                    </ul>
-                </article>
-
+            <div id="changelogContainer" class="space-y-6">
+                <!-- Dynamic Changelog loaded from Supabase -->
             </div>
         </div>
 
     </main>
+
     <!-- FOOTER -->
     <footer class="bg-[#020914] text-gray-400 pt-16 pb-8 px-6 mt-12 border-t border-white/10">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
@@ -270,5 +196,79 @@
 
     <!-- Link to external Javascript file -->
     <script src="script.js"></script>
+
+    <!-- Supabase Changelog & Apps Loader Script -->
+    <script>
+        const SUPABASE_URL = 'https://syculxnokrkluyzuempj.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_uSljNgeCYIweqTOPbfvk4Q_vnDyc9fC';
+        const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        async function loadChangelogPageDynamic() {
+            const appsContainer = document.getElementById('appsContainer');
+            const changelogContainer = document.getElementById('changelogContainer');
+            if (!appsContainer || !changelogContainer || !db) return;
+
+            const { data, error } = await db.from('changelog').select('*').order('id', { ascending: false });
+            if (error || !data || data.length === 0) {
+                appsContainer.innerHTML = '<p class="text-gray-400 text-xs italic">No operational apps published yet.</p>';
+                changelogContainer.innerHTML = '<p class="text-gray-400 text-xs italic">No changelog releases recorded yet.</p>';
+                return;
+            }
+
+            let appsHtml = '';
+            let changelogHtml = '';
+
+            data.forEach(item => {
+                if (item.type === 'app') {
+                    appsHtml += `
+                    <article class="glass-panel rounded-3xl p-5 md:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-5 border border-white/10 hover:border-ana-light/50 transition-all duration-300">
+                        <div class="flex items-center gap-5">
+                            <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-black/40 border border-white/15 p-2 shrink-0 flex items-center justify-center shadow-lg">
+                                <img src="${item.image_url || 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf'}" alt="App Logo" class="w-full h-full object-contain">
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <h3 class="font-heading text-lg md:text-xl font-bold text-white">${item.title}</h3>
+                                    <span class="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-[9px] px-2 py-0.5 rounded-full font-mono uppercase tracking-wider">${item.version}</span>
+                                </div>
+                                <p class="text-gray-300 font-light text-xs md:text-sm leading-relaxed max-w-lg">
+                                    ${item.description}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="shrink-0 self-end sm:self-center">
+                            <a href="${item.external_link || '#'}" target="_blank" class="bg-ana-light hover:bg-blue-400 text-white text-xs md:text-sm px-5 py-2.5 rounded-full font-medium transition flex items-center gap-2 shadow-lg shadow-blue-500/20 border border-white/10">
+                                <span>Open App</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                            </a>
+                        </div>
+                    </article>
+                    `;
+                } else {
+                    changelogHtml += `
+                    <article class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10">
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-4 mb-4">
+                            <div>
+                                <span class="text-ana-light text-xs font-mono font-bold tracking-widest uppercase">${item.version}</span>
+                                <h3 class="font-heading text-lg md:text-xl font-bold text-white mt-0.5">${item.title}</h3>
+                            </div>
+                            <span class="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs px-3 py-1 rounded-full font-mono">Release</span>
+                        </div>
+                        <p class="text-sm text-gray-300 font-light leading-relaxed whitespace-pre-line">
+                            ${item.description}
+                        </p>
+                    </article>
+                    `;
+                }
+            });
+
+            appsContainer.innerHTML = appsHtml || '<p class="text-gray-400 text-xs italic">No operational apps published yet.</p>';
+            changelogContainer.innerHTML = changelogHtml || '<p class="text-gray-400 text-xs italic">No changelog releases recorded yet.</p>';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadChangelogPageDynamic();
+        });
+    </script>
 </body>
 </html>

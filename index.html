@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Nippon Virtual Group - Fly Beyond Borders</title>
+    <title id="pageDocTitle">All Nippon Virtual Group - Fly Beyond Borders</title>
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#00266b">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=JetBrains+Mono:wght@400;600;700&family=Montserrat:wght@600;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <!-- FontAwesome (Icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -39,15 +42,26 @@
 </head>
 <body class="font-sans antialiased overflow-x-hidden">
 
+    <!-- LIVE NOTAM ALERT BAR (HIDDEN BY DEFAULT UNTIL ENABLED IN ADMIN) -->
+    <div id="globalNotamBar" class="hidden fixed top-0 left-0 w-full z-[60] text-white text-xs font-mono py-1.5 px-4 text-center shadow-lg transition-all" style="background-color: #007fc1;">
+        <span id="globalNotamText">⚡ LIVE OPS: Group Flight boarding now!</span>
+    </div>
+
     <!-- ================= MAIN HEADER ================= -->
-    <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl glass-panel rounded-full flex justify-between items-center px-6 py-3 z-50 transition-all">
+    <header id="mainHeaderBar" class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl glass-panel rounded-full flex justify-between items-center px-6 py-3 z-50 transition-all">
         <!-- MAIN NAVIGATION LOGO -->
         <a href="index.html" class="flex items-center">
-            <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790497605/Picsart_26-09-27_13-51-21-265_j4qz5z.png" alt="ANVG Logo" class="h-10 w-auto">
+            <img id="navLogoImg" src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790497605/Picsart_26-09-27_13-51-21-265_j4qz5z.png" alt="ANVG Logo" class="h-10 w-auto">
         </a>
-        <button onclick="openMenu()" class="text-white text-2xl hover:text-ana-light transition">
-            <i class="fa-solid fa-bars"></i>
-        </button>
+        <div class="flex items-center gap-4">
+            <!-- OPTIONAL LIVE ZULU CLOCK PILL (TOGGLED IN USER SETTINGS) -->
+            <div id="liveCockpitClock" class="hidden md:flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1 rounded-full text-[10px] font-mono text-cyan-300">
+                <i class="fa-regular fa-clock"></i> <span id="zuluTimeDisplay">00:00Z</span>
+            </div>
+            <button onclick="openMenu()" class="text-white text-2xl hover:text-ana-light transition">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
     </header>
 
     <!-- ================= HAMBURGER MENU ================= -->
@@ -57,7 +71,7 @@
         
         <div class="flex items-center justify-between p-6 border-b border-white/10">
             <!-- SIDEBAR LOGO -->
-            <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790497605/Picsart_26-09-27_13-51-21-265_j4qz5z.png" alt="ANVG Logo" class="h-8 w-auto">
+            <img id="drawerLogoImg" src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790497605/Picsart_26-09-27_13-51-21-265_j4qz5z.png" alt="ANVG Logo" class="h-8 w-auto">
             <button onclick="closeMenu()" class="text-white text-3xl hover:text-red-400 transition">
                 <i class="fa-solid fa-xmark"></i>
             </button>
@@ -112,19 +126,17 @@
             <p class="text-sm text-gray-300 mb-4 flex items-center justify-center gap-2">
                 Developed By <span class="font-signature text-2xl text-ana-light translate-y-1">Anaya</span>
             </p>
-            <a href="https://waypoint-live.app/va/all-nippon-virtual-airways" target="_blank" class="inline-block w-full bg-ana-light hover:bg-blue-400 text-white text-sm px-4 py-2 rounded-full font-medium transition shadow-lg shadow-blue-500/30">
+            <a id="drawerWaypointsBtn" href="https://waypoint-live.app/va/all-nippon-virtual-airways" target="_blank" class="inline-block w-full bg-ana-light hover:bg-blue-400 text-white text-sm px-4 py-2 rounded-full font-medium transition shadow-lg shadow-blue-500/30">
                 Waypoints VA
             </a>
         </div>
     </div>
-    <!-- ============================================== -->
-
     <!-- ================= HERO SECTION ================= -->
-    <section class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 pt-24 pb-12 overflow-hidden">
+    <section id="heroSectionBox" class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 pt-24 pb-12 overflow-hidden">
         
         <!-- FOREGROUND / HERO IMAGE -->
         <div class="absolute inset-0 z-0">
-            <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790574373/InfiniteFlight_2026-09-27-13-11-43_c2obn9.webp" 
+            <img id="heroBgImage" src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790574373/InfiniteFlight_2026-09-27-13-11-43_c2obn9.webp" 
                  alt="Hero Aircraft" 
                  class="w-full h-full object-cover object-center brightness-50">
             <!-- Gradient Overlay for smooth transition into content -->
@@ -133,15 +145,18 @@
 
         <!-- HERO CONTENT -->
         <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
-            <div class="glass-panel px-6 py-2 rounded-full mb-6 border-white/30 text-xs md:text-sm font-medium tracking-widest uppercase">
+            <div id="heroBadgeText" class="glass-panel px-6 py-2 rounded-full mb-6 border-white/30 text-xs md:text-sm font-medium tracking-widest uppercase">
                 ANVG • Waypoints Community Airline
             </div>
             
-            <h1 class="font-heading text-4xl md:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-blue-300 drop-shadow-lg">
+            <!-- OPTIONAL LOCAL PILOT CALLSIGN GREETING (FROM USER SETTINGS) -->
+            <div id="pilotPersonalGreeting" class="hidden text-xs font-mono text-cyan-300 mb-2 tracking-widest uppercase"></div>
+
+            <h1 id="heroVaName" class="font-heading text-4xl md:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-blue-300 drop-shadow-lg">
                 All Nippon Virtual Group
             </h1>
             
-            <p class="text-xl md:text-2xl font-light mb-10 text-gray-200 drop-shadow">Fly Beyond Borders</p>
+            <p id="heroVaTagline" class="text-xl md:text-2xl font-light mb-10 text-gray-200 drop-shadow">Fly Beyond Borders</p>
             
             <div class="flex flex-col items-center gap-4 mt-2">
                 <div class="flex justify-center gap-4">
@@ -157,34 +172,34 @@
     <main class="max-w-6xl mx-auto px-4 py-16 space-y-24">
 
         <!-- LIVE FLIGHT OPS STATS -->
-<div class="glass-panel rounded-3xl p-6 border border-white/10 shadow-2xl max-w-md mx-auto mb-10">
-    <div class="grid grid-cols-2 gap-4 pb-5 border-b border-white/10 text-center">
-        <div>
-            <h3 id="displayHours" class="text-3xl font-heading font-extrabold text-ana-light">0 Hrs</h3>
-            <p class="text-[11px] font-mono text-gray-300 uppercase tracking-wider mt-1">Flight Hours Flown</p>
-        </div>
-        <div>
-            <h3 id="displayPireps" class="text-3xl font-heading font-extrabold text-ana-light">0</h3>
-            <p class="text-[11px] font-mono text-gray-300 uppercase tracking-wider mt-1">Total PIREPs</p>
-        </div>
-    </div>
+        <div id="statsSectionBox" class="glass-panel rounded-3xl p-6 border border-white/10 shadow-2xl max-w-md mx-auto mb-10 transition-all">
+            <div class="grid grid-cols-2 gap-4 pb-5 border-b border-white/10 text-center">
+                <div>
+                    <h3 id="displayHours" class="stat-number text-3xl font-heading font-extrabold text-ana-light">0 Hrs</h3>
+                    <p class="text-[11px] font-mono text-gray-300 uppercase tracking-wider mt-1">Flight Hours Flown</p>
+                </div>
+                <div>
+                    <h3 id="displayPireps" class="stat-number text-3xl font-heading font-extrabold text-ana-light">0</h3>
+                    <p class="text-[11px] font-mono text-gray-300 uppercase tracking-wider mt-1">Total PIREPs</p>
+                </div>
+            </div>
 
-    <!-- NETWORK NUMBERS -->
-    <div class="divide-y divide-white/10 text-center">
-        <div class="py-4">
-            <h4 id="displayHubs" class="text-3xl font-heading font-extrabold text-ana-light">4</h4>
-            <p class="text-[11px] font-mono text-gray-400 uppercase tracking-widest mt-1">Hubs</p>
+            <!-- NETWORK NUMBERS -->
+            <div class="divide-y divide-white/10 text-center">
+                <div class="py-4">
+                    <h4 id="displayHubs" class="stat-number text-3xl font-heading font-extrabold text-ana-light">4</h4>
+                    <p class="text-[11px] font-mono text-gray-400 uppercase tracking-widest mt-1">Hubs</p>
+                </div>
+                <div class="py-4">
+                    <h4 id="displayAircraft" class="stat-number text-3xl font-heading font-extrabold text-ana-light">7+</h4>
+                    <p class="text-[11px] font-mono text-gray-400 uppercase tracking-widest mt-1">Aircraft Family</p>
+                </div>
+                <div class="pt-4">
+                    <h4 id="displayDestinations" class="stat-number text-3xl font-heading font-extrabold text-ana-light">50+</h4>
+                    <p class="text-[11px] font-mono text-gray-400 uppercase tracking-widest mt-1">Destinations</p>
+                </div>
+            </div>
         </div>
-        <div class="py-4">
-            <h4 id="displayAircraft" class="text-3xl font-heading font-extrabold text-ana-light">7+</h4>
-            <p class="text-[11px] font-mono text-gray-400 uppercase tracking-widest mt-1">Aircraft Family</p>
-        </div>
-        <div class="pt-4">
-            <h4 id="displayDestinations" class="text-3xl font-heading font-extrabold text-ana-light">50+</h4>
-            <p class="text-[11px] font-mono text-gray-400 uppercase tracking-widest mt-1">Destinations</p>
-        </div>
-    </div>
-</div>
 
         <!-- OPERATIONS CENTER SECTION -->
         <section class="text-center">
@@ -200,31 +215,32 @@
                     <i class="fa-solid fa-handshake text-ana-light"></i> Codeshare
                 </a>
             </div>
-            <p class="text-xs text-gray-400">Operations and flight logging powered by Waypoints | Last updated: Sep 2026</p>
+            <p id="statsUpdatedText" class="text-xs text-gray-400">Operations and flight logging powered by Waypoints | Last updated: Sep 2026</p>
         </section>
+
         <!-- LIVE MAP EMBED -->
         <section class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10">
             <div class="flex items-center justify-between mb-4 border-b border-white/10 pb-4">
-                <h2 class="font-sans text-lg md:text-xl font-light tracking-wide text-gray-200 uppercase">Live Map</h2>
+                <h2 id="liveMapTitle" class="font-sans text-lg md:text-xl font-light tracking-wide text-gray-200 uppercase">Live Map</h2>
                 <div class="flex items-center gap-2 bg-white/5 px-4 py-1.5 rounded-full border border-white/10">
                     <span class="relative flex h-2.5 w-2.5">
                       <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-300 opacity-75"></span>
                       <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-400"></span>
                     </span>
-                    <span class="text-blue-200 text-xs font-medium tracking-widest uppercase">Online</span>
+                    <span id="liveMapStatus" class="text-blue-200 text-xs font-medium tracking-widest uppercase">Online</span>
                 </div>
             </div>
             
             <div class="w-full rounded-2xl overflow-hidden bg-[#0a192f]/50">
-                <iframe src="https://waypoint-live.app/embed/va/all-nippon-virtual-airways" width="100%" height="420" style="border:0;" title="Live flights"></iframe>
+                <iframe id="liveMapIframe" src="https://waypoint-live.app/embed/va/all-nippon-virtual-airways" width="100%" height="420" style="border:0;" title="Live flights"></iframe>
             </div>
         </section>
 
         <!-- MISSION STATEMENT -->
-        <section class="glass-panel rounded-3xl p-8 md:p-12 text-center max-w-4xl mx-auto relative overflow-hidden border border-white/10">
+        <section id="missionSectionBox" class="glass-panel rounded-3xl p-8 md:p-12 text-center max-w-4xl mx-auto relative overflow-hidden border border-white/10 transition-all">
             <i class="fa-solid fa-quote-left absolute top-4 left-6 text-6xl text-white/5"></i>
-            <h2 class="font-heading text-3xl font-bold mb-6 text-ana-light">Our Mission</h2>
-            <p class="text-lg md:text-xl leading-relaxed font-light text-gray-200">
+            <h2 id="missionTitleText" class="font-heading text-3xl font-bold mb-6 text-ana-light">Our Mission</h2>
+            <p id="missionBodyText" class="text-lg md:text-xl leading-relaxed font-light text-gray-200">
                 "To turn every flight into a journey worth remembering. ANVG brings together aviators to explore, connect, and experience virtual flight operations through the spirit of Japan. We fly with purpose, grow as a community, and leave a mark on every route we take."
             </p>
         </section>
@@ -234,38 +250,14 @@
             <h2 class="font-heading text-2xl font-bold mb-6 text-center">Fleet Showcase</h2>
             <div class="relative w-full aspect-video rounded-3xl overflow-hidden glass-panel group shadow-2xl shadow-black/50 border border-white/10">
                 <div id="carousel" class="w-full h-full relative">
-                    <!-- Slide 1 -->
-                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790574372/InfiniteFlight_2026-09-27-13-11-15_cmvok8.webp" 
-                         class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100" 
-                         alt="ANVG Fleet Aircraft 1">
-                    <!-- Slide 2 -->
-                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790574372/InfiniteFlight_2026-09-27-13-11-46_tbcdxz.webp" 
-                         class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" 
-                         alt="ANVG Fleet Aircraft 2">
-                    <!-- Slide 3 -->
-                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790574371/InfiniteFlight_2026-09-27-13-12-19_wpuy8h.webp" 
-                         class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" 
-                         alt="ANVG Fleet Aircraft 3">
-                    <!-- Slide 4 -->
-                    <img src="https://i.imgur.com/gduw3Ng.jpeg" 
-                         class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" 
-                         alt="ANVG Fleet Aircraft 4">
-                    <!-- Slide 5 -->
-                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790574377/IMG_0661_xfjoev.png" 
-                         class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" 
-                         alt="ANVG Fleet Aircraft 5">
-                    <!-- Slide 6 -->
-                    <img src="https://i.imgur.com/PhHMZpq.jpeg" 
-                         class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" 
-                         alt="ANVG Fleet Aircraft 6">
-                    <!-- Slide 7 -->
-                    <img src="https://i.imgur.com/uE1d9de.jpeg" 
-                         class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" 
-                         alt="ANVG Fleet Aircraft 7">
-                    <!-- Slide 8 -->
-                    <img src="https://i.imgur.com/A9goNH0.jpeg" 
-                         class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" 
-                         alt="ANVG Fleet Aircraft 8">
+                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790574372/InfiniteFlight_2026-09-27-13-11-15_cmvok8.webp" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="ANVG Fleet Aircraft 1">
+                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790574372/InfiniteFlight_2026-09-27-13-11-46_tbcdxz.webp" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="ANVG Fleet Aircraft 2">
+                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790574371/InfiniteFlight_2026-09-27-13-12-19_wpuy8h.webp" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="ANVG Fleet Aircraft 3">
+                    <img src="https://i.imgur.com/gduw3Ng.jpeg" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="ANVG Fleet Aircraft 4">
+                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790574377/IMG_0661_xfjoev.png" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="ANVG Fleet Aircraft 5">
+                    <img src="https://i.imgur.com/PhHMZpq.jpeg" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="ANVG Fleet Aircraft 6">
+                    <img src="https://i.imgur.com/uE1d9de.jpeg" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="ANVG Fleet Aircraft 7">
+                    <img src="https://i.imgur.com/A9goNH0.jpeg" class="carousel-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="ANVG Fleet Aircraft 8">
                 </div>
                 
                 <!-- Carousel Buttons -->
@@ -279,21 +271,20 @@
         </section>
 
         <!-- CEO MESSAGE CARD -->
-        <section class="glass-panel rounded-3xl p-8 md:p-12 max-w-4xl mx-auto border-l-4 border-l-ana-light border border-white/10">
-            <p class="text-lg md:text-xl leading-relaxed italic font-light mb-6 text-gray-200">
+        <section id="ceoMessageSectionBox" class="glass-panel rounded-3xl p-8 md:p-12 max-w-4xl mx-auto border-l-4 border-l-ana-light border border-white/10 transition-all">
+            <p id="ceoQuoteText" class="text-lg md:text-xl leading-relaxed italic font-light mb-6 text-gray-200">
                 “Welcome to ANVG. We’re here to make every flight meaningful, every destination memorable, and every pilot part of something greater. Let’s fly together and build something we can be proud of.”
             </p>
             <div class="font-heading">
-                <!-- CEO PROFILE DETAILS -->
-                <p class="font-bold text-white text-lg">— Luciano</p>
-                <p class="text-ana-light text-sm mt-1">CEO - All Nippon Virtual Group</p>
+                <p id="ceoNameText" class="font-bold text-white text-lg">— Luciano</p>
+                <p id="ceoRoleText" class="text-ana-light text-sm mt-1">CEO - All Nippon Virtual Group</p>
             </div>
         </section>
 
         <!-- APPLY CTA CARD -->
         <section class="glass-panel rounded-3xl p-12 text-center bg-gradient-to-t from-ana-dark/50 to-transparent border border-white/10">
-            <h2 class="font-heading text-4xl font-bold mb-6 text-white">Ready to join?</h2>
-            <p class="text-gray-300 mb-8 max-w-2xl mx-auto">Experience virtual flight operations with our community. Become part of our growing virtual family today.</p>
+            <h2 id="ctaTitleText" class="font-heading text-4xl font-bold mb-6 text-white">Ready to join?</h2>
+            <p id="ctaBodyText" class="text-gray-300 mb-8 max-w-2xl mx-auto">Experience virtual flight operations with our community. Become part of our growing virtual family today.</p>
             <a href="apply.html" class="inline-block bg-white text-ana-dark px-8 py-3 rounded-full font-bold text-base hover:bg-gray-200 transition shadow-[0_0_20px_rgba(255,255,255,0.3)]">
                 Submit Application <i class="fa-solid fa-paper-plane ml-2"></i>
             </a>
@@ -304,8 +295,6 @@
     <!-- ================= FOOTER ================= -->
     <footer class="bg-[#020914] text-gray-400 pt-16 pb-8 px-6 mt-12 border-t border-white/10">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
-            
-            <!-- Navigation Links -->
             <div>
                 <h4 class="font-heading text-white text-lg font-bold mb-6 flex items-center gap-2">
                     <i class="fa-solid fa-compass text-ana-light"></i> Navigation
@@ -319,17 +308,15 @@
                     <li><a href="codeshare.html" class="hover:text-white transition">Codeshares</a></li>
                 </ul>
             </div>
-
-            <!-- Community Links -->
             <div>
                 <h4 class="font-heading text-white text-lg font-bold mb-6 flex items-center gap-2">
                     <i class="fa-solid fa-users text-ana-light"></i> Community
                 </h4>
                 <ul class="space-y-4">
-                    <li><a href="https://waypoint-live.app/va/all-nippon-virtual-airways" target="_blank" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-w w-5 text-ana-light"></i> Waypoints Portal</a></li>
-                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-discord w-5"></i> Official Discord</a></li>
-                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-instagram w-5"></i> Instagram</a></li>
-                    <li><a href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-youtube w-5"></i> YouTube</a></li>
+                    <li><a id="footerWaypointsLink" href="https://waypoint-live.app/va/all-nippon-virtual-airways" target="_blank" class="hover:text-white transition flex items-center gap-3"><i class="fa-solid fa-w w-5 text-ana-light"></i> Waypoints Portal</a></li>
+                    <li><a id="footerDiscordLink" href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-discord w-5"></i> Official Discord</a></li>
+                    <li><a id="footerInstaLink" href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-instagram w-5"></i> Instagram</a></li>
+                    <li><a id="footerYoutubeLink" href="#" class="hover:text-white transition flex items-center gap-3"><i class="fa-brands fa-youtube w-5"></i> YouTube</a></li>
                 </ul>
             </div>
         </div>
@@ -337,7 +324,7 @@
         <div class="max-w-6xl mx-auto">
             <hr class="border-white/10 mb-8">
             <div class="text-center text-xs space-y-2">
-                <p class="text-white/60">© 2026 All Nippon Virtual Group — Official Community Airline on Waypoints</p>
+                <p id="footerCopyrightText" class="text-white/60">© 2026 All Nippon Virtual Group — Official Community Airline on Waypoints</p>
                 <p class="text-white/40">All Nippon Virtual Group is not affiliated with the real-world All Nippon Airways or ANA Holdings. All trademarks and logos remain the property of their respective owners.</p>
             </div>
         </div>

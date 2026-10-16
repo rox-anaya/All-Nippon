@@ -18,6 +18,9 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -65,7 +68,7 @@
             <a href="index.html" class="block py-3 text-base font-medium hover:text-ana-light transition border-b border-white/5"><i class="fa-solid fa-house w-6 text-ana-light"></i> Home</a>
             
             <div class="border-b border-white/5">
-                <button onclick="toggleSubmenu('aboutSub')" class="w-full flex justify-between items-center py-3 text-base font-medium hover:text-ana-light transition">
+                <button onclick="toggleSubmenu('aboutSub')" class="w-full flex justify-between items-center py-3 text-base font-medium text-ana-light transition">
                     <span><i class="fa-solid fa-circle-info w-6 text-ana-light"></i> About Us</span>
                     <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" id="aboutSub-arrow"></i>
                 </button>
@@ -91,7 +94,7 @@
             <a href="training.html" class="block py-3 text-base font-medium hover:text-ana-light transition border-b border-white/5"><i class="fa-solid fa-book-open-reader w-6 text-ana-light"></i> Training</a>
             
             <div class="border-b border-white/5">
-                <button onclick="toggleSubmenu('changeSub')" class="w-full flex justify-between items-center py-3 text-base font-medium hover:text-ana-light transition">
+                <button onclick="toggleSubmenu('changeSub')" class="w-full flex justify-between items-center py-3 text-base font-medium text-ana-light transition">
                     <span><i class="fa-solid fa-clock-rotate-left w-6 text-ana-light"></i> Change log</span>
                     <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" id="changeSub-arrow"></i>
                 </button>
@@ -126,60 +129,19 @@
             Join our pilots in skies around the world. Discover upcoming group flights, fly-ins, and the latest announcements from All Nippon Virtual Group.
         </p>
     </section>
-    <!-- MAIN CONTENT AREA -->
+
+    <!-- MAIN CONTENT AREA - DYNAMIC EVENTS CONTAINER -->
     <main class="max-w-5xl mx-auto px-4 pb-20 space-y-16 mt-8">
 
-        <!-- 1. UPCOMING EVENT CARD -->
+        <!-- 1. DYNAMIC UPCOMING EVENTS LIST -->
         <div>
             <h2 class="font-heading text-xl md:text-2xl font-bold text-gray-200 mb-6 ml-2 md:ml-4 tracking-wide border-l-4 border-ana-light pl-4">
-                Upcoming Event
+                Upcoming Events
             </h2>
             
-            <article class="glass-panel rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-                <!-- 16:9 Image Container -->
-                <div class="w-full aspect-video overflow-hidden relative border-b border-white/10">
-                    <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790506025/Screenshot_20260927_160442_com.fds.infiniteflight_vqrnuy.jpg" alt="Event Poster" class="w-full h-full object-cover">
-                    <!-- Live Scheduled Pulse Badge -->
-                    <div class="absolute top-4 right-4 flex items-center gap-2 bg-black/60 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/15">
-                        <span class="relative flex h-2.5 w-2.5">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-300 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-400"></span>
-                        </span>
-                        <span class="text-blue-200 text-xs font-medium tracking-widest uppercase">Scheduled</span>
-                    </div>
-                </div>
-                
-                <div class="p-6 md:p-10">
-                    <h3 class="font-heading text-3xl font-bold text-white mb-4">The Flying Honu Escapade</h3>
-                    <p class="text-gray-300 font-light text-sm md:text-base leading-relaxed mb-8">
-                        Join us for our flagship weekend group flight as we take the massive A380 from Narita across the Pacific to the beautiful islands of Hawaii. Expect scenic oceanic cruising, community convoy formations, and flight logging via Waypoints.
-                    </p>
-                    
-                    <!-- Flight Info Grid -->
-                    <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
-                        <div class="bg-white/5 border border-white/10 p-3 rounded-xl text-center">
-                            <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Departure</p>
-                            <p class="font-bold text-ana-light text-lg">RJAA</p>
-                        </div>
-                        <div class="bg-white/5 border border-white/10 p-3 rounded-xl text-center">
-                            <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Arrival</p>
-                            <p class="font-bold text-ana-light text-lg">PHNL</p>
-                        </div>
-                        <div class="bg-white/5 border border-white/10 p-3 rounded-xl text-center">
-                            <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Time</p>
-                            <p class="font-bold text-white text-lg">18:00Z</p>
-                        </div>
-                        <div class="bg-white/5 border border-white/10 p-3 rounded-xl text-center">
-                            <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Dep Date</p>
-                            <p class="font-bold text-white text-lg">15 Oct</p>
-                        </div>
-                        <div class="bg-white/5 border border-white/10 p-3 rounded-xl text-center col-span-2 md:col-span-1">
-                            <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Arr Date</p>
-                            <p class="font-bold text-white text-lg">16 Oct</p>
-                        </div>
-                    </div>
-                </div>
-            </article>
+            <div id="eventsContainer" class="space-y-10">
+                <!-- Dynamic events loaded from Supabase -->
+            </div>
         </div>
 
         <!-- 2. LATEST NEWS CARD -->
@@ -190,12 +152,9 @@
             
             <article class="glass-panel rounded-3xl overflow-hidden border border-white/10">
                 <div class="flex flex-col md:flex-row">
-                    <!-- 16:9 Image Container -->
-                    <div class="w-full md:w-1/2 aspect-video overflow-hidden border-r border-white/5">
+                    <div class="w-full md:w-1/2 aspect-video overflow-hidden border-r border-white/5 bg-black/40">
                         <img src="https://res.cloudinary.com/dsfwafyc2/image/upload/v1790506030/Screenshot_20260927_160309_com.fds.infiniteflight_oxybyl.jpg" alt="News Poster" class="w-full h-full object-cover">
                     </div>
-                    
-                    <!-- Text Content -->
                     <div class="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center">
                         <span class="text-cyan-400 text-[10px] font-bold uppercase tracking-widest mb-2 font-mono">ANVG Announcement</span>
                         <h3 class="font-heading text-2xl md:text-3xl font-bold text-white mb-4">Cargo & Subsidiary Expansion</h3>
@@ -208,6 +167,7 @@
         </div>
 
     </main>
+
     <!-- FOOTER -->
     <footer class="bg-[#020914] text-gray-400 pt-16 pb-8 px-6 mt-12 border-t border-white/10">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
@@ -247,5 +207,72 @@
 
     <!-- Script File -->
     <script src="script.js"></script>
+
+    <!-- Supabase Events Loader Script -->
+    <script>
+        const SUPABASE_URL = 'https://syculxnokrkluyzuempj.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_uSljNgeCYIweqTOPbfvk4Q_vnDyc9fC';
+        const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        async function loadEventsDynamic() {
+            const container = document.getElementById('eventsContainer');
+            if (!container || !db) return;
+
+            const { data, error } = await db.from('events').select('*').order('id', { ascending: false });
+            if (error || !data || data.length === 0) {
+                container.innerHTML = '<p class="text-center text-gray-400 italic py-6">No group flights scheduled at this moment. Check back soon!</p>';
+                return;
+            }
+
+            container.innerHTML = data.map(ev => `
+                <article class="glass-panel rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                    <div class="w-full aspect-video overflow-hidden relative border-b border-white/10 bg-black/40">
+                        <img src="${ev.image_url || 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05'}" alt="${ev.title}" class="w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 flex items-center gap-2 bg-black/60 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/15">
+                            <span class="relative flex h-2.5 w-2.5">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-300 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-400"></span>
+                            </span>
+                            <span class="text-blue-200 text-xs font-medium tracking-widest uppercase">${ev.status || 'Scheduled'}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 md:p-10">
+                        <h3 class="font-heading text-3xl font-bold text-white mb-4">${ev.title}</h3>
+                        <p class="text-gray-300 font-light text-sm md:text-base leading-relaxed mb-8">
+                            ${ev.description || 'Join our upcoming group flight session across the network.'}
+                        </p>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+                            <div class="bg-white/5 border border-white/10 p-3 rounded-xl text-center">
+                                <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Departure</p>
+                                <p class="font-bold text-ana-light text-lg">${ev.dep_icao || 'RJAA'}</p>
+                            </div>
+                            <div class="bg-white/5 border border-white/10 p-3 rounded-xl text-center">
+                                <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Arrival</p>
+                                <p class="font-bold text-ana-light text-lg">${ev.arr_icao || 'RJTT'}</p>
+                            </div>
+                            <div class="bg-white/5 border border-white/10 p-3 rounded-xl text-center">
+                                <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Time</p>
+                                <p class="font-bold text-white text-lg">${ev.time_zulu || '18:00Z'}</p>
+                            </div>
+                            <div class="bg-white/5 border border-white/10 p-3 rounded-xl text-center">
+                                <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Dep Date</p>
+                                <p class="font-bold text-white text-lg">${ev.dep_date || 'TBD'}</p>
+                            </div>
+                            <div class="bg-white/5 border border-white/10 p-3 rounded-xl text-center col-span-2 md:col-span-1">
+                                <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Arr Date</p>
+                                <p class="font-bold text-white text-lg">${ev.arr_date || 'TBD'}</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadEventsDynamic();
+        });
+    </script>
 </body>
 </html>

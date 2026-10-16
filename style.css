@@ -1,89 +1,125 @@
-/* All Nippon Virtual Group - Main Stylesheet */
+/* ========================================================
+   ANVG MASTER STYLESHEET — 12 THEMES & DYNAMIC TYPOGRAPHY
+   ======================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=JetBrains+Mono:wght@400;600;700&family=Montserrat:wght@600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap');
 
-/* ================= THEME COLOR VARIABLES ================= */
 :root {
-    /* Default: All Nippon Airways (ANA) */
-    --brand-color: #007fc1;
-    --brand-dark: #00266b;
-    --brand-bg: linear-gradient(135deg, #0a192f 0%, #00266b 50%, #007fc1 100%);
-    --brand-glow: rgba(0, 127, 193, 0.35);
+    --bg-primary: #001433;
+    --bg-secondary: #00266b;
+    --bg-tertiary: #020914;
+    --accent-primary: #007fc1;
+    --accent-glow: rgba(0, 127, 193, 0.35);
+    --glass-bg: rgba(255, 255, 255, 0.06);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-blur: 16px;
 }
 
-/* Peach Aviation (Pink / Fuchsia) */
+/* --- 12 USER & ADMIN AIRLINE THEMES --- */
+/* 1. Default: ANA Triton Blue (Root) */
+
+/* 2. Peach Aviation (Fuschia & Plum) */
 body.theme-peach {
-    --brand-color: #e6007e;
-    --brand-dark: #4a0026;
-    --brand-bg: linear-gradient(135deg, #16020c 0%, #4a0026 50%, #e6007e 100%);
-    --brand-glow: rgba(230, 0, 126, 0.35);
+    --bg-primary: #1f081e; --bg-secondary: #4a1248; --bg-tertiary: #120411;
+    --accent-primary: #ec4899; --accent-glow: rgba(236, 72, 153, 0.35);
 }
-
-/* Nippon Cargo Airlines (NCA) */
+/* 3. Nippon Cargo Airlines (Industrial Slate & Crimson) */
 body.theme-nca {
-    --brand-color: #005bac;
-    --brand-dark: #021a36;
-    --brand-bg: linear-gradient(135deg, #030d1a 0%, #021a36 50%, #005bac 100%);
-    --brand-glow: rgba(0, 91, 172, 0.35);
+    --bg-primary: #0f172a; --bg-secondary: #1e293b; --bg-tertiary: #090d16;
+    --accent-primary: #ef4444; --accent-glow: rgba(239, 68, 68, 0.35);
 }
-
-/* AirJapan (Sunrise Teal) */
+/* 4. AirJapan Sunrise (Deep Indigo & Coral Teal) */
 body.theme-airjapan {
-    --brand-color: #00b4d8;
-    --brand-dark: #062a4a;
-    --brand-bg: linear-gradient(135deg, #021220 0%, #062a4a 50%, #00b4d8 100%);
-    --brand-glow: rgba(0, 180, 216, 0.35);
+    --bg-primary: #071f29; --bg-secondary: #0e3b4d; --bg-tertiary: #041218;
+    --accent-primary: #14b8a6; --accent-glow: rgba(20, 184, 166, 0.35);
+}
+/* 5. Star Alliance Gold (Obsidian & Metallic Gold) */
+body.theme-staralliance {
+    --bg-primary: #0a0a0c; --bg-secondary: #17171c; --bg-tertiary: #050507;
+    --accent-primary: #eab308; --accent-glow: rgba(234, 179, 8, 0.35);
+}
+/* 6. Flying Honu Hawaii (Ocean Turquoise & Emerald) */
+body.theme-honu {
+    --bg-primary: #04242c; --bg-secondary: #064e5c; --bg-tertiary: #02151a;
+    --accent-primary: #06b6d4; --accent-glow: rgba(6, 182, 212, 0.4);
+}
+/* 7. Tokyo Midnight OLED (Pure Pitch Black & Electric Blue) */
+body.theme-oled {
+    --bg-primary: #000000; --bg-secondary: #080c14; --bg-tertiary: #000000;
+    --accent-primary: #38bdf8; --accent-glow: rgba(56, 189, 248, 0.35);
+}
+/* 8. Sakura Blossom (Midnight Violet & Cherry Rose) */
+body.theme-sakura {
+    --bg-primary: #1a0b1c; --bg-secondary: #331436; --bg-tertiary: #0f0510;
+    --accent-primary: #f472b6; --accent-glow: rgba(244, 114, 182, 0.35);
+}
+/* 9. Boeing 787 HUD (Cockpit Dark & Avionics Phosphor Green) */
+body.theme-b787hud {
+    --bg-primary: #07140d; --bg-secondary: #0d2619; --bg-tertiary: #030a06;
+    --accent-primary: #10b981; --accent-glow: rgba(16, 185, 129, 0.35);
+}
+/* 10. Airbus EIS2 Cockpit (Dark Slate & Eisblau Cyan) */
+body.theme-airbuseis {
+    --bg-primary: #0b1528; --bg-secondary: #162a4a; --bg-tertiary: #060b17;
+    --accent-primary: #00d2ff; --accent-glow: rgba(0, 210, 255, 0.35);
+}
+/* 11. Pokemon Pikachu Jet (Deep Navy & Lightning Yellow) */
+body.theme-pikachu {
+    --bg-primary: #0f172a; --bg-secondary: #1e293b; --bg-tertiary: #090d16;
+    --accent-primary: #facc15; --accent-glow: rgba(250, 204, 21, 0.4);
+}
+/* 12. Polar Daylight Frost (High-Clarity Icy Slate) */
+body.theme-polar {
+    --bg-primary: #0f2942; --bg-secondary: #1b4965; --bg-tertiary: #081826;
+    --accent-primary: #62b6cb; --accent-glow: rgba(98, 182, 203, 0.4);
 }
 
-/* ================= BASE STYLING ================= */
+/* --- BASE BACKGROUND & SMOOTH TRANSITIONS --- */
 body {
-    background: var(--brand-bg);
+    background: radial-gradient(circle at top, var(--bg-secondary) 0%, var(--bg-primary) 55%, var(--bg-tertiary) 100%);
     background-attachment: fixed;
-    color: white;
-    transition: background 0.4s ease;
-    
-    /* Disables text selection/copying on mobile and desktop */
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    color: #ffffff;
+    min-height: 100vh;
+    transition: background 0.4s ease, color 0.3s ease;
 }
 
+/* --- GLASSMORPHISM PANELS & PERFORMANCE MODES --- */
 .glass-panel {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
 }
 
-.hero-bg {
-    background-image: linear-gradient(rgba(0, 38, 107, 0.7), rgba(10, 25, 47, 0.9)), url('https://res.cloudinary.com/dsfwafyc2/image/upload/v1779014897/Screenshot_20260509_221234_com.fds.infiniteflight_ewqhzv.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+body.perf-saver .glass-panel {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(10, 22, 44, 0.92);
 }
 
-/* ================= DYNAMIC THEME OVERRIDES ================= */
-/* Changes Tailwind-styled accents to whatever airline theme is active */
-.bg-ana-light {
-    background-color: var(--brand-color) !important;
+/* --- DYNAMIC THEME OVERRIDES FOR TAILWIND CLASSES --- */
+.text-ana-light { color: var(--accent-primary) !important; }
+.bg-ana-light { background-color: var(--accent-primary) !important; }
+.border-ana-light { border-color: var(--accent-primary) !important; }
+
+/* --- PER-BOX CUSTOM FONT CLASSES (CONTROLLED BY ADMIN) --- */
+.font-style-modern { font-family: 'Montserrat', sans-serif !important; }
+.font-style-clean { font-family: 'Poppins', sans-serif !important; }
+.font-style-hud { font-family: 'JetBrains Mono', monospace !important; letter-spacing: -0.02em; }
+.font-style-luxury { font-family: 'Playfair Display', serif !important; }
+.font-style-signature { font-family: 'Dancing Script', cursive !important; }
+
+/* --- USER HUD FONT SCALE MODES --- */
+body.scale-compact { font-size: 92%; }
+body.scale-large { font-size: 108%; }
+body.hud-numbers .stat-number, body.hud-numbers .font-mono {
+    font-family: 'JetBrains Mono', monospace !important;
 }
 
-.text-ana-light {
-    color: var(--brand-color) !important;
-}
-
-.border-ana-light {
-    border-color: var(--brand-color) !important;
-}
-
-/* Custom Scrollbar styled dynamically with the active airline color */
-::-webkit-scrollbar { 
-    width: 8px; 
-}
-::-webkit-scrollbar-track { 
-    background: #0a192f; 
-}
-::-webkit-scrollbar-thumb { 
-    background: var(--brand-color); 
-    border-radius: 4px; 
+/* --- WEATHER CANVAS OVERLAY (ZERO INTERFERENCE) --- */
+#anvgWeatherCanvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    pointer-events: none !important;
+    z-index: 40;
 }
